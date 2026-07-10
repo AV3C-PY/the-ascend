@@ -1,0 +1,193 @@
+---
+/**
+ * privacidad.astro — Privacy Policy page
+ * GDPR-compliant for France and Spain operations
+ * TODO: Update company legal details (address, registration number, etc.)
+ * TODO: Have a lawyer review this for your specific jurisdiction
+ */
+
+import BaseLayout from '@layouts/BaseLayout.astro';
+import { SITE } from '@data/site';
+
+const lastUpdated = "9 de julio de 2026";
+// TODO: Update this date whenever you modify the privacy policy
+---
+
+<BaseLayout
+  title="Política de Privacidad — The Ascend"
+  description="Política de privacidad de The Ascend. Cómo recopilamos, usamos y protegemos tus datos personales."
+  noindex={false}
+>
+  <section class="legal-page section">
+    <div class="container container--narrow">
+      <div class="legal-header">
+        <span class="section-label">Legal</span>
+        <h1 class="legal-title">Política de Privacidad</h1>
+        <p class="legal-meta">Última actualización: {lastUpdated}</p>
+      </div>
+
+      <div class="legal-content">
+        <h2>1. Responsable del tratamiento</h2>
+        <p>
+          <strong>{SITE.name}</strong><br />
+          <!-- TODO: Add your legal business address -->
+          Email de contacto: <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
+        </p>
+
+        <h2>2. Datos que recopilamos</h2>
+        <p>Recopilamos los siguientes datos cuando utilizas nuestros servicios:</p>
+        <ul>
+          <li><strong>Datos de contacto:</strong> nombre, email, teléfono (cuando los proporcionas en formularios)</li>
+          <li><strong>Datos de uso:</strong> páginas visitadas, tiempo en el sitio, dispositivo utilizado (vía Google Analytics)</li>
+          <li><strong>Datos de comunicación:</strong> contenido de los mensajes que nos envías</li>
+        </ul>
+
+        <h2>3. Finalidad del tratamiento</h2>
+        <p>Utilizamos tus datos para:</p>
+        <ul>
+          <li>Responder a tus solicitudes de información o presupuesto</li>
+          <li>Gestionar la relación comercial si contratas nuestros servicios</li>
+          <li>Mejorar nuestro sitio web y servicios (analytics anonimizados)</li>
+          <li>Enviarte comunicaciones relacionadas con tu proyecto (solo si nos has contactado)</li>
+        </ul>
+
+        <h2>4. Base legal del tratamiento</h2>
+        <p>El tratamiento de tus datos se basa en:</p>
+        <ul>
+          <li><strong>Consentimiento:</strong> cuando rellenas nuestros formularios y aceptas esta política</li>
+          <li><strong>Interés legítimo:</strong> para mejorar nuestros servicios y prevenir fraudes</li>
+          <li><strong>Obligación contractual:</strong> cuando hay una relación comercial activa</li>
+        </ul>
+
+        <h2>5. Conservación de datos</h2>
+        <p>
+          Conservamos tus datos durante el tiempo necesario para los fines descritos:
+        </p>
+        <ul>
+          <li>Datos de contacto: máximo 3 años desde el último contacto</li>
+          <li>Datos de clientes activos: durante la vigencia del contrato + 5 años</li>
+          <li>Datos de analytics: 26 meses (configuración estándar de GA4)</li>
+        </ul>
+
+        <h2>6. Servicios de terceros</h2>
+        <p>Utilizamos los siguientes servicios que pueden tratar tus datos:</p>
+        <ul>
+          <li><strong>Google Analytics 4:</strong> Análisis de tráfico web. <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Política de Google</a></li>
+          <li><strong>Resend:</strong> Plataforma de envío de emails. <a href="https://resend.com/privacy" target="_blank" rel="noopener">Política de Resend</a></li>
+          <li><strong>Cloudflare:</strong> Hosting y seguridad. <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">Política de Cloudflare</a></li>
+        </ul>
+
+        <h2>7. Tus derechos</h2>
+        <p>De acuerdo con el RGPD (Europa) y normativas aplicables, tienes derecho a:</p>
+        <ul>
+          <li><strong>Acceso:</strong> solicitar una copia de los datos que tenemos sobre ti</li>
+          <li><strong>Rectificación:</strong> corregir datos inexactos o incompletos</li>
+          <li><strong>Supresión:</strong> solicitar la eliminación de tus datos ("derecho al olvido")</li>
+          <li><strong>Portabilidad:</strong> recibir tus datos en formato estructurado</li>
+          <li><strong>Oposición:</strong> oponerte al tratamiento en determinadas circunstancias</li>
+          <li><strong>Limitación:</strong> solicitar la restricción del tratamiento</li>
+        </ul>
+        <p>
+          Para ejercer cualquiera de estos derechos, contáctanos en:
+          <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
+        </p>
+
+        <h2>8. Cookies</h2>
+        <p>Este sitio web utiliza cookies técnicas necesarias para su funcionamiento y cookies de análisis (Google Analytics) para entender cómo los visitantes utilizan el sitio. Puedes gestionar las cookies desde la configuración de tu navegador.</p>
+
+        <h2>9. Seguridad</h2>
+        <p>Implementamos medidas técnicas y organizativas para proteger tus datos contra acceso no autorizado, pérdida o divulgación, incluyendo transmisión cifrada (HTTPS) y acceso restringido a los datos.</p>
+
+        <h2>10. Cambios a esta política</h2>
+        <p>Podemos actualizar esta política ocasionalmente. Te notificaremos sobre cambios significativos publicando la nueva versión en esta página con la fecha de actualización.</p>
+
+        <h2>11. Contacto</h2>
+        <p>
+          Si tienes preguntas sobre esta política de privacidad o sobre cómo tratamos tus datos, contáctanos:<br />
+          📧 <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .legal-page {
+    padding-top: calc(4rem + var(--space-16));
+  }
+
+  .legal-header {
+    margin-bottom: var(--space-12);
+    padding-bottom: var(--space-8);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .legal-title {
+    font-size: var(--text-4xl);
+    font-weight: var(--weight-extrabold);
+    letter-spacing: -0.04em;
+    margin-bottom: var(--space-3);
+  }
+
+  .legal-meta {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+  }
+
+  .section-label {
+    display: inline-block;
+    font-size: var(--text-xs);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-widest);
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: var(--space-4);
+  }
+
+  /* Legal content typography */
+  .legal-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+  }
+
+  .legal-content h2 {
+    font-size: var(--text-xl);
+    font-weight: var(--weight-semibold);
+    color: var(--color-text-primary);
+    letter-spacing: -0.02em;
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .legal-content p {
+    font-size: var(--text-base);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-relaxed);
+  }
+
+  .legal-content ul {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding-left: var(--space-6);
+  }
+
+  .legal-content li {
+    font-size: var(--text-base);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-relaxed);
+    list-style-type: disc;
+  }
+
+  .legal-content a {
+    color: var(--color-primary-light);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .legal-content strong {
+    color: var(--color-text-primary);
+    font-weight: var(--weight-semibold);
+  }
+</style>

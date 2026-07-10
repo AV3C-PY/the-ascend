@@ -1,0 +1,220 @@
+---
+/**
+ * Testimonials.astro
+ * Social proof section with client testimonials.
+ * TODO: Replace placeholder testimonials in src/data/testimonials.ts
+ * TODO: Add real client photos to /public/testimonials/
+ */
+
+import { TESTIMONIALS } from '@data/testimonials';
+---
+
+<section class="testimonials section" aria-labelledby="testimonials-title">
+  <div class="container">
+    <!-- Header -->
+    <div class="section-header reveal" style="margin-bottom: var(--space-12)">
+      <!-- TODO: Update testimonials text in src/i18n/es.ts and fr.ts (testimonials.*) -->
+      <span class="section-label" data-i18n="testimonials.sectionLabel">Testimonios</span>
+      <h2 class="section-title" id="testimonials-title" data-i18n="testimonials.title">
+        Lo que dicen nuestros<br /><span class="text-gradient">clientes.</span>
+      </h2>
+    </div>
+
+    <!-- Testimonials track (auto-scroll) -->
+    <div class="testimonials__wrapper" aria-label="Testimonios de clientes">
+      <div class="testimonials__track" id="testimonials-track">
+        {[...TESTIMONIALS, ...TESTIMONIALS].map((t, i) => (
+          <article
+            class="testimonial-card"
+            aria-label={`Testimonio de ${t.name}`}
+            key={`${t.id}-${i}`}
+          >
+            <!-- Stars -->
+            <div class="testimonial-card__stars" aria-label={`${t.rating} de 5 estrellas`}>
+              {Array.from({ length: t.rating }).map((_, j) => (
+                <span class="testimonial-card__star" aria-hidden="true" key={j}>★</span>
+              ))}
+            </div>
+
+            <!-- Quote -->
+            <blockquote class="testimonial-card__quote">
+              "{t.quote}"
+            </blockquote>
+
+            <!-- Author -->
+            <footer class="testimonial-card__author">
+              <!-- TODO: Add real photo when available -->
+              <div class="testimonial-card__avatar" aria-hidden="true">
+                {t.name.charAt(0)}
+              </div>
+              <div class="testimonial-card__info">
+                <cite class="testimonial-card__name">{t.name}</cite>
+                <span class="testimonial-card__role">{t.role}, {t.company}</span>
+                <span class="testimonial-card__location">{t.location}</span>
+              </div>
+            </footer>
+
+            <!-- Service badge -->
+            <div class="testimonial-card__service">
+              {t.service}
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+
+    <!-- Gradient masks -->
+    <div class="testimonials__mask testimonials__mask--left" aria-hidden="true"></div>
+    <div class="testimonials__mask testimonials__mask--right" aria-hidden="true"></div>
+  </div>
+</section>
+
+<style>
+  .testimonials {
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* More breathing room between title and carousel */
+  .testimonials .section-header {
+    margin-bottom: var(--space-12);
+  }
+
+  /* Track */
+  .testimonials__wrapper {
+    position: relative;
+    overflow: hidden;
+    margin-inline: calc(-1 * var(--container-padding-x));
+  }
+
+  .testimonials__track {
+    display: flex;
+    gap: var(--space-4);
+    animation: scrollTrack 40s linear infinite;
+    width: max-content;
+    padding-inline: var(--container-padding-x);
+  }
+
+  .testimonials__track:hover {
+    animation-play-state: paused;
+  }
+
+  @keyframes scrollTrack {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  /* Card */
+  .testimonial-card {
+    flex-shrink: 0;
+    width: 360px;
+    padding: var(--space-8);
+    background: var(--color-bg-elevated);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    transition: border-color var(--duration-normal) var(--ease-default);
+  }
+
+  .testimonial-card:hover {
+    border-color: var(--color-border-hover);
+  }
+
+  /* Stars */
+  .testimonial-card__stars {
+    display: flex;
+    gap: 2px;
+  }
+
+  .testimonial-card__star {
+    color: #fbbf24;
+    font-size: var(--text-sm);
+  }
+
+  /* Quote */
+  .testimonial-card__quote {
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-relaxed);
+    font-style: normal;
+    flex: 1;
+  }
+
+  /* Author */
+  .testimonial-card__author {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-3);
+  }
+
+  .testimonial-card__avatar {
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: var(--radius-full);
+    background: var(--color-primary-glow);
+    border: 1px solid var(--color-primary-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    color: var(--color-primary-light);
+    flex-shrink: 0;
+  }
+
+  .testimonial-card__info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .testimonial-card__name {
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    color: var(--color-text-primary);
+    font-style: normal;
+  }
+
+  .testimonial-card__role {
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+  }
+
+  .testimonial-card__location {
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+  }
+
+  /* Service badge */
+  .testimonial-card__service {
+    font-size: var(--text-xs);
+    color: var(--color-primary);
+    background: var(--color-primary-glow);
+    border: 1px solid var(--color-primary-border);
+    padding: var(--space-1) var(--space-3);
+    border-radius: var(--radius-full);
+    align-self: flex-start;
+  }
+
+  /* Masks */
+  .testimonials__mask {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 200px;
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .testimonials__mask--left {
+    left: 0;
+    background: linear-gradient(to right, var(--color-bg), transparent);
+  }
+
+  .testimonials__mask--right {
+    right: 0;
+    background: linear-gradient(to left, var(--color-bg), transparent);
+  }
+</style>

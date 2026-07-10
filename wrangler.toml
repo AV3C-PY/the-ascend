@@ -1,0 +1,5 @@
+name = "the-ascend"
+compatibility_date = "2024-01-01"
+
+# TODO: Add your real Cloudflare configuration here
+# See: https://developers.cloudflare.com/workers/wrangler/configuration/

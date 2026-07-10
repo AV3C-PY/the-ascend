@@ -1,0 +1,81 @@
+---
+/**
+ * 404.astro — Custom 404 error page
+ */
+
+import BaseLayout from '@layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Página no encontrada — The Ascend"
+  description="Esta página no existe. Vuelve al inicio."
+  noindex={true}
+>
+  <section class="error-page section">
+    <div class="container">
+      <div class="error-page__inner">
+        <div class="error-page__code" aria-hidden="true">404</div>
+        <h1 class="error-page__title">Página no encontrada</h1>
+        <p class="error-page__desc">
+          Parece que esta página no existe o fue movida.
+          Vuelve al inicio o cuéntanos lo que buscas.
+        </p>
+        <div class="error-page__actions">
+          <a href="/" class="btn btn--primary">Volver al inicio</a>
+          <a href="/contacto" class="btn btn--secondary">Contactar</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .error-page {
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    padding-top: 4rem;
+  }
+
+  .error-page__inner {
+    max-width: 480px;
+    margin-inline: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-6);
+  }
+
+  .error-page__code {
+    font-family: var(--font-display);
+    font-size: 8rem;
+    font-weight: var(--weight-extrabold);
+    letter-spacing: -0.06em;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    line-height: 1;
+  }
+
+  .error-page__title {
+    font-size: var(--text-3xl);
+    font-weight: var(--weight-bold);
+    color: var(--color-text-primary);
+    letter-spacing: -0.03em;
+  }
+
+  .error-page__desc {
+    font-size: var(--text-lg);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-relaxed);
+  }
+
+  .error-page__actions {
+    display: flex;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+</style>

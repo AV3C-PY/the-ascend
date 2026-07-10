@@ -1,0 +1,27 @@
+{
+  "name": "the-ascend",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "node ./node_modules/astro/astro.js dev --host",
+    "build": "node ./node_modules/astro/astro.js build",
+    "preview": "node ./node_modules/astro/astro.js preview",
+    "check": "node ./node_modules/@astrojs/check/dist/index.js"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.9",
+    "@astrojs/cloudflare": "^12.6.1",
+    "@astrojs/react": "^4.3.0",
+    "@astrojs/sitemap": "^3.3.0",
+    "astro": "^5.10.0",
+    "lucide-react": "^0.525.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "resend": "^4.5.1",
+    "typescript": "^5.9.3"
+  },
+  "devDependencies": {
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6"
+  }
+}

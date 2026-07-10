@@ -1,0 +1,29 @@
+---
+/**
+ * index.astro — Home page
+ * All section content is in src/data/
+ * All section components are in src/components/sections/
+ */
+
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Hero from '@components/sections/Hero.astro';
+import ServicesOverview from '@components/sections/ServicesOverview.astro';
+import ProcessTeaser from '@components/sections/ProcessTeaser.astro';
+import PortfolioTeaser from '@components/sections/PortfolioTeaser.astro';
+import Testimonials from '@components/sections/Testimonials.astro';
+import FaqTeaser from '@components/sections/FaqTeaser.astro';
+import CTABanner from '@components/sections/CTABanner.astro';
+---
+
+<BaseLayout
+  title="The Ascend — Transformación Digital para tu Negocio"
+  description="Diseño web premium, SEO local, chatbots IA y automatizaciones para restaurantes, clínicas, abogados y pequeñas empresas en Francia, España y Perú."
+>
+  <Hero />
+  <ServicesOverview />
+  <ProcessTeaser />
+  <PortfolioTeaser />
+  <Testimonials />
+  <FaqTeaser />
+  <CTABanner />
+</BaseLayout>

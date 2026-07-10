@@ -1,0 +1,648 @@
+---
+/**
+ * precios.astro — Pricing page
+ *
+ * Prices are market-aware and update dynamically via the navbar Market Selector.
+ * All pricing data lives in src/data/market.ts — edit prices there.
+ *
+ * TODO: Update prices per country in src/data/market.ts
+ * IMPORTANT: No "Buy" buttons. Only "Solicitar presupuesto" CTAs.
+ */
+
+import BaseLayout from '@layouts/BaseLayout.astro';
+import CTABanner from '@components/sections/CTABanner.astro';
+import { MARKET_PRICING, MARKETS, DEFAULT_MARKET, MARKET_LIST } from '@data/market';
+import { ENTERPRISE } from '@data/pricing';
+import { CTA, SITE } from '@data/site';
+import { FAQ } from '@data/faq';
+
+// Default market data for SSR (client-side market selector will override via JS)
+const defaultPricing = MARKET_PRICING[DEFAULT_MARKET];
+const defaultMarket  = MARKETS[DEFAULT_MARKET];
+
+// Serialize all pricing data for client-side market switching
+const allPricingJSON = JSON.stringify(MARKET_PRICING);
+const allMarketsJSON = JSON.stringify(MARKETS);
+
+const pricingFaq = FAQ.filter((f) => f.category === 'precios');
+---
+
+<BaseLayout
+  title="Precios — The Ascend"
+  description="Planes de transformación digital para pequeñas empresas. Precios transparentes, sin sorpresas. Consulta siempre gratuita."
+>
+  <!-- Hero -->
+  <section class="page-hero section">
+    <div class="container">
+      <div class="page-hero__inner">
+        <span class="section-label reveal">Precios</span>
+        <h1 class="page-hero__title reveal reveal--delay-1">
+          Inversión transparente.<br />
+          <span class="text-gradient">Sin sorpresas.</span>
+        </h1>
+        <p class="page-hero__subtitle reveal reveal--delay-2">
+          Elegimos no tener checkout automático. Porque cada negocio es único
+          y merece una propuesta hecha a medida. Hablamos primero, pagamos después.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing cards -->
+  <section class="pricing section" aria-labelledby="pricing-title">
+    <div class="container">
+      <h2 class="sr-only" id="pricing-title">Planes de precios</h2>
+
+      <div class="pricing__grid" id="pricing-grid">
+        {defaultPricing.plans.map((plan, i) => (
+          <article
+            class={`pricing-card reveal reveal--delay-${i + 1} ${plan.highlighted ? 'pricing-card--highlighted' : ''}`}
+            aria-label={`Plan ${plan.name}`}
+            aria-describedby={`plan-desc-${plan.id}`}
+            data-plan-id={plan.id}
+          >
+            {plan.badge && (
+              <div class="pricing-card__badge">{plan.badge}</div>
+            )}
+
+            <div class="pricing-card__header">
+              <h3 class="pricing-card__name">{plan.name}</h3>
+              <p class="pricing-card__tagline">{plan.tagline}</p>
+            </div>
+
+            <!-- Price — data attributes enable client-side market switching -->
+            <div class="pricing-card__price">
+              <span class="pricing-card__currency" data-market-currency>
+                {defaultMarket.currencySymbol}
+              </span>
+              <span class="pricing-card__amount" data-market-price={plan.id}>
+                {plan.price.toLocaleString()}
+              </span>
+            </div>
+
+            <p class="pricing-card__desc" id={`plan-desc-${plan.id}`}>
+              {plan.description}
+            </p>
+
+            <!-- Features -->
+            <ul class="pricing-card__features">
+              {plan.features.map((feat) => (
+                <li class="pricing-card__feature">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <polyline points="20 6 9 17 4 12"/>
+                  </svg>
+                  {feat}
+                </li>
+              ))}
+              {plan.notIncluded.map((feat) => (
+                <li class="pricing-card__feature pricing-card__feature--no">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <line x1="18" y1="6" x2="6" y2="18"/>
+                    <line x1="6" y1="6" x2="18" y2="18"/>
+                  </svg>
+                  {feat}
+                </li>
+              ))}
+            </ul>
+
+            <!-- CTA — NEVER "Buy". Always "Request quote". -->
+            <!-- TODO: Update CTA labels in src/data/market.ts per plan -->
+            <a href="/contacto" class={`btn ${plan.highlighted ? 'btn--primary' : 'btn--secondary'} pricing-card__cta`}>
+              {plan.cta}
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </a>
+          </article>
+        ))}
+      </div>
+
+      <!-- Currency note — updates via JS on market change -->
+      <p class="pricing__currency-note reveal" data-market-note>
+        {defaultPricing.note}
+      </p>
+
+      <!-- Enterprise -->
+      <div class="pricing__enterprise reveal">
+        <div class="pricing__enterprise-content">
+          <h3 class="pricing__enterprise-title">{ENTERPRISE.title}</h3>
+          <p class="pricing__enterprise-desc">{ENTERPRISE.description}</p>
+        </div>
+        <a href="/contacto" class="btn btn--secondary">
+          {ENTERPRISE.cta}
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- How payment works -->
+  <section class="payment-flow section" aria-labelledby="payment-title">
+    <div class="container container--narrow">
+      <div class="section-header reveal">
+        <span class="section-label">¿Cómo funciona el pago?</span>
+        <h2 class="section-title" id="payment-title">
+          100% humano.<br />Sin presiones.
+        </h2>
+        <p class="section-subtitle">
+          Nunca te pediremos que pagues antes de hablar contigo.
+          El proceso siempre empieza con una conversación.
+        </p>
+      </div>
+
+      <ol class="payment-steps">
+        {[
+          { step: "01", text: "Solicitas presupuesto a través del formulario o WhatsApp." },
+          { step: "02", text: "Hablamos sobre tu proyecto sin ningún compromiso." },
+          { step: "03", text: "Analizamos tu caso y preparamos una propuesta personalizada." },
+          { step: "04", text: "Si estás convencido, te enviamos el enlace de pago." },
+          { step: "05", text: "Pagas y comenzamos a trabajar inmediatamente." },
+        ].map((item, i) => (
+          <li class={`payment-step reveal reveal--delay-${i + 1}`}>
+            <span class="payment-step__number" aria-hidden="true">{item.step}</span>
+            <p class="payment-step__text">{item.text}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- Pricing FAQ -->
+  {pricingFaq.length > 0 && (
+    <section class="pricing-faq section" aria-labelledby="pricing-faq-title">
+      <div class="container container--narrow">
+        <h2 class="section-title text-center reveal" id="pricing-faq-title">
+          Dudas sobre precios
+        </h2>
+        <div class="faq-list">
+          {pricingFaq.map((item, i) => (
+            <details class={`faq-item reveal reveal--delay-${(i % 3) + 1}`}>
+              <summary class="faq-item__summary">
+                <span class="faq-item__question">{item.question}</span>
+                <span class="faq-item__icon" aria-hidden="true">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M6 9l6 6 6-6"/>
+                  </svg>
+                </span>
+              </summary>
+              <div class="faq-item__answer">
+                <p>{item.answer}</p>
+              </div>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <CTABanner
+    title="¿Tienes dudas sobre qué plan necesitas?"
+    subtitle="Cuéntame sobre tu negocio y te diré exactamente qué necesitas. Sin tecnicismos, sin presiones."
+    ctaPrimary={CTA.schedule}
+  />
+</BaseLayout>
+
+<!-- Inject all pricing data for client-side market switching -->
+<script define:vars={{ allPricingJSON, allMarketsJSON }}>
+  /**
+   * Market-aware pricing update
+   * Reads the saved market from localStorage on load,
+   * then listens for 'marketchange' events from MarketSelector.tsx
+   */
+
+  const ALL_PRICING = JSON.parse(allPricingJSON);
+  const ALL_MARKETS = JSON.parse(allMarketsJSON);
+  const STORAGE_KEY = 'ascend_market';
+  const DEFAULT = 'ES';
+
+  function getCurrentMarket() {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    return stored && ALL_PRICING[stored] ? stored : DEFAULT;
+  }
+
+  function updatePricing(marketCode) {
+    const pricing = ALL_PRICING[marketCode];
+    const market  = ALL_MARKETS[marketCode];
+    if (!pricing || !market) return;
+
+    // Update currency symbol
+    document.querySelectorAll('[data-market-currency]').forEach((el) => {
+      el.textContent = market.currencySymbol;
+    });
+
+    // Update prices
+    pricing.plans.forEach((plan) => {
+      document.querySelectorAll(`[data-market-price="${plan.id}"]`).forEach((el) => {
+        el.textContent = plan.price.toLocaleString(market.locale);
+      });
+    });
+
+    // Update pricing note
+    document.querySelectorAll('[data-market-note]').forEach((el) => {
+      el.textContent = pricing.note || '';
+    });
+  }
+
+  // Apply on page load
+  updatePricing(getCurrentMarket());
+
+  // React to market changes from MarketSelector
+  window.addEventListener('marketchange', (e) => {
+    updatePricing(e.detail.market);
+  });
+</script>
+
+<style>
+  /* Page Hero */
+  .page-hero {
+    padding-top: calc(4rem + var(--space-16));
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .page-hero__inner {
+    max-width: 680px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+  }
+
+  .page-hero__title {
+    font-size: var(--text-5xl);
+    font-weight: var(--weight-extrabold);
+    letter-spacing: -0.05em;
+    line-height: 1.0;
+  }
+
+  .page-hero__subtitle {
+    font-size: var(--text-lg);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-relaxed);
+  }
+
+  /* Pricing grid */
+  .pricing__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-4);
+    align-items: start;
+    margin-bottom: var(--space-8);
+  }
+
+  .pricing-card {
+    position: relative;
+    background: var(--color-bg-elevated);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    padding: var(--space-8);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+    transition:
+      border-color var(--duration-normal) var(--ease-default),
+      transform var(--duration-normal) var(--ease-spring),
+      box-shadow var(--duration-normal) var(--ease-default);
+  }
+
+  .pricing-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .pricing-card--highlighted {
+    border-color: var(--color-primary-border);
+    background: rgba(99, 102, 241, 0.04);
+    box-shadow: 0 0 0 1px var(--color-primary-border), var(--shadow-glow);
+  }
+
+  .pricing-card--highlighted:hover {
+    box-shadow: 0 0 0 1px var(--color-primary-border), var(--shadow-primary);
+  }
+
+  .pricing-card__badge {
+    position: absolute;
+    top: -0.875rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--gradient-primary);
+    color: #fff;
+    font-size: var(--text-xs);
+    font-weight: var(--weight-semibold);
+    padding: 0.3rem var(--space-4);
+    border-radius: var(--radius-full);
+    white-space: nowrap;
+    box-shadow: 0 2px 8px rgba(99, 102, 241, 0.4);
+  }
+
+  .pricing-card__name {
+    font-size: var(--text-xl);
+    font-weight: var(--weight-bold);
+    color: var(--color-text-primary);
+    letter-spacing: -0.02em;
+  }
+
+  .pricing-card__tagline {
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+    margin-top: var(--space-1);
+    font-weight: var(--weight-normal);
+    font-family: var(--font-body);
+  }
+
+  .pricing-card__price {
+    display: flex;
+    align-items: baseline;
+    gap: 3px;
+  }
+
+  .pricing-card__currency {
+    font-size: var(--text-xl);
+    font-weight: var(--weight-medium);
+    color: var(--color-text-secondary);
+    transition: opacity var(--duration-fast) var(--ease-default);
+  }
+
+  .pricing-card__amount {
+    font-family: var(--font-display);
+    font-size: var(--text-5xl);
+    font-weight: var(--weight-extrabold);
+    letter-spacing: -0.05em;
+    color: var(--color-text-primary);
+    line-height: 1;
+    transition: opacity var(--duration-fast) var(--ease-default);
+  }
+
+  .pricing-card__desc {
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-relaxed);
+    font-family: var(--font-body);
+  }
+
+  .pricing-card__features {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    flex: 1;
+  }
+
+  .pricing-card__feature {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-2);
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+    font-family: var(--font-body);
+  }
+
+  .pricing-card__feature svg {
+    color: var(--color-primary);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .pricing-card__feature--no {
+    color: var(--color-text-muted);
+  }
+
+  .pricing-card__feature--no svg {
+    color: var(--color-text-muted);
+  }
+
+  .pricing-card__cta {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Currency note */
+  .pricing__currency-note {
+    text-align: center;
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-10);
+    font-family: var(--font-body);
+    transition: opacity var(--duration-fast) var(--ease-default);
+  }
+
+  /* Enterprise */
+  .pricing__enterprise {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-8);
+    padding: var(--space-8) var(--space-10);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    background: rgba(255, 255, 255, 0.015);
+    flex-wrap: wrap;
+    transition: border-color var(--duration-normal) var(--ease-default);
+  }
+
+  .pricing__enterprise:hover {
+    border-color: var(--color-border-hover);
+  }
+
+  .pricing__enterprise-title {
+    font-size: var(--text-xl);
+    font-weight: var(--weight-semibold);
+    color: var(--color-text-primary);
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-2);
+  }
+
+  .pricing__enterprise-desc {
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+    max-width: 480px;
+    line-height: var(--leading-relaxed);
+    font-family: var(--font-body);
+  }
+
+  /* Payment flow */
+  .payment-steps {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    margin-top: var(--space-10);
+  }
+
+  .payment-step {
+    display: flex;
+    align-items: center;
+    gap: var(--space-5);
+    padding: var(--space-5) var(--space-6);
+    background: var(--color-bg-elevated);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    transition:
+      border-color var(--duration-fast) var(--ease-default),
+      background-color var(--duration-fast) var(--ease-default);
+  }
+
+  .payment-step:hover {
+    border-color: var(--color-border-hover);
+    background-color: var(--color-surface);
+  }
+
+  .payment-step__number {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-bold);
+    color: var(--color-primary);
+    background: var(--color-primary-glow);
+    border: 1px solid var(--color-primary-border);
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .payment-step__text {
+    font-size: var(--text-base);
+    color: var(--color-text-secondary);
+    font-family: var(--font-body);
+    line-height: var(--leading-relaxed);
+  }
+
+  /* Section header shared */
+  .section-header {
+    text-align: center;
+    max-width: 600px;
+    margin-inline: auto;
+    margin-bottom: var(--space-12);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    align-items: center;
+  }
+
+  .section-title {
+    font-size: var(--text-3xl);
+    font-weight: var(--weight-bold);
+    letter-spacing: -0.03em;
+    color: var(--color-text-primary);
+  }
+
+  .section-subtitle {
+    font-size: var(--text-base);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-relaxed);
+    font-family: var(--font-body);
+  }
+
+  .section-label {
+    display: inline-block;
+    font-size: var(--text-xs);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-widest);
+    text-transform: uppercase;
+    color: var(--color-primary);
+  }
+
+  /* FAQ */
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    margin-top: var(--space-10);
+  }
+
+  .faq-item {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-bg-elevated);
+    overflow: hidden;
+    transition: border-color var(--duration-fast) var(--ease-default);
+  }
+
+  .faq-item[open] {
+    border-color: var(--color-primary-border);
+  }
+
+  .faq-item__summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    padding: var(--space-5) var(--space-6);
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+    transition: background-color var(--duration-fast) var(--ease-default);
+  }
+
+  .faq-item__summary::-webkit-details-marker { display: none; }
+  .faq-item__summary:hover { background-color: rgba(255,255,255,0.02); }
+
+  .faq-item__question {
+    font-size: var(--text-base);
+    font-weight: var(--weight-medium);
+    color: var(--color-text-primary);
+  }
+
+  .faq-item__icon {
+    color: var(--color-text-muted);
+    flex-shrink: 0;
+    transition: transform var(--duration-normal) var(--ease-spring);
+  }
+
+  .faq-item[open] .faq-item__icon {
+    transform: rotate(180deg);
+    color: var(--color-primary);
+  }
+
+  .faq-item__answer {
+    padding: 0 var(--space-6) var(--space-5);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .faq-item__answer p {
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-relaxed);
+    padding-top: var(--space-4);
+    font-family: var(--font-body);
+  }
+
+  .text-center { text-align: center; }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .pricing__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .pricing__grid > :last-child {
+      grid-column: 1 / -1;
+      max-width: 480px;
+      margin-inline: auto;
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .pricing__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .pricing__grid > :last-child {
+      grid-column: auto;
+      max-width: none;
+    }
+
+    .page-hero__title {
+      font-size: var(--text-4xl);
+    }
+
+    .pricing__enterprise {
+      flex-direction: column;
+      padding: var(--space-6);
+    }
+
+    .pricing__enterprise .btn {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+</style>

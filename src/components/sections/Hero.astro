@@ -1,0 +1,349 @@
+---
+/**
+ * Hero.astro
+ * The first thing visitors see. Must immediately communicate:
+ * - What we do
+ * - Who we do it for
+ * - Why we're different
+ *
+ * TODO: Update headline and subheadline text below
+ * TODO: Update CTA button labels in src/data/site.ts
+ * TODO: Update the social proof stats (client count, etc.)
+ */
+
+import { CTA, SITE } from '@data/site';
+---
+
+<section class="hero" aria-label="Sección principal">
+  <!-- Animated background mesh -->
+  <div class="hero__bg" aria-hidden="true">
+    <div class="hero__bg-glow hero__bg-glow--1"></div>
+    <div class="hero__bg-glow hero__bg-glow--2"></div>
+    <div class="hero__bg-glow hero__bg-glow--3"></div>
+    <div class="hero__bg-grid"></div>
+  </div>
+
+  <div class="container hero__inner">
+    <!-- Badge -->
+    <div class="hero__badge reveal">
+      <span class="hero__badge-dot" aria-hidden="true"></span>
+      <!-- TODO: Update this badge text in src/i18n/es.ts and fr.ts (hero.badge) -->
+      <span data-i18n="hero.badge">Transformación digital para negocios reales</span>
+    </div>
+
+    <!-- Headline -->
+    <!-- TODO: Update this headline in src/i18n/es.ts and fr.ts (hero.title) -->
+    <h1 class="hero__title reveal reveal--delay-1" data-i18n="hero.title">
+      Tu negocio merece<br />
+      una presencia digital<br />
+      <span class="text-gradient">que impresione.</span>
+    </h1>
+
+    <!-- Subheadline -->
+    <!-- TODO: Update this subheadline in src/i18n/es.ts and fr.ts (hero.subtitle) -->
+    <p class="hero__subtitle reveal reveal--delay-2" data-i18n="hero.subtitle">
+      Diseñamos webs, automatizamos procesos e implementamos IA para que
+      restaurantes, clínicas, abogados y pequeñas empresas de Francia, España y Perú
+      compitan con los grandes.
+    </p>
+
+    <!-- CTA buttons -->
+    <div class="hero__ctas reveal reveal--delay-3">
+      <a href="/contacto" class="btn btn--primary btn--lg">
+        <!-- TODO: Update CTA text in src/i18n/es.ts and fr.ts (hero.ctaPrimary) -->
+        <span data-i18n="hero.ctaPrimary">Agendar llamada gratuita</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
+      <a href="/portfolio" class="btn btn--secondary btn--lg" data-i18n="hero.ctaSecondary">
+        Ver nuestro trabajo
+      </a>
+    </div>
+
+    <!-- Social proof bar -->
+    <!-- TODO: Update these numbers in src/i18n/es.ts and fr.ts (hero.proof.*) -->
+    <div class="hero__proof reveal reveal--delay-4">
+      <div class="hero__proof-item">
+        <span class="hero__proof-number" data-i18n="hero.proof.projects">+40</span>
+        <span class="hero__proof-label" data-i18n="hero.proof.projectsLabel">Proyectos entregados</span>
+      </div>
+      <div class="hero__proof-divider" aria-hidden="true"></div>
+      <div class="hero__proof-item">
+        <span class="hero__proof-number" data-i18n="hero.proof.countries">3</span>
+        <span class="hero__proof-label" data-i18n="hero.proof.countriesLabel">Países</span>
+      </div>
+      <div class="hero__proof-divider" aria-hidden="true"></div>
+      <div class="hero__proof-item">
+        <span class="hero__proof-number" data-i18n="hero.proof.satisfaction">98%</span>
+        <span class="hero__proof-label" data-i18n="hero.proof.satisfactionLabel">Satisfacción</span>
+      </div>
+      <div class="hero__proof-divider" aria-hidden="true"></div>
+      <div class="hero__proof-item">
+        <span class="hero__proof-number">
+          <span class="hero__proof-star" aria-hidden="true">★</span>5.0
+        </span>
+        <span class="hero__proof-label">Valoración media</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="hero__scroll" aria-hidden="true">
+    <div class="hero__scroll-line"></div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    padding-block: calc(4rem + var(--space-16)) var(--space-16);
+    overflow: hidden;
+  }
+
+  /* ===== Background ===== */
+  .hero__bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .hero__bg-glow {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.4;
+  }
+
+  .hero__bg-glow--1 {
+    width: 700px;
+    height: 700px;
+    top: -200px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.35) 0%, transparent 70%);
+    animation: float 8s ease-in-out infinite;
+  }
+
+  .hero__bg-glow--2 {
+    width: 400px;
+    height: 400px;
+    bottom: 10%;
+    left: -5%;
+    background: radial-gradient(circle, rgba(167, 139, 250, 0.2) 0%, transparent 70%);
+    animation: float 10s ease-in-out infinite 2s;
+  }
+
+  .hero__bg-glow--3 {
+    width: 350px;
+    height: 350px;
+    top: 30%;
+    right: -5%;
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, transparent 70%);
+    animation: float 12s ease-in-out infinite 4s;
+  }
+
+  /* Subtle grid lines */
+  .hero__bg-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black, transparent);
+  }
+
+  /* ===== Content ===== */
+  .hero__inner {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--space-8);
+  }
+
+  /* Badge */
+  .hero__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+    color: var(--color-primary-light);
+    background: var(--color-primary-glow);
+    border: 1px solid var(--color-primary-border);
+    padding: var(--space-2) var(--space-4);
+    border-radius: var(--radius-full);
+    letter-spacing: 0.01em;
+  }
+
+  .hero__badge-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    animation: pulse 2s ease-in-out infinite;
+    flex-shrink: 0;
+  }
+
+  /* Title */
+  .hero__title {
+    font-size: var(--text-5xl);
+    font-weight: var(--weight-extrabold);
+    letter-spacing: -0.05em;
+    line-height: 1.0;
+    max-width: 800px;
+    color: var(--color-text-primary);
+  }
+
+  /* Subtitle */
+  .hero__subtitle {
+    font-size: var(--text-xl);
+    color: var(--color-text-secondary);
+    max-width: 600px;
+    line-height: var(--leading-relaxed);
+  }
+
+  /* CTAs */
+  .hero__ctas {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  /* Proof bar */
+  .hero__proof {
+    display: flex;
+    align-items: center;
+    gap: var(--space-8);
+    padding: var(--space-5) var(--space-8);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    backdrop-filter: blur(8px);
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: var(--space-4);
+  }
+
+  .hero__proof-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-1);
+  }
+
+  .hero__proof-number {
+    font-family: var(--font-display);
+    font-size: var(--text-2xl);
+    font-weight: var(--weight-bold);
+    color: var(--color-text-primary);
+    letter-spacing: -0.03em;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+  }
+
+  .hero__proof-star {
+    color: #fbbf24;
+    font-size: var(--text-lg);
+  }
+
+  .hero__proof-label {
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+    white-space: nowrap;
+  }
+
+  .hero__proof-divider {
+    width: 1px;
+    height: 2rem;
+    background: var(--color-border);
+    flex-shrink: 0;
+  }
+
+  /* Scroll indicator */
+  .hero__scroll {
+    position: absolute;
+    bottom: var(--space-8);
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .hero__scroll-line {
+    width: 1px;
+    height: 3rem;
+    background: linear-gradient(to bottom, var(--color-border), transparent);
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  /* ===== Responsive ===== */
+  @media (max-width: 768px) {
+    .hero__title {
+      font-size: var(--text-4xl);
+    }
+
+    .hero__subtitle {
+      font-size: var(--text-lg);
+    }
+
+    .hero__proof {
+      gap: var(--space-5);
+      padding: var(--space-4) var(--space-5);
+    }
+
+    .hero__proof-divider {
+      display: none;
+    }
+
+    .hero__ctas {
+      flex-direction: column;
+      width: 100%;
+    }
+
+    .hero__ctas .btn {
+      width: 100%;
+      min-height: 3rem; /* Touch target */
+    }
+  }
+
+  /* Small phones: 375px */
+  @media (max-width: 430px) {
+    .hero__title {
+      font-size: var(--text-3xl);
+    }
+
+    .hero__proof {
+      gap: var(--space-4);
+      padding: var(--space-3) var(--space-4);
+    }
+
+    .hero__proof-number {
+      font-size: var(--text-xl);
+    }
+  }
+
+  /* Extra small: 320px */
+  @media (max-width: 340px) {
+    .hero__title {
+      font-size: clamp(1.6rem, 7vw, 2rem);
+    }
+
+    .hero__subtitle {
+      font-size: var(--text-base);
+    }
+  }
+</style>

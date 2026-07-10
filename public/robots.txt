@@ -1,0 +1,12 @@
+# TODO: Replace this placeholder favicon with your real brand favicon
+# Place your favicon files here:
+# /public/favicon.svg        — Main SVG favicon (recommended)
+# /public/favicon.ico        — Fallback ICO
+# /public/apple-touch-icon.png — 180x180px for iOS
+# /public/og-image.jpg       — 1200x630px Open Graph image
+
+User-agent: *
+Allow: /
+Disallow: /api/
+
+Sitemap: https://the-ascend.store/sitemap-index.xml

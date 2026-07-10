@@ -1,0 +1,337 @@
+---
+/**
+ * proceso.astro — Process page
+ * Step data from src/data/process.ts
+ * TODO: Edit process steps in src/data/process.ts
+ */
+
+import BaseLayout from '@layouts/BaseLayout.astro';
+import CTABanner from '@components/sections/CTABanner.astro';
+import { PROCESS_STEPS } from '@data/process';
+import { CTA } from '@data/site';
+---
+
+<BaseLayout
+  title="Nuestro Proceso — The Ascend"
+  description="Conoce cómo trabajamos en The Ascend. Un proceso claro, transparente y enfocado en resultados para tu negocio."
+>
+  <!-- Hero -->
+  <section class="page-hero section">
+    <div class="container">
+      <div class="page-hero__inner">
+        <span class="section-label reveal">Proceso</span>
+        <h1 class="page-hero__title reveal reveal--delay-1">
+          Así trabajamos.<br /><span class="text-gradient">Simple y claro.</span>
+        </h1>
+        <p class="page-hero__subtitle reveal reveal--delay-2">
+          Sin tecnicismos, sin misterios. Cada etapa es transparente
+          y tú siempre sabes exactamente en qué punto estamos.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Timeline -->
+  <section class="process section" aria-labelledby="process-title">
+    <div class="container">
+      <h2 class="sr-only" id="process-title">Proceso de trabajo</h2>
+      <div class="process__timeline">
+        {PROCESS_STEPS.map((step, i) => (
+          <div class={`process-item reveal reveal--delay-${(i % 3) + 1}`}>
+            <!-- Number & connector -->
+            <div class="process-item__left">
+              <div class="process-item__number" aria-hidden="true">
+                {step.number}
+              </div>
+              {i < PROCESS_STEPS.length - 1 && (
+                <div class="process-item__line" aria-hidden="true"></div>
+              )}
+            </div>
+
+            <!-- Content -->
+            <div class="process-item__content">
+              <div class="process-item__header">
+                <h3 class="process-item__title">{step.title}</h3>
+                <span class="process-item__duration">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="12" cy="12" r="10"/>
+                    <polyline points="12 6 12 12 16 14"/>
+                  </svg>
+                  {step.duration}
+                </span>
+              </div>
+              <p class="process-item__desc">{step.description}</p>
+              <ul class="process-item__details">
+                {step.details.map((detail) => (
+                  <li class="process-item__detail">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                    {detail}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust section -->
+  <section class="process-trust section" aria-labelledby="trust-title">
+    <div class="container container--narrow">
+      <div class="section-header reveal">
+        <h2 class="section-title" id="trust-title">
+          Nuestros compromisos contigo.
+        </h2>
+      </div>
+      <div class="trust-grid">
+        {[
+          {
+            title: "Comunicación constante",
+            desc: "Actualizaciones semanales de progreso. Nunca estarás en la oscuridad sobre el estado de tu proyecto.",
+          },
+          {
+            title: "Plazos cumplidos",
+            desc: "Si acordamos una fecha de entrega, la cumplimos. Si surge algo, te avisamos con antelación.",
+          },
+          {
+            title: "Revisiones incluidas",
+            desc: "Hasta 3 rondas de revisiones sin coste adicional. Tu satisfacción es parte del proyecto.",
+          },
+          {
+            title: "Sin sorpresas",
+            desc: "El presupuesto acordado es el precio final. No añadimos costes ocultos ni extras no pactados.",
+          },
+        ].map((item, i) => (
+          <div class={`trust-item reveal reveal--delay-${i + 1}`}>
+            <div class="trust-item__icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              </svg>
+            </div>
+            <h3 class="trust-item__title">{item.title}</h3>
+            <p class="trust-item__desc">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CTABanner
+    title="¿Quieres empezar el proceso?"
+    subtitle="El primer paso es una conversación. Cuéntanos sobre tu negocio y empezamos desde ahí."
+  />
+</BaseLayout>
+
+<style>
+  .page-hero {
+    padding-top: calc(4rem + var(--space-16));
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .page-hero__inner { max-width: 680px; }
+
+  .page-hero__title {
+    font-size: var(--text-5xl);
+    font-weight: var(--weight-extrabold);
+    letter-spacing: -0.05em;
+    line-height: 1.0;
+    margin-bottom: var(--space-6);
+  }
+
+  .page-hero__subtitle {
+    font-size: var(--text-lg);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-relaxed);
+  }
+
+  /* Timeline */
+  .process__timeline {
+    max-width: 760px;
+    margin-inline: auto;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .process-item {
+    display: grid;
+    grid-template-columns: 4rem 1fr;
+    gap: var(--space-6);
+  }
+
+  .process-item__left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .process-item__number {
+    width: 3rem;
+    height: 3rem;
+    border-radius: var(--radius-lg);
+    background: var(--color-primary-glow);
+    border: 1px solid var(--color-primary-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-bold);
+    color: var(--color-primary);
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+  }
+
+  .process-item__line {
+    width: 1px;
+    flex: 1;
+    min-height: 2rem;
+    background: linear-gradient(to bottom, var(--color-primary-border), transparent);
+    margin-block: var(--space-2);
+  }
+
+  .process-item__content {
+    padding-bottom: var(--space-12);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .process-item:last-child .process-item__content {
+    padding-bottom: 0;
+  }
+
+  .process-item__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+    padding-top: 0.5rem;
+  }
+
+  .process-item__title {
+    font-size: var(--text-xl);
+    font-weight: var(--weight-semibold);
+    color: var(--color-text-primary);
+    letter-spacing: -0.02em;
+  }
+
+  .process-item__duration {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+    font-size: var(--text-xs);
+    font-family: var(--font-mono);
+    color: var(--color-text-muted);
+    white-space: nowrap;
+  }
+
+  .process-item__desc {
+    font-size: var(--text-base);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-relaxed);
+  }
+
+  .process-item__details {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .process-item__detail {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-2);
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+  }
+
+  .process-item__detail svg {
+    color: var(--color-primary);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  /* Trust grid */
+  .trust-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-4);
+  }
+
+  .trust-item {
+    padding: var(--space-6);
+    background: var(--color-bg-elevated);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .trust-item__icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: var(--radius-md);
+    background: var(--color-primary-glow);
+    border: 1px solid var(--color-primary-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-primary-light);
+  }
+
+  .trust-item__title {
+    font-size: var(--text-base);
+    font-weight: var(--weight-semibold);
+    color: var(--color-text-primary);
+    letter-spacing: -0.01em;
+  }
+
+  .trust-item__desc {
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-relaxed);
+  }
+
+  .section-header {
+    text-align: center;
+    max-width: 600px;
+    margin-inline: auto;
+    margin-bottom: var(--space-10);
+  }
+
+  .section-title {
+    font-size: var(--text-3xl);
+    font-weight: var(--weight-bold);
+    letter-spacing: -0.03em;
+    color: var(--color-text-primary);
+  }
+
+  .section-label {
+    display: inline-block;
+    font-size: var(--text-xs);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-widest);
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: var(--space-4);
+  }
+
+  @media (max-width: 768px) {
+    .page-hero__title { font-size: var(--text-4xl); }
+
+    .process-item {
+      grid-template-columns: 3rem 1fr;
+      gap: var(--space-4);
+    }
+
+    .trust-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

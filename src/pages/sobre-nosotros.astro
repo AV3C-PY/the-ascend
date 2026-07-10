@@ -1,0 +1,517 @@
+---
+/**
+ * sobre-nosotros.astro — About page
+ * TODO: Update company story, values, and team info here
+ * TODO: Add real team photos in /public/team/ if desired
+ */
+
+import BaseLayout from '@layouts/BaseLayout.astro';
+import CTABanner from '@components/sections/CTABanner.astro';
+import { SITE, CTA } from '@data/site';
+---
+
+<BaseLayout
+  title="Sobre Nosotros — The Ascend"
+  description="Conoce The Ascend: nuestra historia, filosofía y por qué ayudamos a pequeñas empresas a transformarse digitalmente en Francia, España y Perú."
+>
+  <!-- Hero -->
+  <section class="page-hero section">
+    <div class="container">
+      <div class="about-hero">
+        <div class="about-hero__text">
+          <span class="section-label reveal">Sobre Nosotros</span>
+          <!-- TODO: Update headline -->
+          <h1 class="page-hero__title reveal reveal--delay-1">
+            No somos una agencia.<br />
+            <span class="text-gradient">Somos tu equipo digital.</span>
+          </h1>
+          <!-- TODO: Update company description -->
+          <p class="page-hero__subtitle reveal reveal--delay-2">
+            The Ascend nació de una convicción simple: las pequeñas empresas merecen
+            el mismo nivel de calidad digital que las grandes marcas.
+            Sin presupuestos astronómicos. Sin procesos interminables.
+            Sin tecnicismos innecesarios.
+          </p>
+        </div>
+        <div class="about-hero__visual reveal reveal--delay-3" aria-hidden="true">
+          <div class="about-hero__card">
+            <div class="about-hero__card-icon">▲</div>
+            <div class="about-hero__card-text">
+              <span class="about-hero__card-name">The Ascend</span>
+              <span class="about-hero__card-role">Transformación Digital</span>
+            </div>
+          </div>
+          <div class="about-hero__stats">
+            <div class="about-hero__stat">
+              <span class="about-hero__stat-n">🇫🇷</span>
+              <span>Francia</span>
+            </div>
+            <div class="about-hero__stat">
+              <span class="about-hero__stat-n">🇪🇸</span>
+              <span>España</span>
+            </div>
+            <div class="about-hero__stat">
+              <span class="about-hero__stat-n">🇵🇪</span>
+              <span>Perú</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Philosophy -->
+  <section class="about-philosophy section" aria-labelledby="philosophy-title">
+    <div class="container container--narrow">
+      <h2 class="section-title text-center reveal" id="philosophy-title">Nuestra filosofía</h2>
+
+      <div class="philosophy-grid">
+        {[
+          {
+            label: "Lo que creemos",
+            title: "Cada negocio merece brillar.",
+            body: "Un restaurante de barrio, una clínica familiar o un abogado local merecen la misma presencia digital que cualquier gran empresa. La tecnología debe ser un igualador, no una barrera.",
+          },
+          {
+            label: "Cómo trabajamos",
+            title: "Claro, humano y sin rodeos.",
+            body: "No hablamos de APIs, frameworks ni stacks tecnológicos. Hablamos de clientes, ventas y crecimiento. Nuestro trabajo es traducir la tecnología en resultados que tú puedas ver y medir.",
+          },
+          {
+            label: "Nuestro compromiso",
+            title: "Tu éxito es nuestro portfolio.",
+            body: "No somos proveedores que entregan y desaparecen. Somos socios a largo plazo. Tu crecimiento es nuestra mejor tarjeta de presentación.",
+          },
+        ].map((item, i) => (
+          <div class={`philosophy-item reveal reveal--delay-${i + 1}`}>
+            <span class="philosophy-item__label">{item.label}</span>
+            <h3 class="philosophy-item__title">{item.title}</h3>
+            <p class="philosophy-item__body">{item.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Values -->
+  <section class="about-values section" aria-labelledby="values-title">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">Valores</span>
+        <h2 class="section-title" id="values-title">Lo que nos define.</h2>
+      </div>
+
+      <div class="values-grid">
+        {[
+          { icon: "✦", title: "Calidad sin concesiones", desc: "Cada pixel, cada línea de código, cada palabra está pensada para transmitir profesionalismo." },
+          { icon: "◈", title: "Transparencia total", desc: "Precios claros, plazos cumplidos y comunicación constante. Sin sorpresas, nunca." },
+          { icon: "◉", title: "Resultados medibles", desc: "No vendemos promesas. Entregamos métricas reales: tráfico, conversiones, leads." },
+          { icon: "⬡", title: "Tecnología al servicio", desc: "La IA y la automatización son herramientas para ayudarte, no para impresionarte." },
+          { icon: "◇", title: "Cercanía humana", desc: "Hablamos contigo, no a ti. Entendemos tu negocio antes de proponer soluciones." },
+          { icon: "△", title: "Crecimiento continuo", desc: "El lanzamiento es solo el principio. Seguimos optimizando contigo durante años." },
+        ].map((value, i) => (
+          <div class={`value-item reveal reveal--delay-${(i % 3) + 1}`}>
+            <span class="value-item__icon" aria-hidden="true">{value.icon}</span>
+            <h3 class="value-item__title">{value.title}</h3>
+            <p class="value-item__desc">{value.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Markets -->
+  <section class="about-markets section" aria-labelledby="markets-title">
+    <div class="container container--narrow">
+      <div class="section-header reveal">
+        <h2 class="section-title" id="markets-title">Donde estamos.</h2>
+        <p class="section-subtitle">
+          Operamos en tres mercados con características y necesidades diferentes.
+          Conocemos las particularidades de cada uno.
+        </p>
+      </div>
+
+      <div class="markets-grid">
+        {[
+          {
+            flag: "🇫🇷",
+            country: "Francia",
+            desc: "Atendemos a negocios franceses con comunicación en francés, precios en euros y cumplimiento del RGPD europeo.",
+            focus: ["Restaurantes", "Hôtellerie", "Professions libérales"],
+          },
+          {
+            flag: "🇪🇸",
+            country: "España",
+            desc: "Proyectos para empresas españolas en toda la geografía nacional, con foco en pymes y autónomos.",
+            focus: ["Clínicas", "Abogados", "Comercio local"],
+          },
+          {
+            flag: "🇵🇪",
+            country: "Perú",
+            desc: "Soluciones adaptadas al mercado peruano, con precios locales y entendimiento del contexto empresarial.",
+            focus: ["Restaurantes", "Peluquerías", "Tiendas"],
+          },
+        ].map((market, i) => (
+          <div class={`market-item reveal reveal--delay-${i + 1}`}>
+            <span class="market-item__flag" aria-hidden="true">{market.flag}</span>
+            <h3 class="market-item__country">{market.country}</h3>
+            <p class="market-item__desc">{market.desc}</p>
+            <ul class="market-item__focus">
+              {market.focus.map((item) => (
+                <li class="market-item__focus-item">{item}</li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CTABanner
+    title="¿Quieres trabajar con nosotros?"
+    subtitle="Cuéntanos sobre tu negocio. Estaremos encantados de conocer tu proyecto."
+  />
+</BaseLayout>
+
+<style>
+  .page-hero {
+    padding-top: calc(4rem + var(--space-16));
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  /* About hero */
+  .about-hero {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: var(--space-16);
+    align-items: center;
+  }
+
+  .about-hero__text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+  }
+
+  .page-hero__title {
+    font-size: var(--text-5xl);
+    font-weight: var(--weight-extrabold);
+    letter-spacing: -0.05em;
+    line-height: 1.0;
+  }
+
+  .page-hero__subtitle {
+    font-size: var(--text-lg);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-relaxed);
+  }
+
+  /* Visual card */
+  .about-hero__visual {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .about-hero__card {
+    padding: var(--space-6);
+    background: var(--color-bg-elevated);
+    border: 1px solid var(--color-primary-border);
+    border-radius: var(--radius-xl);
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    box-shadow: var(--shadow-glow);
+  }
+
+  .about-hero__card-icon {
+    font-size: 2rem;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .about-hero__card-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .about-hero__card-name {
+    font-family: var(--font-display);
+    font-size: var(--text-lg);
+    font-weight: var(--weight-bold);
+    color: var(--color-text-primary);
+  }
+
+  .about-hero__card-role {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+  }
+
+  .about-hero__stats {
+    display: flex;
+    gap: var(--space-3);
+  }
+
+  .about-hero__stat {
+    flex: 1;
+    padding: var(--space-4);
+    background: var(--color-bg-elevated);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+    text-align: center;
+  }
+
+  .about-hero__stat-n {
+    font-size: 1.5rem;
+  }
+
+  /* Philosophy */
+  .philosophy-grid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    margin-top: var(--space-10);
+  }
+
+  .philosophy-item {
+    padding: var(--space-8);
+    background: var(--color-bg-elevated);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    transition: border-color var(--duration-normal) var(--ease-default);
+  }
+
+  .philosophy-item:hover {
+    border-color: var(--color-primary-border);
+  }
+
+  .philosophy-item__label {
+    font-size: var(--text-xs);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color: var(--color-primary);
+  }
+
+  .philosophy-item__title {
+    font-size: var(--text-xl);
+    font-weight: var(--weight-semibold);
+    color: var(--color-text-primary);
+    letter-spacing: -0.02em;
+  }
+
+  .philosophy-item__body {
+    font-size: var(--text-base);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-relaxed);
+    max-width: 560px;
+  }
+
+  /* Values */
+  .values-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-4);
+  }
+
+  .value-item {
+    padding: var(--space-6);
+    background: var(--color-bg-elevated);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    transition: border-color var(--duration-normal) var(--ease-default),
+                transform var(--duration-normal) var(--ease-spring);
+  }
+
+  .value-item:hover {
+    border-color: var(--color-primary-border);
+    transform: translateY(-2px);
+  }
+
+  .value-item__icon {
+    font-size: 1.5rem;
+    color: var(--color-primary-light);
+  }
+
+  .value-item__title {
+    font-size: var(--text-base);
+    font-weight: var(--weight-semibold);
+    color: var(--color-text-primary);
+    letter-spacing: -0.01em;
+  }
+
+  .value-item__desc {
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-relaxed);
+  }
+
+  /* Markets */
+  .markets-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-5);
+  }
+
+  .market-item {
+    /* Generous internal padding — premium, breathable feel */
+    padding: var(--space-10) var(--space-8);
+    background: var(--color-bg-elevated);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    transition:
+      border-color var(--duration-slow) var(--ease-spring),
+      transform var(--duration-slow) var(--ease-spring),
+      box-shadow var(--duration-slow) var(--ease-spring);
+  }
+
+  .market-item:hover {
+    border-color: var(--color-primary-border);
+    transform: translateY(-5px);
+    box-shadow:
+      var(--shadow-lg),
+      0 0 40px -8px rgba(99, 102, 241, 0.18);
+  }
+
+  .market-item__flag {
+    font-size: 2.25rem;
+    line-height: 1;
+    /* Small bottom margin adds visual separation from title */
+    margin-bottom: var(--space-1);
+  }
+
+  .market-item__country {
+    font-size: var(--text-2xl);
+    font-weight: var(--weight-bold);
+    color: var(--color-text-primary);
+    letter-spacing: -0.03em;
+  }
+
+  .market-item__desc {
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-relaxed);
+    font-family: var(--font-body);
+  }
+
+  .market-item__focus {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    /* Push focus list to bottom of the card */
+    margin-top: auto;
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .market-item__focus-item {
+    font-size: var(--text-xs);
+    font-weight: var(--weight-medium);
+    color: var(--color-text-muted);
+    padding-left: var(--space-4);
+    position: relative;
+    letter-spacing: 0.01em;
+  }
+
+  .market-item__focus-item::before {
+    content: "·";
+    position: absolute;
+    left: 0;
+    color: var(--color-primary);
+    font-size: 1.1em;
+  }
+
+  /* Shared */
+  .section-header {
+    text-align: center;
+    max-width: 600px;
+    margin-inline: auto;
+    margin-bottom: var(--space-12);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    align-items: center;
+  }
+
+  .section-title {
+    font-size: var(--text-3xl);
+    font-weight: var(--weight-bold);
+    letter-spacing: -0.03em;
+    color: var(--color-text-primary);
+  }
+
+  .section-subtitle {
+    font-size: var(--text-base);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-relaxed);
+    text-align: center;
+  }
+
+  .section-label {
+    display: inline-block;
+    font-size: var(--text-xs);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-widest);
+    text-transform: uppercase;
+    color: var(--color-primary);
+  }
+
+  .text-center { text-align: center; }
+
+  @media (max-width: 900px) {
+    .about-hero {
+      grid-template-columns: 1fr;
+    }
+
+    .values-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .markets-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .page-hero__title {
+      font-size: var(--text-4xl);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .values-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .markets-grid {
+      grid-template-columns: 1fr;
+    }
+
+    /* Reduce padding on small phones while keeping the premium feel */
+    .market-item {
+      padding: var(--space-8) var(--space-6);
+    }
+  }
+
+  @media (max-width: 400px) {
+    .market-item {
+      padding: var(--space-6) var(--space-5);
+    }
+  }
+</style>

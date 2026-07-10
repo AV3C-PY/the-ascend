@@ -1,0 +1,16 @@
+{
+  "name": "The Ascend",
+  "short_name": "The Ascend",
+  "description": "Transformación digital para pequeñas empresas",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#09090b",
+  "theme_color": "#6366f1",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

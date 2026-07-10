@@ -1,0 +1,181 @@
+---
+/**
+ * terminos.astro — Terms of Service page
+ * TODO: Update legal entity info
+ * TODO: Have a lawyer review for your jurisdiction
+ */
+
+import BaseLayout from '@layouts/BaseLayout.astro';
+import { SITE } from '@data/site';
+
+const lastUpdated = "9 de julio de 2026";
+---
+
+<BaseLayout
+  title="Términos de Servicio — The Ascend"
+  description="Términos y condiciones de los servicios de transformación digital de The Ascend."
+  noindex={false}
+>
+  <section class="legal-page section">
+    <div class="container container--narrow">
+      <div class="legal-header">
+        <span class="section-label">Legal</span>
+        <h1 class="legal-title">Términos de Servicio</h1>
+        <p class="legal-meta">Última actualización: {lastUpdated}</p>
+      </div>
+
+      <div class="legal-content">
+        <h2>1. Identificación del prestador</h2>
+        <p>
+          <strong>{SITE.name}</strong> presta servicios de transformación digital,
+          diseño web, SEO, automatización e inteligencia artificial para empresas.<br />
+          <!-- TODO: Add legal business address and registration number -->
+          Email: <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
+        </p>
+
+        <h2>2. Servicios ofrecidos</h2>
+        <p>{SITE.name} ofrece servicios digitales incluyendo, entre otros: desarrollo web, diseño gráfico, SEO local, implementación de chatbots con IA, automatización de procesos, y gestión de herramientas de marketing digital.</p>
+
+        <h2>3. Proceso de contratación</h2>
+        <p>
+          Todos los proyectos se inician mediante una solicitud de presupuesto.
+          El proceso es el siguiente:
+        </p>
+        <ol>
+          <li>El cliente solicita presupuesto a través de los canales disponibles (formulario, email o WhatsApp)</li>
+          <li>{SITE.name} prepara una propuesta personalizada sin coste</li>
+          <li>El cliente acepta la propuesta y recibe el enlace de pago correspondiente</li>
+          <li>El pago activa el inicio del proyecto</li>
+        </ol>
+        <p>No existe checkout automático. Todo acuerdo comercial es previo al pago.</p>
+
+        <h2>4. Condiciones de pago</h2>
+        <ul>
+          <li>El pago se realizará según las condiciones acordadas en la propuesta</li>
+          <li>El pago inicial (50%) activa el inicio del trabajo</li>
+          <li>El pago final (50%) se realiza a la entrega y aprobación del proyecto</li>
+          <li>Los pagos se procesan de forma segura mediante LemonSqueezy</li>
+          <li><!-- TODO: Update currency and VAT info based on your legal structure -->
+            Los precios en euros incluyen/excluyen IVA según lo indicado en cada propuesta</li>
+        </ul>
+
+        <h2>5. Entrega y plazos</h2>
+        <p>Los plazos de entrega se especifican en cada propuesta individual. {SITE.name} se compromete a cumplir los plazos acordados. Retrasos causados por falta de información o aprobación del cliente no son responsabilidad de {SITE.name}.</p>
+
+        <h2>6. Revisiones</h2>
+        <p>Cada proyecto incluye hasta 3 rondas de revisiones sin coste adicional. Las revisiones adicionales o cambios fuera del alcance acordado pueden suponer un coste extra, que se comunicará y acordará previamente.</p>
+
+        <h2>7. Propiedad intelectual</h2>
+        <p>Una vez completado el pago íntegro del proyecto, el cliente recibe la propiedad completa de los entregables acordados. {SITE.name} se reserva el derecho de mostrar el proyecto en su portfolio salvo indicación expresa del cliente.</p>
+
+        <h2>8. Garantías y limitaciones</h2>
+        <ul>
+          <li>{SITE.name} garantiza que el trabajo entregado cumple las especificaciones acordadas</li>
+          <li>No se garantizan posiciones específicas en buscadores (SEO)</li>
+          <li>No se garantizan resultados comerciales específicos</li>
+          <li>La responsabilidad máxima de {SITE.name} se limita al importe pagado por el proyecto</li>
+        </ul>
+
+        <h2>9. Soporte post-entrega</h2>
+        <p>El soporte incluido con cada plan cubre correcciones de errores y dudas de funcionamiento. No incluye nuevas funcionalidades o cambios de alcance no previstos.</p>
+
+        <h2>10. Cancelación</h2>
+        <p>El cliente puede cancelar el proyecto en cualquier momento. El importe facturado corresponderá al trabajo ya realizado. El depósito inicial no es reembolsable si el trabajo ya ha comenzado.</p>
+
+        <h2>11. Ley aplicable</h2>
+        <p>
+          <!-- TODO: Update jurisdiction based on your legal entity location -->
+          Estos términos se rigen por la legislación aplicable. Para usuarios en España: legislación española. Para usuarios en Francia: legislación francesa.
+        </p>
+
+        <h2>12. Contacto</h2>
+        <p>
+          Para cualquier consulta sobre estos términos:<br />
+          📧 <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .legal-page { padding-top: calc(4rem + var(--space-16)); }
+
+  .legal-header {
+    margin-bottom: var(--space-12);
+    padding-bottom: var(--space-8);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .legal-title {
+    font-size: var(--text-4xl);
+    font-weight: var(--weight-extrabold);
+    letter-spacing: -0.04em;
+    margin-bottom: var(--space-3);
+  }
+
+  .legal-meta {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+  }
+
+  .section-label {
+    display: inline-block;
+    font-size: var(--text-xs);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-widest);
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: var(--space-4);
+  }
+
+  .legal-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+  }
+
+  .legal-content h2 {
+    font-size: var(--text-xl);
+    font-weight: var(--weight-semibold);
+    color: var(--color-text-primary);
+    letter-spacing: -0.02em;
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .legal-content p {
+    font-size: var(--text-base);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-relaxed);
+  }
+
+  .legal-content ul, .legal-content ol {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding-left: var(--space-6);
+  }
+
+  .legal-content li {
+    font-size: var(--text-base);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-relaxed);
+    list-style-type: disc;
+  }
+
+  .legal-content ol li {
+    list-style-type: decimal;
+  }
+
+  .legal-content a {
+    color: var(--color-primary-light);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .legal-content strong {
+    color: var(--color-text-primary);
+    font-weight: var(--weight-semibold);
+  }
+</style>

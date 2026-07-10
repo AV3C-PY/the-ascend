@@ -1,0 +1,290 @@
+---
+/**
+ * faq.astro — FAQ page
+ * All questions from src/data/faq.ts
+ * TODO: Add/edit/remove questions in src/data/faq.ts
+ */
+
+import BaseLayout from '@layouts/BaseLayout.astro';
+import CTABanner from '@components/sections/CTABanner.astro';
+import { FAQ, FAQ_CATEGORIES } from '@data/faq';
+import { CTA } from '@data/site';
+
+const grouped = Object.entries(FAQ_CATEGORIES).map(([key, label]) => ({
+  key,
+  label,
+  items: FAQ.filter((f) => f.category === key),
+}));
+---
+
+<BaseLayout
+  title="Preguntas Frecuentes — The Ascend"
+  description="Resolvemos tus dudas sobre nuestros servicios, proceso, precios y soporte. Sin tecnicismos, sin rodeos."
+>
+  <!-- Hero -->
+  <section class="page-hero section">
+    <div class="container">
+      <div class="page-hero__inner">
+        <span class="section-label reveal">FAQ</span>
+        <h1 class="page-hero__title reveal reveal--delay-1">
+          Preguntas frecuentes.
+        </h1>
+        <p class="page-hero__subtitle reveal reveal--delay-2">
+          Todo lo que necesitas saber antes de empezar.
+          Si no encuentras tu respuesta, escríbenos directamente.
+        </p>
+        <a href="/contacto" class="btn btn--secondary reveal reveal--delay-3">
+          {CTA.contact}
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ by category -->
+  <section class="faq-page section" aria-label="Preguntas frecuentes">
+    <div class="container">
+      <div class="faq-page__layout">
+        <!-- Sidebar navigation -->
+        <nav class="faq-nav" aria-label="Categorías de FAQ">
+          <p class="faq-nav__title">Categorías</p>
+          {grouped.map((group) => group.items.length > 0 && (
+            <a href={`#cat-${group.key}`} class="faq-nav__link">
+              {group.label}
+              <span class="faq-nav__count">{group.items.length}</span>
+            </a>
+          ))}
+        </nav>
+
+        <!-- FAQ content -->
+        <div class="faq-content">
+          {grouped.map((group) => group.items.length > 0 && (
+            <div class="faq-group" id={`cat-${group.key}`}>
+              <h2 class="faq-group__title reveal">{group.label}</h2>
+              <div class="faq-list">
+                {group.items.map((item, i) => (
+                  <details
+                    class={`faq-item reveal reveal--delay-${(i % 3) + 1}`}
+                    id={item.id}
+                  >
+                    <summary class="faq-item__summary">
+                      <span class="faq-item__question">{item.question}</span>
+                      <span class="faq-item__icon" aria-hidden="true">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M6 9l6 6 6-6"/>
+                        </svg>
+                      </span>
+                    </summary>
+                    <div class="faq-item__answer">
+                      <p>{item.answer}</p>
+                    </div>
+                  </details>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CTABanner
+    title="¿Tienes una pregunta diferente?"
+    subtitle="Escríbenos y te respondemos en menos de 24 horas. Sin bots, sin formularios genéricos."
+  />
+</BaseLayout>
+
+<style>
+  .page-hero {
+    padding-top: calc(4rem + var(--space-16));
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .page-hero__inner {
+    max-width: 640px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    align-items: flex-start;
+  }
+
+  .page-hero__title {
+    font-size: var(--text-5xl);
+    font-weight: var(--weight-extrabold);
+    letter-spacing: -0.05em;
+    line-height: 1.0;
+  }
+
+  .page-hero__subtitle {
+    font-size: var(--text-lg);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-relaxed);
+  }
+
+  /* Layout */
+  .faq-page__layout {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: var(--space-16);
+    align-items: start;
+  }
+
+  /* Sidebar */
+  .faq-nav {
+    position: sticky;
+    top: calc(4rem + var(--space-8));
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+
+  .faq-nav__title {
+    font-size: var(--text-xs);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-widest);
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-3);
+    padding-left: var(--space-3);
+  }
+
+  .faq-nav__link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-2) var(--space-3);
+    border-radius: var(--radius-md);
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+    transition: color var(--duration-fast) var(--ease-default),
+                background-color var(--duration-fast) var(--ease-default);
+  }
+
+  .faq-nav__link:hover {
+    color: var(--color-text-primary);
+    background-color: rgba(255,255,255,0.04);
+  }
+
+  .faq-nav__count {
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+    background: rgba(255,255,255,0.05);
+    padding: 1px var(--space-2);
+    border-radius: var(--radius-full);
+  }
+
+  /* Content */
+  .faq-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-12);
+  }
+
+  .faq-group__title {
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-4);
+    padding-bottom: var(--space-3);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  /* FAQ items */
+  .faq-item {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-bg-elevated);
+    overflow: hidden;
+    transition: border-color var(--duration-fast) var(--ease-default);
+  }
+
+  .faq-item[open] {
+    border-color: var(--color-primary-border);
+  }
+
+  .faq-item__summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    padding: var(--space-5) var(--space-6);
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+    transition: background-color var(--duration-fast) var(--ease-default);
+  }
+
+  .faq-item__summary::-webkit-details-marker { display: none; }
+
+  .faq-item__summary:hover {
+    background-color: rgba(255,255,255,0.02);
+  }
+
+  .faq-item__question {
+    font-size: var(--text-base);
+    font-weight: var(--weight-medium);
+    color: var(--color-text-primary);
+    line-height: var(--leading-snug);
+  }
+
+  .faq-item__icon {
+    color: var(--color-text-muted);
+    flex-shrink: 0;
+    transition: transform var(--duration-normal) var(--ease-spring);
+  }
+
+  .faq-item[open] .faq-item__icon {
+    transform: rotate(180deg);
+    color: var(--color-primary);
+  }
+
+  .faq-item__answer {
+    padding: 0 var(--space-6) var(--space-5);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .faq-item__answer p {
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-relaxed);
+    padding-top: var(--space-4);
+  }
+
+  .section-label {
+    display: inline-block;
+    font-size: var(--text-xs);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-widest);
+    text-transform: uppercase;
+    color: var(--color-primary);
+  }
+
+  @media (max-width: 900px) {
+    .faq-page__layout {
+      grid-template-columns: 1fr;
+    }
+
+    .faq-nav {
+      position: static;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+    }
+
+    .faq-nav__title {
+      width: 100%;
+      margin-bottom: 0;
+    }
+
+    .page-hero__title {
+      font-size: var(--text-4xl);
+    }
+  }
+</style>

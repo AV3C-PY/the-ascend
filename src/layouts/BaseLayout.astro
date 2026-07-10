@@ -1,0 +1,213 @@
+---
+/**
+ * BaseLayout.astro
+ * Root layout for all pages. Handles:
+ * - <head> meta tags, fonts, favicons
+ * - Global CSS imports
+ * - Header + Footer wrapping
+ * - Google Analytics (via Partytown for zero performance impact)
+ *
+ * TODO: Update the GA_MEASUREMENT_ID with your real Google Analytics ID
+ * TODO: Replace favicon files in /public/ with your real brand favicon
+ * TODO: Update OG image at /public/og-image.jpg with your real OG image
+ */
+
+import { SITE } from '@data/site';
+import Header from '@components/layout/Header.astro';
+import Footer from '@components/layout/Footer.astro';
+import { es } from '@i18n/es';
+import { fr } from '@i18n/fr';
+import '@styles/global.css';
+import '@styles/animations.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  ogImage?: string;
+  canonical?: string;
+  noindex?: boolean;
+}
+
+const {
+  title,
+  description = SITE.description,
+  ogImage = SITE.ogImage,
+  canonical,
+  noindex = false,
+} = Astro.props;
+
+const fullTitle = title === SITE.name ? title : `${title} | ${SITE.name}`;
+const canonicalUrl = canonical ?? new URL(Astro.url.pathname, SITE.url).href;
+
+// TODO: Replace with your real Google Analytics Measurement ID (format: G-XXXXXXXXXX)
+const GA_ID = 'G-XXXXXXXXXX';
+
+// Serialize the translation dictionaries for the client-side engine.
+// They are injected at build time via define:vars — no client-side imports needed.
+const i18nDicts = { es, fr };
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- Primary Meta Tags -->
+    <title>{fullTitle}</title>
+    <meta name="title" content={fullTitle} />
+    <meta name="description" content={description} />
+    <meta name="author" content={SITE.name} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+
+    <!-- Canonical -->
+    <link rel="canonical" href={canonicalUrl} />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(ogImage, SITE.url).href} />
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:locale" content="es_ES" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalUrl} />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(ogImage, SITE.url).href} />
+
+    <!-- Favicon -->
+    <!-- TODO: Replace these with your real favicon files in /public/ -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#6366f1" />
+
+    <!-- Fonts — Google Fonts -->
+    <!-- TODO: If changing fonts, update font-family in src/styles/tokens.css too -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Google Analytics via Partytown (zero perf impact) -->
+    <!-- TODO: Replace GA_ID above with your real Measurement ID -->
+    {GA_ID !== 'G-XXXXXXXXXX' && (
+      <>
+        <script type="text/partytown" src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}></script>
+        <script type="text/partytown" define:vars={{ GA_ID }}>
+          window.dataLayer = window.dataLayer || [];
+          function gtag() { dataLayer.push(arguments); }
+          gtag('js', new Date());
+          gtag('config', GA_ID);
+        </script>
+      </>
+    )}
+  </head>
+  <body class="noise">
+    <!-- Skip to content — visible on Tab for keyboard users -->
+    <a href="#main-content" class="skip-to-content" data-i18n="nav.skipToContent">Ir al contenido principal</a>
+    <Header />
+    <main id="main-content">
+      <slot />
+    </main>
+    <Footer />
+
+    <!-- Scroll reveal animation init -->
+    <script>
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.1, rootMargin: '0px 0px -60px 0px' }
+      );
+
+      document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+    </script>
+
+    <!-- i18n Engine — applies translations on page load and market change -->
+    <!-- Translations are injected at build time via define:vars — no runtime imports -->
+    <script define:vars={{ i18nDicts }}>
+      /**
+       * Get value at dot-notation path from a nested object.
+       * Example: getByPath(dict, "nav.services") → "Servicios"
+       */
+      function getByPath(obj, path) {
+        const parts = path.split('.');
+        let current = obj;
+        for (const part of parts) {
+          if (typeof current !== 'object' || current === null) return undefined;
+          current = current[part];
+        }
+        return typeof current === 'string' ? current : undefined;
+      }
+
+      /** Map market code → language code */
+      const MARKET_LANG = { FR: 'fr', ES: 'es', PE: 'es' };
+
+      /** Apply all translations for the given language */
+      function applyTranslations(lang) {
+        const dict = i18nDicts[lang] ?? i18nDicts.es;
+
+        // Text content: <span data-i18n="hero.badge">...</span>
+        document.querySelectorAll('[data-i18n]').forEach((el) => {
+          const key = el.getAttribute('data-i18n');
+          const value = getByPath(dict, key);
+          if (value !== undefined) el.textContent = value;
+        });
+
+        // Attribute swaps: <input data-i18n-attr="placeholder:key,aria-label:key2">
+        document.querySelectorAll('[data-i18n-attr]').forEach((el) => {
+          const spec = el.getAttribute('data-i18n-attr');
+          spec.split(',').forEach((pair) => {
+            const colonIdx = pair.indexOf(':');
+            if (colonIdx === -1) return;
+            const attr = pair.slice(0, colonIdx).trim();
+            const key  = pair.slice(colonIdx + 1).trim();
+            const value = getByPath(dict, key);
+            if (value !== undefined) el.setAttribute(attr, value);
+          });
+        });
+
+        // Update <html lang>
+        document.documentElement.lang = lang;
+      }
+
+      /** Read current market from localStorage and return its language */
+      function getCurrentLang() {
+        const market = localStorage.getItem('ascend_market') ?? 'ES';
+        return MARKET_LANG[market] ?? 'es';
+      }
+
+      // Apply on initial page load
+      function initI18n() {
+        applyTranslations(getCurrentLang());
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initI18n);
+      } else {
+        initI18n();
+      }
+
+      // Listen for market changes dispatched by MarketSelector
+      window.addEventListener('marketchange', (e) => {
+        const market = e.detail && e.detail.market;
+        if (!market) return;
+        const lang = MARKET_LANG[market] ?? 'es';
+        applyTranslations(lang);
+      });
+    </script>
+  </body>
+</html>

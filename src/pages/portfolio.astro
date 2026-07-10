@@ -1,0 +1,424 @@
+---
+/**
+ * portfolio.astro — Portfolio page
+ * All portfolio data from src/data/portfolio.ts
+ * TODO: Replace placeholder items with real projects in src/data/portfolio.ts
+ * TODO: Add real images in /public/portfolio/ and update portfolio.ts paths
+ */
+
+import BaseLayout from '@layouts/BaseLayout.astro';
+import CTABanner from '@components/sections/CTABanner.astro';
+import { PORTFOLIO, INDUSTRIES } from '@data/portfolio';
+import { CTA } from '@data/site';
+---
+
+<BaseLayout
+  title="Portfolio — The Ascend"
+  description="Proyectos reales, resultados medibles. Webs, tiendas online y soluciones digitales para restaurantes, clínicas, hoteles y más."
+>
+  <!-- Hero -->
+  <section class="page-hero section">
+    <div class="container">
+      <div class="page-hero__inner">
+        <span class="section-label reveal">Portfolio</span>
+        <h1 class="page-hero__title reveal reveal--delay-1">
+          Proyectos que generan<br /><span class="text-gradient">resultados reales.</span>
+        </h1>
+        <p class="page-hero__subtitle reveal reveal--delay-2">
+          Cada caso de estudio documenta el reto del cliente,
+          la solución que implementamos y los resultados obtenidos.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Portfolio grid -->
+  <section class="portfolio-page section" aria-label="Portfolio de proyectos">
+    <div class="container">
+
+      <!-- Stats bar -->
+      <div class="portfolio-stats reveal">
+        <div class="portfolio-stat">
+          <span class="portfolio-stat__number">{PORTFOLIO.length}+</span>
+          <span class="portfolio-stat__label">Proyectos</span>
+        </div>
+        <div class="portfolio-stat__divider" aria-hidden="true"></div>
+        <div class="portfolio-stat">
+          <span class="portfolio-stat__number">3</span>
+          <span class="portfolio-stat__label">Países</span>
+        </div>
+        <div class="portfolio-stat__divider" aria-hidden="true"></div>
+        <div class="portfolio-stat">
+          <span class="portfolio-stat__number">7</span>
+          <span class="portfolio-stat__label">Industrias</span>
+        </div>
+        <div class="portfolio-stat__divider" aria-hidden="true"></div>
+        <div class="portfolio-stat">
+          <span class="portfolio-stat__number">100%</span>
+          <span class="portfolio-stat__label">Clientes satisfechos</span>
+        </div>
+      </div>
+
+      <!-- Grid -->
+      <div class="portfolio-grid">
+        {PORTFOLIO.map((project, i) => (
+          <article
+            class={`portfolio-full-card reveal reveal--delay-${(i % 3) + 1} ${project.featured ? 'portfolio-full-card--featured' : ''}`}
+            id={project.id}
+            aria-labelledby={`project-title-${project.id}`}
+          >
+            <!-- Image -->
+            <div class="portfolio-full-card__image">
+              <!-- TODO: Replace placeholder with real project image: {project.image} -->
+              <div class="portfolio-full-card__placeholder" aria-hidden="true">
+                <span class="portfolio-full-card__initial">{project.title.charAt(0)}</span>
+                <span class="portfolio-full-card__industry-label">{project.industry}</span>
+              </div>
+              {project.featured && (
+                <div class="portfolio-full-card__badge">Destacado</div>
+              )}
+            </div>
+
+            <!-- Body -->
+            <div class="portfolio-full-card__body">
+              <div class="portfolio-full-card__meta">
+                <span class="portfolio-full-card__tag">{project.industry}</span>
+                <span class="portfolio-full-card__location">{project.location} · {project.year}</span>
+              </div>
+
+              <h2 class="portfolio-full-card__title" id={`project-title-${project.id}`}>
+                {project.title}
+              </h2>
+              <p class="portfolio-full-card__client">{project.client}</p>
+
+              <p class="portfolio-full-card__desc">{project.description}</p>
+
+              <!-- Challenge & Solution -->
+              <div class="portfolio-full-card__cs">
+                <div class="portfolio-full-card__cs-item">
+                  <span class="portfolio-full-card__cs-label">Reto</span>
+                  <p class="portfolio-full-card__cs-text">{project.challenge}</p>
+                </div>
+                <div class="portfolio-full-card__cs-item">
+                  <span class="portfolio-full-card__cs-label">Solución</span>
+                  <p class="portfolio-full-card__cs-text">{project.solution}</p>
+                </div>
+              </div>
+
+              <!-- Results -->
+              <div class="portfolio-full-card__results">
+                <span class="portfolio-full-card__results-title">Resultados:</span>
+                <ul class="portfolio-full-card__results-list">
+                  {project.results.map((result) => (
+                    <li class="portfolio-full-card__result">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M22 7l-8.5 8.5-5-5L1 18"/>
+                        <path d="M16 7h6v6"/>
+                      </svg>
+                      {result}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <CTABanner
+    title="¿Quieres un proyecto así?"
+    subtitle="Cuéntanos sobre tu negocio. Analizamos tu situación y te presentamos una propuesta personalizada."
+    ctaPrimary={CTA.contact}
+  />
+</BaseLayout>
+
+<style>
+  .page-hero {
+    padding-top: calc(4rem + var(--space-16));
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .page-hero__inner { max-width: 680px; }
+
+  .page-hero__title {
+    font-size: var(--text-5xl);
+    font-weight: var(--weight-extrabold);
+    letter-spacing: -0.05em;
+    line-height: 1.0;
+    margin-bottom: var(--space-6);
+  }
+
+  .page-hero__subtitle {
+    font-size: var(--text-lg);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-relaxed);
+  }
+
+  /* Stats */
+  .portfolio-stats {
+    display: flex;
+    align-items: center;
+    gap: var(--space-8);
+    padding: var(--space-6) var(--space-8);
+    background: var(--color-bg-elevated);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    margin-bottom: var(--space-10);
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .portfolio-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-1);
+  }
+
+  .portfolio-stat__number {
+    font-family: var(--font-display);
+    font-size: var(--text-3xl);
+    font-weight: var(--weight-bold);
+    color: var(--color-text-primary);
+    letter-spacing: -0.04em;
+  }
+
+  .portfolio-stat__label {
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+  }
+
+  .portfolio-stat__divider {
+    width: 1px;
+    height: 2.5rem;
+    background: var(--color-border);
+  }
+
+  /* Grid */
+  .portfolio-grid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+  }
+
+  /* Card */
+  .portfolio-full-card {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    background: var(--color-bg-elevated);
+    transition:
+      border-color var(--duration-normal) var(--ease-default),
+      transform var(--duration-normal) var(--ease-spring);
+  }
+
+  .portfolio-full-card:nth-child(even) {
+    direction: rtl;
+  }
+
+  .portfolio-full-card:nth-child(even) > * {
+    direction: ltr;
+  }
+
+  .portfolio-full-card:hover {
+    border-color: var(--color-border-hover);
+    transform: translateY(-2px);
+  }
+
+  .portfolio-full-card--featured {
+    border-color: var(--color-primary-border);
+  }
+
+  /* Image */
+  .portfolio-full-card__image {
+    position: relative;
+    min-height: 300px;
+    background: var(--color-surface-2);
+  }
+
+  .portfolio-full-card__placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-3);
+    background: linear-gradient(135deg, var(--color-surface-2), var(--color-surface));
+  }
+
+  .portfolio-full-card__initial {
+    font-family: var(--font-display);
+    font-size: 6rem;
+    font-weight: var(--weight-extrabold);
+    color: rgba(255,255,255,0.04);
+    line-height: 1;
+  }
+
+  .portfolio-full-card__industry-label {
+    font-size: var(--text-xs);
+    letter-spacing: var(--tracking-widest);
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+  }
+
+  .portfolio-full-card__badge {
+    position: absolute;
+    top: var(--space-4);
+    left: var(--space-4);
+    background: var(--gradient-primary);
+    color: #fff;
+    font-size: var(--text-xs);
+    font-weight: var(--weight-semibold);
+    padding: var(--space-1) var(--space-3);
+    border-radius: var(--radius-full);
+  }
+
+  /* Body */
+  .portfolio-full-card__body {
+    padding: var(--space-10);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+  }
+
+  .portfolio-full-card__meta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  .portfolio-full-card__tag {
+    font-size: var(--text-xs);
+    font-weight: var(--weight-semibold);
+    color: var(--color-primary);
+    background: var(--color-primary-glow);
+    border: 1px solid var(--color-primary-border);
+    padding: var(--space-1) var(--space-2);
+    border-radius: var(--radius-full);
+  }
+
+  .portfolio-full-card__location {
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+  }
+
+  .portfolio-full-card__title {
+    font-size: var(--text-3xl);
+    font-weight: var(--weight-bold);
+    color: var(--color-text-primary);
+    letter-spacing: -0.03em;
+    line-height: var(--leading-tight);
+  }
+
+  .portfolio-full-card__client {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    margin-top: calc(-1 * var(--space-3));
+  }
+
+  .portfolio-full-card__desc {
+    font-size: var(--text-base);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-relaxed);
+  }
+
+  /* Challenge/Solution */
+  .portfolio-full-card__cs {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    padding: var(--space-5);
+    background: rgba(255,255,255,0.02);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+  }
+
+  .portfolio-full-card__cs-item {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+
+  .portfolio-full-card__cs-label {
+    font-size: var(--text-xs);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+  }
+
+  .portfolio-full-card__cs-text {
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-relaxed);
+  }
+
+  /* Results */
+  .portfolio-full-card__results-title {
+    font-size: var(--text-xs);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    display: block;
+    margin-bottom: var(--space-3);
+  }
+
+  .portfolio-full-card__results-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .portfolio-full-card__result {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-2);
+    font-size: var(--text-sm);
+    color: var(--color-success);
+    font-weight: var(--weight-medium);
+  }
+
+  .section-label {
+    display: inline-block;
+    font-size: var(--text-xs);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-widest);
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: var(--space-4);
+  }
+
+  @media (max-width: 900px) {
+    .portfolio-full-card {
+      grid-template-columns: 1fr;
+      direction: ltr;
+    }
+
+    .portfolio-full-card:nth-child(even) {
+      direction: ltr;
+    }
+
+    .portfolio-full-card__image {
+      min-height: 200px;
+    }
+
+    .portfolio-full-card__body {
+      padding: var(--space-6);
+    }
+
+    .portfolio-stat__divider {
+      display: none;
+    }
+
+    .page-hero__title {
+      font-size: var(--text-4xl);
+    }
+  }
+</style>

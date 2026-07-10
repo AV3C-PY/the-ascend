@@ -1,0 +1,291 @@
+/* =============================================================================
+   THE ASCEND — Global Styles
+   Base reset, typography, and utility classes.
+   Import tokens.css FIRST, then this file.
+   ============================================================================= */
+
+@import './tokens.css';
+
+/* ---------------------------------------------------------------------------
+   CSS RESET — Modern minimal reset
+--------------------------------------------------------------------------- */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: var(--weight-normal);
+  line-height: var(--leading-normal);
+  color: var(--color-text-primary);
+  background-color: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+img, video, svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: inherit;
+}
+
+input, textarea, select {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-text-primary);
+}
+
+p {
+  line-height: var(--leading-relaxed);
+  color: var(--color-text-secondary);
+}
+
+/* ---------------------------------------------------------------------------
+   SKIP TO CONTENT — Keyboard accessibility
+   Hidden until focused; appears when user presses Tab on page load
+--------------------------------------------------------------------------- */
+
+.skip-to-content {
+  position: fixed;
+  top: var(--space-4);
+  left: 50%;
+  transform: translateX(-50%) translateY(-200%);
+  background: var(--color-primary);
+  color: #fff;
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  padding: var(--space-3) var(--space-6);
+  border-radius: var(--radius-full);
+  z-index: calc(var(--z-modal) + 10);
+  transition: transform var(--duration-fast) var(--ease-spring);
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.skip-to-content:focus {
+  transform: translateX(-50%) translateY(0%);
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+
+/* ---------------------------------------------------------------------------
+   LAYOUT UTILITIES
+--------------------------------------------------------------------------- */
+
+.container {
+  width: 100%;
+  max-width: var(--container-xl);
+  margin-inline: auto;
+  padding-inline: var(--container-padding-x);
+}
+
+.container--wide {
+  max-width: var(--container-2xl);
+}
+
+.container--narrow {
+  max-width: var(--container-md);
+}
+
+/* Ultrawide: prevent content from becoming too wide on 2560px+ screens */
+@media (min-width: 1800px) {
+  .container {
+    max-width: 1400px;
+  }
+  .container--wide {
+    max-width: 1600px;
+  }
+}
+
+.section {
+  padding-block: var(--section-py);
+}
+
+/* ---------------------------------------------------------------------------
+   TYPOGRAPHY UTILITIES
+--------------------------------------------------------------------------- */
+
+.text-gradient {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+/* Screen-reader only */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* ---------------------------------------------------------------------------
+   INTERACTIVE — Focus styles (accessibility)
+--------------------------------------------------------------------------- */
+
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+/* Remove outline for mouse/touch users, keep for keyboard */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* ---------------------------------------------------------------------------
+   SCROLLBAR — Custom thin scrollbar
+--------------------------------------------------------------------------- */
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-surface-2);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-border-hover);
+}
+
+/* ---------------------------------------------------------------------------
+   SELECTION
+--------------------------------------------------------------------------- */
+
+::selection {
+  background: var(--color-primary-glow);
+  color: var(--color-primary-light);
+}
+
+/* ---------------------------------------------------------------------------
+   DIVIDER
+--------------------------------------------------------------------------- */
+
+hr {
+  border: none;
+  border-top: 1px solid var(--color-border);
+}
+
+/* ---------------------------------------------------------------------------
+   CODE
+--------------------------------------------------------------------------- */
+
+code, pre {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+}
+
+/* ---------------------------------------------------------------------------
+   ANIMATIONS — Scroll reveal
+   Used by IntersectionObserver in BaseLayout.astro
+--------------------------------------------------------------------------- */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity var(--duration-slower) var(--ease-spring),
+    transform var(--duration-slower) var(--ease-spring);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal--delay-1 { transition-delay: 80ms; }
+.reveal--delay-2 { transition-delay: 160ms; }
+.reveal--delay-3 { transition-delay: 240ms; }
+.reveal--delay-4 { transition-delay: 320ms; }
+.reveal--delay-5 { transition-delay: 400ms; }
+
+/* ---------------------------------------------------------------------------
+   REDUCED MOTION — Accessibility
+   Respects the user's OS "reduce motion" setting
+   Critical for users with vestibular disorders
+--------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Reveal elements immediately — no animation */
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   NOISE TEXTURE — Subtle film grain for premium feel
+--------------------------------------------------------------------------- */
+
+.noise::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: var(--z-toast);
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 128px 128px;
+}

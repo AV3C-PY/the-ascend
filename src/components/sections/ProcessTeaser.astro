@@ -1,0 +1,169 @@
+---
+/**
+ * ProcessTeaser.astro
+ * Home page process teaser — 3 key steps.
+ * Full process is at /proceso.
+ * TODO: Edit full process steps in src/data/process.ts
+ */
+
+import { PROCESS_STEPS } from '@data/process';
+
+const teaserSteps = PROCESS_STEPS.slice(0, 3);
+---
+
+<section class="process-teaser section" aria-labelledby="process-teaser-title">
+  <div class="container">
+    <div class="process-teaser__inner">
+      <!-- Text side -->
+      <div class="process-teaser__text">
+        <!-- TODO: Update process text in src/i18n/es.ts and fr.ts (processTeaser.*) -->
+        <span class="section-label reveal" data-i18n="processTeaser.sectionLabel">Proceso</span>
+        <h2 class="section-title process-teaser__title reveal reveal--delay-1" id="process-teaser-title" data-i18n="processTeaser.title">
+          Simple, claro<br />y sin sorpresas.
+        </h2>
+        <p class="section-subtitle process-teaser__subtitle reveal reveal--delay-2" data-i18n="processTeaser.subtitle">
+          Cada proyecto sigue el mismo proceso probado. Sabes exactamente en qué punto estamos en todo momento.
+        </p>
+        <a href="/proceso" class="btn btn--secondary reveal reveal--delay-3" data-i18n="processTeaser.cta">
+          Ver el proceso completo
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+
+      <!-- Steps side -->
+      <div class="process-teaser__steps">
+        {teaserSteps.map((step, i) => (
+          <div class={`process-step reveal reveal--delay-${i + 1}`}>
+            <div class="process-step__number" aria-hidden="true">
+              {step.number}
+            </div>
+            <div class="process-step__body">
+              <h3 class="process-step__title" data-i18n={`process.steps.${step.id}.title`}>{step.title}</h3>
+              <p class="process-step__desc" data-i18n={`process.steps.${step.id}.description`}>{step.description}</p>
+              <span class="process-step__duration">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <circle cx="12" cy="12" r="10"/>
+                  <polyline points="12 6 12 12 16 14"/>
+                </svg>
+                <span data-i18n={`process.steps.${step.id}.duration`}>{step.duration}</span>
+              </span>
+            </div>
+            {i < teaserSteps.length - 1 && (
+              <div class="process-step__connector" aria-hidden="true"></div>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .process-teaser__inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-20);
+    align-items: center;
+  }
+
+  .process-teaser__text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+    align-items: flex-start;
+  }
+
+  .process-teaser__title {
+    text-align: left;
+  }
+
+  .process-teaser__subtitle {
+    text-align: left;
+  }
+
+  /* Steps */
+  .process-teaser__steps {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    position: relative;
+  }
+
+  .process-step {
+    display: grid;
+    grid-template-columns: 3rem 1fr;
+    gap: var(--space-4);
+    position: relative;
+    padding-bottom: var(--space-8);
+  }
+
+  .process-step:last-child {
+    padding-bottom: 0;
+  }
+
+  .process-step__number {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    font-weight: var(--weight-bold);
+    color: var(--color-primary);
+    background: var(--color-primary-glow);
+    border: 1px solid var(--color-primary-border);
+    border-radius: var(--radius-md);
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+  }
+
+  .process-step__connector {
+    position: absolute;
+    left: 1.25rem;
+    top: 2.5rem;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--color-primary-border), transparent);
+  }
+
+  .process-step__body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    padding-top: 0.375rem;
+  }
+
+  .process-step__title {
+    font-size: var(--text-base);
+    font-weight: var(--weight-semibold);
+    color: var(--color-text-primary);
+    letter-spacing: -0.02em;
+  }
+
+  .process-step__desc {
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-relaxed);
+  }
+
+  .process-step__duration {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+    font-family: var(--font-mono);
+  }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .process-teaser__inner {
+      grid-template-columns: 1fr;
+      gap: var(--space-12);
+    }
+  }
+</style>
