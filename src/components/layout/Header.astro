@@ -192,8 +192,13 @@ const currentPath = Astro.url.pathname;
     flex-shrink: 0;
   }
 
-  /* ===== Market Selector Styles (used by MarketSelector.tsx) ===== */
-  /* These are global because the React component renders outside Astro's scoped CSS */
+  /* ===== Responsive overrides for Block 1 ===== */
+  @media (max-width: 1024px) {
+    .header__nav,
+    .header__cta {
+      display: none;
+    }
+  }
 </style>
 
 <!-- Market Selector global styles (can't use scoped CSS for React island) -->
@@ -534,14 +539,6 @@ const currentPath = Astro.url.pathname;
 
   /* ===== Responsive ===== */
   @media (max-width: 1024px) {
-    .header__nav {
-      display: none;
-    }
-
-    .header__cta {
-      display: none;
-    }
-
     .header__menu-btn {
       display: flex;
     }
