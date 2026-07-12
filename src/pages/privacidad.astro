@@ -17,20 +17,21 @@ const lastUpdated = "9 de julio de 2026";
   title="Política de Privacidad — The Ascend"
   description="Política de privacidad de The Ascend. Cómo recopilamos, usamos y protegemos tus datos personales."
   noindex={false}
+  i18nTitle="legal.privacy.title"
+  i18nDesc="legal.privacy.metaDesc"
 >
   <section class="legal-page section">
     <div class="container container--narrow">
       <div class="legal-header">
         <span class="section-label">Legal</span>
-        <h1 class="legal-title">Política de Privacidad</h1>
-        <p class="legal-meta">Última actualización: {lastUpdated}</p>
+        <h1 class="legal-title" data-i18n="legal.privacy.title">Política de Privacidad</h1>
+        <p class="legal-meta"><span data-i18n="legal.privacy.lastUpdated">Última actualización</span>: {lastUpdated}</p>
       </div>
 
-      <div class="legal-content">
+      <div class="legal-content" data-i18n-html="legal.privacy.content">
         <h2>1. Responsable del tratamiento</h2>
         <p>
           <strong>{SITE.name}</strong><br />
-          <!-- TODO: Add your legal business address -->
           Email de contacto: <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
         </p>
 

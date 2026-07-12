@@ -25,15 +25,15 @@ const grouped = Object.entries(FAQ_CATEGORIES).map(([key, label]) => ({
   <section class="page-hero section">
     <div class="container">
       <div class="page-hero__inner">
-        <span class="section-label reveal">FAQ</span>
-        <h1 class="page-hero__title reveal reveal--delay-1">
+        <span class="section-label reveal" data-i18n="faq.sectionLabel">FAQ</span>
+        <h1 class="page-hero__title reveal reveal--delay-1" data-i18n="faq.title">
           Preguntas frecuentes.
         </h1>
-        <p class="page-hero__subtitle reveal reveal--delay-2">
+        <p class="page-hero__subtitle reveal reveal--delay-2" data-i18n="faq.subtitle">
           Todo lo que necesitas saber antes de empezar.
           Si no encuentras tu respuesta, escríbenos directamente.
         </p>
-        <a href="/contacto" class="btn btn--secondary reveal reveal--delay-3">
+        <a href="/contacto" class="btn btn--secondary reveal reveal--delay-3" data-i18n="faq.ctaContact">
           {CTA.contact}
         </a>
       </div>
@@ -46,10 +46,10 @@ const grouped = Object.entries(FAQ_CATEGORIES).map(([key, label]) => ({
       <div class="faq-page__layout">
         <!-- Sidebar navigation -->
         <nav class="faq-nav" aria-label="Categorías de FAQ">
-          <p class="faq-nav__title">Categorías</p>
+          <p class="faq-nav__title" data-i18n="faq.categoriesTitle">Categorías</p>
           {grouped.map((group) => group.items.length > 0 && (
             <a href={`#cat-${group.key}`} class="faq-nav__link">
-              {group.label}
+              <span data-i18n={`faq.categories.${group.key}`}>{group.label}</span>
               <span class="faq-nav__count">{group.items.length}</span>
             </a>
           ))}
@@ -59,7 +59,7 @@ const grouped = Object.entries(FAQ_CATEGORIES).map(([key, label]) => ({
         <div class="faq-content">
           {grouped.map((group) => group.items.length > 0 && (
             <div class="faq-group" id={`cat-${group.key}`}>
-              <h2 class="faq-group__title reveal">{group.label}</h2>
+              <h2 class="faq-group__title reveal" data-i18n={`faq.categories.${group.key}`}>{group.label}</h2>
               <div class="faq-list">
                 {group.items.map((item, i) => (
                   <details
@@ -67,7 +67,7 @@ const grouped = Object.entries(FAQ_CATEGORIES).map(([key, label]) => ({
                     id={item.id}
                   >
                     <summary class="faq-item__summary">
-                      <span class="faq-item__question">{item.question}</span>
+                      <span class="faq-item__question" data-i18n={`faq.items.${item.id}.question`}>{item.question}</span>
                       <span class="faq-item__icon" aria-hidden="true">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                           <path d="M6 9l6 6 6-6"/>
@@ -75,7 +75,7 @@ const grouped = Object.entries(FAQ_CATEGORIES).map(([key, label]) => ({
                       </span>
                     </summary>
                     <div class="faq-item__answer">
-                      <p>{item.answer}</p>
+                      <p data-i18n={`faq.items.${item.id}.answer`}>{item.answer}</p>
                     </div>
                   </details>
                 ))}

@@ -26,11 +26,11 @@ const grouped = Object.entries(SERVICE_CATEGORIES).map(([key, label]) => ({
   <section class="page-hero section">
     <div class="container page-hero__inner">
       <div class="page-hero__content">
-        <span class="section-label reveal">Servicios</span>
-        <h1 class="page-hero__title reveal reveal--delay-1">
+        <span class="section-label reveal" data-i18n="services.sectionLabel">Servicios</span>
+        <h1 class="page-hero__title reveal reveal--delay-1" data-i18n="services.page.heading">
           Todo lo que necesitas<br />para <span class="text-gradient">crecer online.</span>
         </h1>
-        <p class="page-hero__subtitle reveal reveal--delay-2">
+        <p class="page-hero__subtitle reveal reveal--delay-2" data-i18n="services.page.subtitle">
           No vendemos herramientas. Vendemos resultados.
           Cada servicio está diseñado pensando en el crecimiento real de tu negocio.
         </p>
@@ -42,7 +42,7 @@ const grouped = Object.entries(SERVICE_CATEGORIES).map(([key, label]) => ({
   {grouped.map((group) => group.items.length > 0 && (
     <section class="services-category section" id={group.key} aria-labelledby={`cat-${group.key}`}>
       <div class="container">
-        <h2 class="services-category__title reveal" id={`cat-${group.key}`}>
+        <h2 class="services-category__title reveal" id={`cat-${group.key}`} data-i18n={`services.categories.${group.key}`}>
           {group.label}
         </h2>
         <div class="services-full-grid">
@@ -57,24 +57,24 @@ const grouped = Object.entries(SERVICE_CATEGORIES).map(([key, label]) => ({
                   {service.icon.charAt(0)}
                 </div>
                 <div>
-                  <h3 class="service-full-card__name" id={`service-name-${service.id}`}>
+                  <h3 class="service-full-card__name" id={`service-name-${service.id}`} data-i18n={`services.items.${service.id}.name`}>
                     {service.name}
                   </h3>
-                  <p class="service-full-card__tagline">{service.tagline}</p>
+                  <p class="service-full-card__tagline" data-i18n={`services.items.${service.id}.tagline`}>{service.tagline}</p>
                 </div>
               </div>
 
-              <p class="service-full-card__desc">{service.description}</p>
+              <p class="service-full-card__desc" data-i18n={`services.items.${service.id}.description`}>{service.description}</p>
 
               <div class="service-full-card__features">
-                <h4 class="service-full-card__features-title">Incluye:</h4>
+                <h4 class="service-full-card__features-title" data-i18n="services.page.features">Incluye:</h4>
                 <ul class="service-full-card__features-list">
-                  {service.features.map((feat) => (
+                  {service.features.map((feat, fi) => (
                     <li class="service-full-card__feature">
                       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                         <polyline points="20 6 9 17 4 12"/>
                       </svg>
-                      {feat}
+                      <span data-i18n={`services.items.${service.id}.features.${fi}`}>{feat}</span>
                     </li>
                   ))}
                 </ul>
@@ -87,13 +87,18 @@ const grouped = Object.entries(SERVICE_CATEGORIES).map(([key, label]) => ({
                       <circle cx="12" cy="12" r="10"/>
                       <polyline points="12 6 12 12 16 14"/>
                     </svg>
-                    {service.duration}
+                    <span data-i18n={`services.items.${service.id}.duration`}>{service.duration}</span>
                   </div>
                   <div class="service-full-card__for">
-                    Ideal para: {service.idealFor.join(', ')}
+                    <span data-i18n="services.page.idealFor">Ideal para</span>: 
+                    {service.idealFor.map((item, ii) => (
+                      <Fragment key={ii}>
+                        <span data-i18n={`services.items.${service.id}.idealFor.${ii}`}>{item}</span>{ii < service.idealFor.length - 1 ? ', ' : ''}
+                      </Fragment>
+                    ))}
                   </div>
                 </div>
-                <a href="/contacto" class="btn btn--primary btn--sm">
+                <a href="/contacto" class="btn btn--primary btn--sm" data-i18n="services.page.requestService">
                   {CTA.quote}
                 </a>
               </div>

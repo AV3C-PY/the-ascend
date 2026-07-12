@@ -27,9 +27,9 @@ export const TESTIMONIALS: Testimonial[] = [
     company: "Restaurant Le Petit Coin",
     location: "Lyon, France",
     quote:
-      "Antes de trabajar con The Ascend, mi restaurante era invisible en Google. Ahora recibo reservas todos los días a través de mi web. El diseño es exactamente lo que imaginaba: elegante y moderno.",
+      "Avant de travailler avec The Ascend, mon restaurant était invisible sur Google. Désormais, je reçois des réservations via mon site web. Le design correspond exactement à ce que j'avais imaginé : élégant et moderne.",
     rating: 5,
-    service: "Desarrollo Web + SEO Local",
+    service: "Développement Web & SEO Local",
   },
   {
     id: "2",
@@ -60,9 +60,9 @@ export const TESTIMONIALS: Testimonial[] = [
     company: "Hôtel Belle Vue",
     location: "Marseille, France",
     quote:
-      "Nuestro hotel tiene ahora reservas directas sin comisiones de plataformas intermediarias. La web multiidioma atrajo clientes que antes no llegaban. El ROI fue inmediato.",
+      "Notre hôtel propose désormais des réservations directes. Le site web multilingue a attiré des clients qui ne venaient pas auparavant.",
     rating: 5,
-    service: "Desarrollo Web Multiidioma",
+    service: "Développement Web Multilingue",
   },
   {
     id: "5",
@@ -82,8 +82,8 @@ export const TESTIMONIALS: Testimonial[] = [
     company: "Martin Architecture",
     location: "Paris, France",
     quote:
-      "Mi portfolio online ahora hace el trabajo de presentación por mí. Consigo proyectos de clientes que me encuentran en Google sin referencias previas. Un cambio total.",
+      "Mon portfolio en ligne fait désormais office de carte de visite à ma place. Je décroche des projets auprès de clients qui me trouvent sur Google sans aucune référence préalable. Un changement radical.",
     rating: 5,
-    service: "Desarrollo Web + SEO",
+    service: "Développement Web + SEO",
   },
 ];

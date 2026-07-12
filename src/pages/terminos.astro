@@ -15,21 +15,22 @@ const lastUpdated = "9 de julio de 2026";
   title="Términos de Servicio — The Ascend"
   description="Términos y condiciones de los servicios de transformación digital de The Ascend."
   noindex={false}
+  i18nTitle="legal.terms.title"
+  i18nDesc="legal.terms.metaDesc"
 >
   <section class="legal-page section">
     <div class="container container--narrow">
       <div class="legal-header">
         <span class="section-label">Legal</span>
-        <h1 class="legal-title">Términos de Servicio</h1>
-        <p class="legal-meta">Última actualización: {lastUpdated}</p>
+        <h1 class="legal-title" data-i18n="legal.terms.title">Términos de Servicio</h1>
+        <p class="legal-meta"><span data-i18n="legal.terms.lastUpdated">Última actualización</span>: {lastUpdated}</p>
       </div>
 
-      <div class="legal-content">
+      <div class="legal-content" data-i18n-html="legal.terms.content">
         <h2>1. Identificación del prestador</h2>
         <p>
           <strong>{SITE.name}</strong> presta servicios de transformación digital,
           diseño web, SEO, automatización e inteligencia artificial para empresas.<br />
-          <!-- TODO: Add legal business address and registration number -->
           Email: <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
         </p>
 
@@ -55,8 +56,7 @@ const lastUpdated = "9 de julio de 2026";
           <li>El pago inicial (50%) activa el inicio del trabajo</li>
           <li>El pago final (50%) se realiza a la entrega y aprobación del proyecto</li>
           <li>Los pagos se procesan de forma segura mediante LemonSqueezy</li>
-          <li><!-- TODO: Update currency and VAT info based on your legal structure -->
-            Los precios en euros incluyen/excluyen IVA según lo indicado en cada propuesta</li>
+          <li>Los precios en euros incluyen/excluyen IVA según lo indicado en cada propuesta</li>
         </ul>
 
         <h2>5. Entrega y plazos</h2>
@@ -84,7 +84,6 @@ const lastUpdated = "9 de julio de 2026";
 
         <h2>11. Ley aplicable</h2>
         <p>
-          <!-- TODO: Update jurisdiction based on your legal entity location -->
           Estos términos se rigen por la legislación aplicable. Para usuarios en España: legislación española. Para usuarios en Francia: legislación francesa.
         </p>
 

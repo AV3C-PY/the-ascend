@@ -35,12 +35,12 @@ const pricingFaq = FAQ.filter((f) => f.category === 'precios');
   <section class="page-hero section">
     <div class="container">
       <div class="page-hero__inner">
-        <span class="section-label reveal">Precios</span>
-        <h1 class="page-hero__title reveal reveal--delay-1">
+        <span class="section-label reveal" data-i18n="pricing.sectionLabel">Precios</span>
+        <h1 class="page-hero__title reveal reveal--delay-1" data-i18n="pricing.title">
           Inversión transparente.<br />
           <span class="text-gradient">Sin sorpresas.</span>
         </h1>
-        <p class="page-hero__subtitle reveal reveal--delay-2">
+        <p class="page-hero__subtitle reveal reveal--delay-2" data-i18n="pricing.subtitle">
           Elegimos no tener checkout automático. Porque cada negocio es único
           y merece una propuesta hecha a medida. Hablamos primero, pagamos después.
         </p>
@@ -66,8 +66,8 @@ const pricingFaq = FAQ.filter((f) => f.category === 'precios');
             )}
 
             <div class="pricing-card__header">
-              <h3 class="pricing-card__name">{plan.name}</h3>
-              <p class="pricing-card__tagline">{plan.tagline}</p>
+              <h3 class="pricing-card__name" data-plan-name={plan.id}>{plan.name}</h3>
+              <p class="pricing-card__tagline" data-plan-tagline={plan.id}>{plan.tagline}</p>
             </div>
 
             <!-- Price — data attributes enable client-side market switching -->
@@ -80,27 +80,32 @@ const pricingFaq = FAQ.filter((f) => f.category === 'precios');
               </span>
             </div>
 
-            <p class="pricing-card__desc" id={`plan-desc-${plan.id}`}>
+            <p class="pricing-card__desc" id={`plan-desc-${plan.id}`} data-plan-desc={plan.id}>
               {plan.description}
             </p>
 
-            <!-- Features -->
-            <ul class="pricing-card__features">
+            <!-- Features — Rebuilt by JS on market change -->
+            <ul class="pricing-card__features" data-plan-features={plan.id}>
               {plan.features.map((feat) => (
-                <li class="pricing-card__feature">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <polyline points="20 6 9 17 4 12"/>
-                  </svg>
-                  {feat}
+                <li class="pricing-card__feature feature-row">
+                  <span class="feature-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="#10B981" stroke="none" aria-hidden="true" style="flex-shrink: 0; display: block;">
+                      <circle cx="12" cy="12" r="12"/>
+                      <polyline points="17 9 10.5 15.5 7 12" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </span>
+                  <span class="feature-text">{feat}</span>
                 </li>
               ))}
               {plan.notIncluded.map((feat) => (
-                <li class="pricing-card__feature pricing-card__feature--no">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <line x1="18" y1="6" x2="6" y2="18"/>
-                    <line x1="6" y1="6" x2="18" y2="18"/>
-                  </svg>
-                  {feat}
+                <li class="pricing-card__feature pricing-card__feature--no feature-row">
+                  <span class="feature-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0; opacity: 0.45; display: block;">
+                      <line x1="18" y1="6" x2="6" y2="18"/>
+                      <line x1="6" y1="6" x2="18" y2="18"/>
+                    </svg>
+                  </span>
+                  <span class="feature-text">{feat}</span>
                 </li>
               ))}
             </ul>
@@ -108,7 +113,7 @@ const pricingFaq = FAQ.filter((f) => f.category === 'precios');
             <!-- CTA — NEVER "Buy". Always "Request quote". -->
             <!-- TODO: Update CTA labels in src/data/market.ts per plan -->
             <a href="/contacto" class={`btn ${plan.highlighted ? 'btn--primary' : 'btn--secondary'} pricing-card__cta`}>
-              {plan.cta}
+              <span data-plan-cta={plan.id}>{plan.cta}</span>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M5 12h14M12 5l7 7-7 7"/>
               </svg>
@@ -125,10 +130,10 @@ const pricingFaq = FAQ.filter((f) => f.category === 'precios');
       <!-- Enterprise -->
       <div class="pricing__enterprise reveal">
         <div class="pricing__enterprise-content">
-          <h3 class="pricing__enterprise-title">{ENTERPRISE.title}</h3>
-          <p class="pricing__enterprise-desc">{ENTERPRISE.description}</p>
+          <h3 class="pricing__enterprise-title" data-i18n="pricing.enterprise.title">{ENTERPRISE.title}</h3>
+          <p class="pricing__enterprise-desc" data-i18n="pricing.enterprise.description">{ENTERPRISE.description}</p>
         </div>
-        <a href="/contacto" class="btn btn--secondary">
+        <a href="/contacto" class="btn btn--secondary" data-i18n="pricing.enterprise.cta">
           {ENTERPRISE.cta}
         </a>
       </div>
@@ -139,27 +144,20 @@ const pricingFaq = FAQ.filter((f) => f.category === 'precios');
   <section class="payment-flow section" aria-labelledby="payment-title">
     <div class="container container--narrow">
       <div class="section-header reveal">
-        <span class="section-label">¿Cómo funciona el pago?</span>
-        <h2 class="section-title" id="payment-title">
+        <span class="section-label" data-i18n="pricing.paymentFlow.sectionLabel">¿Cómo funciona el pago?</span>
+        <h2 class="section-title" id="payment-title" data-i18n="pricing.paymentFlow.title">
           100% humano.<br />Sin presiones.
         </h2>
-        <p class="section-subtitle">
+        <p class="section-subtitle" data-i18n="pricing.paymentFlow.subtitle">
           Nunca te pediremos que pagues antes de hablar contigo.
           El proceso siempre empieza con una conversación.
         </p>
       </div>
 
-      <ol class="payment-steps">
-        {[
-          { step: "01", text: "Solicitas presupuesto a través del formulario o WhatsApp." },
-          { step: "02", text: "Hablamos sobre tu proyecto sin ningún compromiso." },
-          { step: "03", text: "Analizamos tu caso y preparamos una propuesta personalizada." },
-          { step: "04", text: "Si estás convencido, te enviamos el enlace de pago." },
-          { step: "05", text: "Pagas y comenzamos a trabajar inmediatamente." },
-        ].map((item, i) => (
+        {[0, 1, 2, 3, 4].map((i) => (
           <li class={`payment-step reveal reveal--delay-${i + 1}`}>
-            <span class="payment-step__number" aria-hidden="true">{item.step}</span>
-            <p class="payment-step__text">{item.text}</p>
+            <span class="payment-step__number" aria-hidden="true">0{i + 1}</span>
+            <p class="payment-step__text" data-i18n={`pricing.paymentFlow.steps.${i}`}></p>
           </li>
         ))}
       </ol>
@@ -170,25 +168,34 @@ const pricingFaq = FAQ.filter((f) => f.category === 'precios');
   {pricingFaq.length > 0 && (
     <section class="pricing-faq section" aria-labelledby="pricing-faq-title">
       <div class="container container--narrow">
-        <h2 class="section-title text-center reveal" id="pricing-faq-title">
+        <h2 class="section-title text-center reveal" id="pricing-faq-title" data-i18n="pricing.faqTitle">
           Dudas sobre precios
         </h2>
         <div class="faq-list">
-          {pricingFaq.map((item, i) => (
-            <details class={`faq-item reveal reveal--delay-${(i % 3) + 1}`}>
-              <summary class="faq-item__summary">
-                <span class="faq-item__question">{item.question}</span>
-                <span class="faq-item__icon" aria-hidden="true">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M6 9l6 6 6-6"/>
-                  </svg>
-                </span>
-              </summary>
-              <div class="faq-item__answer">
-                <p>{item.answer}</p>
-              </div>
-            </details>
-          ))}
+          {pricingFaq.map((item, i) => {
+            const keyMap: any = {
+              'como-se-paga': 'paymentProcess',
+              'que-metodos-pago': 'paymentMethods',
+              'pago-adelanto': 'upfront',
+              'presupuesto-gratis': 'freeQuote',
+            };
+            const faqKey = keyMap[item.id] || item.id;
+            return (
+              <details class={`faq-item reveal reveal--delay-${(i % 3) + 1}`}>
+                <summary class="faq-item__summary">
+                  <span class="faq-item__question" data-i18n={`pricing.faq.${faqKey}.question`}>{item.question}</span>
+                  <span class="faq-item__icon" aria-hidden="true">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M6 9l6 6 6-6"/>
+                    </svg>
+                  </span>
+                </summary>
+                <div class="faq-item__answer">
+                  <p data-i18n={`pricing.faq.${faqKey}.answer`}>{item.answer}</p>
+                </div>
+              </details>
+            );
+          })}
         </div>
       </div>
     </section>
@@ -231,8 +238,56 @@ const pricingFaq = FAQ.filter((f) => f.category === 'precios');
 
     // Update prices
     pricing.plans.forEach((plan) => {
+      // 1. Amount
       document.querySelectorAll(`[data-market-price="${plan.id}"]`).forEach((el) => {
         el.textContent = plan.price.toLocaleString(market.locale);
+      });
+      // 2. Name
+      document.querySelectorAll(`[data-plan-name="${plan.id}"]`).forEach((el) => {
+        el.textContent = plan.name;
+      });
+      // 3. Tagline
+      document.querySelectorAll(`[data-plan-tagline="${plan.id}"]`).forEach((el) => {
+        el.textContent = plan.tagline;
+      });
+      // 4. Description
+      document.querySelectorAll(`[data-plan-desc="${plan.id}"]`).forEach((el) => {
+        el.textContent = plan.description;
+      });
+      // 5. CTA
+      document.querySelectorAll(`[data-plan-cta="${plan.id}"]`).forEach((el) => {
+        el.textContent = plan.cta;
+      });
+      // 6. Features list
+      document.querySelectorAll(`[data-plan-features="${plan.id}"]`).forEach((el) => {
+        let html = '';
+        plan.features.forEach((feat) => {
+          html += `
+            <li class="pricing-card__feature feature-row">
+              <span class="feature-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="#10B981" stroke="none" aria-hidden="true" style="flex-shrink: 0; display: block;">
+                  <circle cx="12" cy="12" r="12"/>
+                  <polyline points="17 9 10.5 15.5 7 12" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              <span class="feature-text">${feat}</span>
+            </li>
+          `;
+        });
+        plan.notIncluded.forEach((feat) => {
+          html += `
+            <li class="pricing-card__feature pricing-card__feature--no feature-row">
+              <span class="feature-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0; opacity: 0.45; display: block;">
+                  <line x1="18" y1="6" x2="6" y2="18"/>
+                  <line x1="6" y1="6" x2="18" y2="18"/>
+                </svg>
+              </span>
+              <span class="feature-text">${feat}</span>
+            </li>
+          `;
+        });
+        el.innerHTML = html;
       });
     });
 
@@ -380,30 +435,50 @@ const pricingFaq = FAQ.filter((f) => f.category === 'precios');
   .pricing-card__features {
     display: flex;
     flex-direction: column;
-    gap: var(--space-3);
     flex: 1;
   }
 
-  .pricing-card__feature {
-    display: flex;
-    align-items: flex-start;
-    gap: var(--space-2);
+  /*
+   * :global() en las clases de abajo es INTENCIONAL.
+   * El script de cambio de mercado (más abajo en este archivo) reconstruye
+   * estos <li> con innerHTML en el cliente, y los nodos creados así NO llevan
+   * el atributo data-astro-cid que Astro usa para el scoping de estilos.
+   * Sin :global(), estas reglas dejarían de aplicar en cuanto el script
+   * corriera al cargar la página (por eso el check aparecía arriba del texto).
+   */
+  :global(.pricing-card__feature) {
+    padding: 8px 0;
     font-size: var(--text-sm);
     color: var(--color-text-secondary);
     font-family: var(--font-body);
+    transition: transform var(--duration-fast) var(--ease-default);
   }
 
-  .pricing-card__feature svg {
-    color: var(--color-primary);
+  :global(.feature-row) {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+  }
+
+  :global(.feature-icon) {
+    width: 18px;
+    height: 18px;
     flex-shrink: 0;
-    margin-top: 2px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
   }
 
-  .pricing-card__feature--no {
-    color: var(--color-text-muted);
+  :global(.feature-text) {
+    flex: 1;
   }
 
-  .pricing-card__feature--no svg {
+  :global(.pricing-card__feature:hover) {
+    transform: translateX(3px);
+  }
+
+  :global(.pricing-card__feature--no) {
     color: var(--color-text-muted);
   }
 

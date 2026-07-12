@@ -12,7 +12,18 @@
 // Key structure mirrors es.ts exactly.
 // =============================================================================
 
+import { SITE } from '../data/site';
+
 export const fr = {
+  // ---------------------------------------------------------------------------
+  // SEO
+  // ---------------------------------------------------------------------------
+  seo: {
+    home: {
+      title: 'The Ascend — Transformation Numérique pour votre Entreprise',
+      metaDesc: 'Design web premium, SEO local, chatbots IA et automatisations pour restaurants, cliniques, avocats et petites entreprises en France, Espagne et Pérou.'
+    }
+  },
 
   // ---------------------------------------------------------------------------
   // NAVIGATION
@@ -220,6 +231,12 @@ export const fr = {
       subtitle: 'Chaque étude de cas documente le défi, la solution et les résultats obtenus.',
     },
 
+    stats: {
+      industriesNumber: '7',
+      industriesLabel: 'Industries',
+      satisfactionLabel: 'Clients satisfaits',
+    },
+
     // TODO: Update French portfolio descriptions as needed
     items: {
       'restaurant-paris': {
@@ -372,6 +389,24 @@ export const fr = {
     },
 
     faqTitle: 'Questions sur nos tarifs',
+    faq: {
+      paymentProcess: {
+        question: 'Comment fonctionne le processus de paiement ?',
+        answer: 'Le processus est entièrement humain : nous parlons d\'abord, analysons votre projet, préparons une proposition et convenons des détails. Une fois tout clair, nous vous envoyons le lien de paiement. Pas de checkout automatique ni de pression.'
+      },
+      paymentMethods: {
+        question: 'Quels moyens de paiement acceptez-vous ?',
+        answer: 'Nous acceptons les cartes de crédit/débit, les virements bancaires et PayPal. Les paiements sont gérés de manière sécurisée via LemonSqueezy.'
+      },
+      upfront: {
+        question: 'Faut-il tout payer d\'avance ?',
+        answer: 'Non. Nous travaillons généralement avec 50% au démarrage du projet et 50% à la livraison. Pour les projets importants, nous pouvons convenir d\'un plan de paiement en 3 fois.'
+      },
+      freeQuote: {
+        question: 'Le devis est-il gratuit ?',
+        answer: 'Oui, toujours. Analyser votre projet et vous préparer une proposition détaillée n\'a aucun coût. Nous commençons à facturer uniquement lorsque vous décidez de nous engager.'
+      }
+    }
   },
 
   // ---------------------------------------------------------------------------
@@ -468,9 +503,30 @@ export const fr = {
   // ABOUT (À propos)
   // ---------------------------------------------------------------------------
   about: {
-    sectionLabel: 'À propos',
-    title:        'Nous ne sommes pas\nune agence comme les autres.',
-    subtitle:     'Nous sommes votre équipe digitale. Nés pour démocratiser l\'accès à la technologie de qualité pour les petites entreprises qui méritent de rivaliser avec les grands.',
+    sectionLabel: 'À propos de nous',
+    title:        'Nous ne sommes pas une agence.\nNous sommes votre équipe digitale.',
+    subtitle:     'The Ascend est né d\'une conviction simple : les petites entreprises méritent le même niveau de qualité numérique que les grandes marques. Sans budgets astronomiques. Sans processus interminables. Sans jargon inutile.',
+
+    philosophy: {
+      title: 'Notre philosophie',
+      items: [
+        {
+          label: 'Ce que nous croyons',
+          title: 'Chaque entreprise mérite de briller.',
+          body: 'Un restaurant de quartier, une clinique familiale ou un avocat local méritent la même présence numérique que n\'importe quelle grande entreprise. La technologie doit être un égalisateur, pas une barrière.',
+        },
+        {
+          label: 'Comment nous travaillons',
+          title: 'Clair, humain et sans détours.',
+          body: 'Nous ne parlons pas d\'API, de frameworks ou de stacks technologiques. Nous parlons de clients, de ventes et de croissance. Notre travail consiste à traduire la technologie en résultats que vous pouvez voir et mesurer.',
+        },
+        {
+          label: 'Notre engagement',
+          title: 'Votre succès est notre portfolio.',
+          body: 'Nous ne sommes pas des fournisseurs qui livrent et disparaissent. Nous sommes des partenaires à long terme. Votre croissance est notre meilleure carte de visite.',
+        },
+      ]
+    },
 
     mission: {
       label:  'Mission',
@@ -499,9 +555,9 @@ export const fr = {
     },
 
     markets: {
-      label:    'Où nous sommes',
-      title:    'Présents dans 3 pays.',
-      subtitle: 'Nous travaillons entièrement à distance avec une pleine efficacité. Nous connaissons les marchés locaux parce que nous y vivons et respirons.',
+      label:    'Nos marchés',
+      title:    'Où nous sommes.',
+      subtitle: 'Nous opérons sur trois marchés avec des caractéristiques et des besoins différents. Nous connaissons les particularités de chacun.',
       items: [
         {
           country:     'France',
@@ -552,15 +608,38 @@ export const fr = {
       phonePlaceholder: '+33 6 00 00 00 00',
       business:     'Nom de votre entreprise (optionnel)',
       businessPlaceholder: 'Restaurant Le Petit Coin',
-      service:      'Service souhaité',
-      serviceDefault: 'Sélectionnez un service',
+      businessOptions: {
+        select: 'Sélectionnez...',
+        restaurant: 'Restaurant / Hôtellerie',
+        clinic: 'Clinique / Santé',
+        lawyer: 'Avocat / Conseil',
+        architect: 'Architecte / Design',
+        salon: 'Coiffeur / Beauté',
+        hotel: 'Hôtel / Hébergement',
+        store: 'Boutique / Commerce',
+        other: 'Autre',
+      },
+      service:      'Quel service vous intéresse ?',
+      serviceDefault: 'Sélectionnez un service...',
+      serviceOptions: {
+        notSure: 'Je ne sais pas encore, j\'ai besoin de conseils',
+      },
+      budget:       'Budget approximatif',
+      budgetOptions: {
+        select: 'Sélectionnez une fourchette...',
+        tier1: 'Moins de 500€',
+        tier2: '500€ – 1 000€',
+        tier3: '1 000€ – 2 000€',
+        tier4: 'Plus de 2 000€',
+        notSure: 'Je ne sais pas encore',
+      },
       message:      'Parlez-nous de votre projet',
-      messagePlaceholder: 'De quoi avez-vous besoin ? Quel est votre objectif principal ? Avez-vous une date limite ?',
+      messagePlaceholder: 'De quoi avez-vous besoin ? Avez-vous déjà un site web ? Quels sont vos objectifs ? Plus vous nous en direz, mieux nous pourrons vous aider.',
       privacy:      'J\'ai lu et j\'accepte la ',
-      privacyLink:  'politique de confidentialité',
+      privacyLink:  'Politique de Confidentialité',
       submit:       'Envoyer la demande',
       sending:      'Envoi en cours...',
-      required:     'Champ obligatoire',
+      required:     'Champ requis',
     },
 
     success: {
@@ -575,14 +654,25 @@ export const fr = {
     },
 
     info: {
-      response:      'Délai de réponse',
-      responseValue: '< 24 heures',
+      directContact: 'Contact direct',
       email:         'Email',
       whatsapp:      'WhatsApp',
-      location:      'Localisation',
+      responseTimeTitle: 'Quand répondons-nous ?',
+      fast:          'Rapide',
+      normal:        'Normal',
+      emailForm:     'Email / Formulaire',
+      time1:         '1–3 heures',
+      time2:         'Moins de 24h',
+      afterContactTitle: 'Après avoir contacté...',
+      step1:         'Nous vous répondons avec quelques questions pour mieux comprendre votre projet.',
+      step2:         'Nous préparons une proposition personnalisée sans engagement.',
+      step3:         'Si vous êtes convaincu, nous validons les détails et commençons.',
+      response:      'Temps de réponse',
+      responseValue: '< 24 heures',
+      location:      'Emplacement',
       locationValue: 'France · Espagne · Pérou',
-      schedule:      'Heures d\'ouverture',
-      scheduleValue: 'Lun–Ven, 9h00–19h00',
+      schedule:      'Horaires d\'ouverture',
+      scheduleValue: 'Lun–Ven, 9:00–19:00',
       howItWorks:    'Comment ça marche',
       steps: [
         'Vous remplissez le formulaire',
@@ -612,6 +702,10 @@ export const fr = {
       terms:     'Conditions d\'utilisation',
       faq:       'FAQ',
     },
+    ctaTitle: 'Prêt à commencer ?',
+    ctaText: 'Parlez-nous de votre projet. Sans engagement, sans pression.',
+    ctaButton: 'Demander un devis',
+    whatsapp: 'Écrivez-moi sur WhatsApp',
     markets:   'France · Espagne · Pérou',
     copyright: (year: number) => `© ${year} The Ascend. Tous droits réservés.`,
   },
@@ -621,9 +715,18 @@ export const fr = {
   // ---------------------------------------------------------------------------
   cta: {
     primary:   'Planifier un appel gratuit',
-    secondary: 'Voir le portfolio',
+    secondary: 'Voir notre travail',
     schedule:  'Planifier un appel gratuit',
-    contact:   'Nous contacter',
+    contact:   'Contacter maintenant',
+    whatsapp:  'Parlons sur WhatsApp',
+    bannerTitle: 'Prêt à transformer votre entreprise ?',
+    bannerSubtitle: 'Parlez-nous de votre projet. La consultation initiale est gratuite et sans engagement. Nous répondons en moins de 24 heures.',
+    trust: [
+      'Consultation gratuite',
+      'Réponse en <24h',
+      'Sans engagement',
+      'Payez seulement quand vous êtes convaincu',
+    ]
   },
 
   // ---------------------------------------------------------------------------
@@ -644,11 +747,156 @@ export const fr = {
       title:       'Politique de confidentialité',
       metaDesc:    'Politique de confidentialité de The Ascend.',
       lastUpdated: 'Dernière mise à jour',
+      content: `
+        <h2>1. Responsable du traitement</h2>
+        <p>
+          <strong>${SITE.name}</strong><br />
+          Email de contact : <a href="mailto:${SITE.email}">${SITE.email}</a>
+        </p>
+
+        <h2>2. Données que nous collectons</h2>
+        <p>Nous collectons les données suivantes lorsque vous utilisez nos services :</p>
+        <ul>
+          <li><strong>Données de contact :</strong> nom, email, téléphone (lorsque vous les fournissez dans les formulaires)</li>
+          <li><strong>Données d'utilisation :</strong> pages visitées, temps passé sur le site, appareil utilisé (via Google Analytics)</li>
+          <li><strong>Données de communication :</strong> contenu des messages que vous nous envoyez</li>
+        </ul>
+
+        <h2>3. Finalité du traitement</h2>
+        <p>Nous utilisons vos données pour :</p>
+        <ul>
+          <li>Répondre à vos demandes d'informations ou de devis</li>
+          <li>Gérer la relation commerciale si vous souscrivez à nos services</li>
+          <li>Améliorer notre site web et nos services (analyses anonymisées)</li>
+          <li>Vous envoyer des communications liées à votre projet (uniquement si vous nous avez contactés)</li>
+        </ul>
+
+        <h2>4. Base légale du traitement</h2>
+        <p>Le traitement de vos données est basé sur :</p>
+        <ul>
+          <li><strong>Consentement :</strong> lorsque vous remplissez nos formulaires et acceptez cette politique</li>
+          <li><strong>Intérêt légitime :</strong> pour améliorer nos services et prévenir la fraude</li>
+          <li><strong>Obligation contractuelle :</strong> lorsqu'il y a une relation commerciale active</li>
+        </ul>
+
+        <h2>5. Conservation des données</h2>
+        <p>
+          Nous conservons vos données pendant le temps nécessaire aux fins décrites :
+        </p>
+        <ul>
+          <li>Données de contact : maximum 3 ans depuis le dernier contact</li>
+          <li>Données des clients actifs : pendant la durée du contrat + 5 ans</li>
+          <li>Données d'analyse : 26 mois (configuration standard de GA4)</li>
+        </ul>
+
+        <h2>6. Services tiers</h2>
+        <p>Nous utilisons les services suivants qui peuvent traiter vos données :</p>
+        <ul>
+          <li><strong>Google Analytics 4 :</strong> Analyse du trafic web. <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Politique de Google</a></li>
+          <li><strong>Resend :</strong> Plateforme d'envoi d'emails. <a href="https://resend.com/privacy" target="_blank" rel="noopener">Politique de Resend</a></li>
+          <li><strong>Cloudflare :</strong> Hébergement et sécurité. <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">Politique de Cloudflare</a></li>
+        </ul>
+
+        <h2>7. Vos droits</h2>
+        <p>Conformément au RGPD (Europe) et aux réglementations applicables, vous avez le droit de :</p>
+        <ul>
+          <li><strong>Accès :</strong> demander une copie des données que nous détenons à votre sujet</li>
+          <li><strong>Rectification :</strong> corriger des données inexactes ou incomplètes</li>
+          <li><strong>Suppression :</strong> demander l'effacement de vos données ("droit à l'oubli")</li>
+          <li><strong>Portabilité :</strong> recevoir vos données dans un format structuré</li>
+          <li><strong>Opposition :</strong> vous opposer au traitement dans certaines circonstances</li>
+          <li><strong>Limitation :</strong> demander la restriction du traitement</li>
+        </ul>
+        <p>
+          Pour exercer l'un de ces droits, contactez-nous à l'adresse :
+          <a href="mailto:${SITE.email}">${SITE.email}</a>
+        </p>
+
+        <h2>8. Cookies</h2>
+        <p>Ce site web utilise des cookies techniques nécessaires à son fonctionnement et des cookies d'analyse (Google Analytics) pour comprendre comment les visiteurs utilisent le site. Vous pouvez gérer les cookies depuis les paramètres de votre navigateur.</p>
+
+        <h2>9. Sécurité</h2>
+        <p>Nous mettons en œuvre des mesures techniques et organisationnelles pour protéger vos données contre l'accès non autorisé, la perte ou la divulgation, y compris la transmission cryptée (HTTPS) et l'accès restreint aux données.</p>
+
+        <h2>10. Modifications de cette politique</h2>
+        <p>Nous pouvons mettre à jour cette politique occasionnellement. Nous vous informerons des changements significatifs en publiant la nouvelle version sur cette page avec la date de mise à jour.</p>
+
+        <h2>11. Contact</h2>
+        <p>
+          Si vous avez des questions concernant cette politique de confidentialité ou la manière dont nous traitons vos données, contactez-nous :<br />
+          📧 <a href="mailto:${SITE.email}">${SITE.email}</a>
+        </p>
+      `
     },
     terms: {
       title:       'Conditions d\'utilisation',
       metaDesc:    'Conditions générales d\'utilisation de The Ascend.',
       lastUpdated: 'Dernière mise à jour',
+      content: `
+        <h2>1. Identification du prestataire</h2>
+        <p>
+          <strong>${SITE.name}</strong> fournit des services de transformation numérique,
+          de conception web, de SEO, d'automatisation et d'intelligence artificielle pour les entreprises.<br />
+          Email : <a href="mailto:${SITE.email}">${SITE.email}</a>
+        </p>
+
+        <h2>2. Services proposés</h2>
+        <p>${SITE.name} propose des services numériques comprenant, entre autres : le développement web, le design graphique, le SEO local, la mise en œuvre de chatbots avec IA, l'automatisation des processus et la gestion d'outils de marketing numérique.</p>
+
+        <h2>3. Processus de souscription</h2>
+        <p>
+          Tous les projets commencent par une demande de devis.
+          Le processus est le suivant :
+        </p>
+        <ol>
+          <li>Le client demande un devis via les canaux disponibles (formulaire, email ou WhatsApp)</li>
+          <li>${SITE.name} prépare une proposition personnalisée gratuite</li>
+          <li>Le client accepte la proposition et reçoit le lien de paiement correspondant</li>
+          <li>Le paiement déclenche le début du projet</li>
+        </ol>
+        <p>Il n'y a pas de processus de paiement automatique. Tout accord commercial est préalable au paiement.</p>
+
+        <h2>4. Conditions de paiement</h2>
+        <ul>
+          <li>Le paiement sera effectué selon les conditions convenues dans la proposition</li>
+          <li>Le paiement initial (50 %) déclenche le début du travail</li>
+          <li>Le paiement final (50 %) est effectué lors de la livraison et de l'approbation du projet</li>
+          <li>Les paiements sont traités de manière sécurisée via LemonSqueezy</li>
+          <li>Les prix en euros incluent/excluent la TVA comme indiqué dans chaque proposition</li>
+        </ul>
+
+        <h2>5. Livraison et délais</h2>
+        <p>Les délais de livraison sont spécifiés dans chaque proposition individuelle. ${SITE.name} s'engage à respecter les délais convenus. Les retards causés par un manque d'informations ou l'approbation du client ne relèvent pas de la responsabilité de ${SITE.name}.</p>
+
+        <h2>6. Révisions</h2>
+        <p>Chaque projet comprend jusqu'à 3 séries de révisions sans frais supplémentaires. Les révisions supplémentaires ou les modifications en dehors du cadre convenu peuvent entraîner des frais supplémentaires, qui seront communiqués et convenus au préalable.</p>
+
+        <h2>7. Propriété intellectuelle</h2>
+        <p>Une fois le projet intégralement payé, le client reçoit la pleine propriété des livrables convenus. ${SITE.name} se réserve le droit de présenter le projet dans son portfolio, sauf indication contraire explicite du client.</p>
+
+        <h2>8. Garanties et limitations</h2>
+        <ul>
+          <li>${SITE.name} garantit que le travail livré est conforme aux spécifications convenues</li>
+          <li>Aucune position spécifique dans les moteurs de recherche (SEO) n'est garantie</li>
+          <li>Aucun résultat commercial spécifique n'est garanti</li>
+          <li>La responsabilité maximale de ${SITE.name} est limitée au montant payé pour le projet</li>
+        </ul>
+
+        <h2>9. Support après livraison</h2>
+        <p>Le support inclus dans chaque forfait couvre les corrections de bogues et les questions opérationnelles. Il n'inclut pas de nouvelles fonctionnalités ou des modifications de portée imprévues.</p>
+
+        <h2>10. Annulation</h2>
+        <p>Le client peut annuler le projet à tout moment. Le montant facturé correspondra au travail déjà effectué. Le dépôt initial n'est pas remboursable si le travail a déjà commencé.</p>
+
+        <h2>11. Loi applicable</h2>
+        <p>Ces conditions sont régies par la loi applicable. Pour les utilisateurs en Espagne : loi espagnole. Pour les utilisateurs en France : loi française.</p>
+
+        <h2>12. Contact</h2>
+        <p>
+          Pour toute question concernant ces conditions :<br />
+          📧 <a href="mailto:${SITE.email}">${SITE.email}</a>
+        </p>
+      `
     },
   },
 
@@ -660,6 +908,103 @@ export const fr = {
     title:        'Simple, transparent\net sans surprises.',
     subtitle:     'Chaque projet suit le même processus éprouvé. Vous savez exactement où nous en sommes à chaque instant.',
     cta:          'Voir la méthode complète',
+  },
+
+  // ---------------------------------------------------------------------------
+  // PROCESS PAGE
+  // ---------------------------------------------------------------------------
+  process: {
+    page: {
+      title: 'Voici comment nous travaillons.\nSimple et clair.',
+      subtitle: 'Sans jargon, sans mystère. Chaque étape est transparente et vous savez toujours exactement où nous en sommes.',
+      trustTitle: 'Nos engagements envers vous.',
+    },
+    items: {
+      consulta: {
+        title: 'Consultation initiale',
+        description: 'Vous nous parlez de votre entreprise, de vos objectifs et de ce dont vous avez besoin. Pas de longs formulaires, pas de jargon technique. Juste une conversation.',
+        duration: '1 jour',
+        details: [
+          'Analyse de votre situation actuelle',
+          'Compréhension de vos objectifs',
+          'Identification des opportunités',
+          'Proposition initiale sans engagement'
+        ]
+      },
+      propuesta: {
+        title: 'Proposition personnalisée',
+        description: 'Nous préparons une proposition détaillée avec la stratégie, la portée, les délais et le budget. Sans surprises.',
+        duration: '1–2 jours',
+        details: [
+          'Stratégie digitale adaptée à votre entreprise',
+          'Portée détaillée du projet',
+          'Calendrier de livraison',
+          'Budget détaillé'
+        ]
+      },
+      diseno: {
+        title: 'Conception et développement',
+        description: 'Notre équipe travaille sur votre projet avec des mises à jour régulières. Vous approuvez, nous exécutons.',
+        duration: '1–4 semaines',
+        details: [
+          'Conception visuelle personnalisée',
+          'Développement technique professionnel',
+          'Mises à jour hebdomadaires',
+          'Révisions incluses à chaque étape'
+        ]
+      },
+      revision: {
+        title: 'Révision et ajustements',
+        description: 'Nous présentons le résultat et peaufinons chaque détail jusqu\'à ce que vous soyez entièrement satisfait.',
+        duration: '3–5 jours',
+        details: [
+          'Présentation du projet complet',
+          'Jusqu\'à 3 séries de révisions incluses',
+          'Ajustements de conception et de contenu',
+          'Tests sur tous les appareils'
+        ]
+      },
+      lanzamiento: {
+        title: 'Lancement',
+        description: 'Nous publions votre projet, tout est configuré et nous vous offrons une formation de base pour que vous puissiez le gérer.',
+        duration: '1–2 jours',
+        details: [
+          'Publication en production',
+          'Configuration des analyses et du SEO',
+          'Formation de base à l\'administration',
+          'Documentation d\'accès'
+        ]
+      },
+      soporte: {
+        title: 'Support et croissance',
+        description: 'Nous ne disparaissons pas après le lancement. Nous sommes disponibles pour le support, les améliorations et pour continuer à grandir ensemble.',
+        duration: '1–6 mois inclus',
+        details: [
+          'Support technique inclus',
+          'Surveillance des performances',
+          'Suggestions d\'amélioration continue',
+          'Accès prioritaire pour de nouveaux projets'
+        ]
+      }
+    },
+    trust: [
+      {
+        title: 'Communication constante',
+        desc: 'Mises à jour hebdomadaires. Vous ne serez jamais dans l\'ignorance quant à l\'état de votre projet.'
+      },
+      {
+        title: 'Délais respectés',
+        desc: 'Si nous convenons d\'une date de livraison, nous la respectons. Si quelque chose survient, nous vous prévenons à l\'avance.'
+      },
+      {
+        title: 'Révisions incluses',
+        desc: 'Jusqu\'à 3 séries de révisions sans frais supplémentaires. Votre satisfaction fait partie du projet.'
+      },
+      {
+        title: 'Sans surprises',
+        desc: 'Le budget convenu est le prix final. Nous n\'ajoutons pas de coûts cachés ni de suppléments non convenus.'
+      }
+    ]
   },
 
   // ---------------------------------------------------------------------------

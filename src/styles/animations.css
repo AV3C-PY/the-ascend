@@ -3,6 +3,16 @@
    All reusable @keyframes live here.
    ============================================================================= */
 
+/* ---------------------------------------------------------------------------
+   EASING — curva "premium" con un pelín de overshoot.
+   Úsala para elementos que quieras que "aterricen" con más carácter
+   (badges, CTAs, cards al hacer hover). Para reveals de scroll normales
+   seguí usando --ease-spring de tokens.css, que es más sobrio.
+--------------------------------------------------------------------------- */
+:root {
+  --ease-overshoot: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
 @keyframes fadeIn {
   from { opacity: 0; }
   to   { opacity: 1; }
@@ -90,3 +100,97 @@
   80%       { transform: translate(1%, 3%); }
   90%       { transform: translate(3%, -2%); }
 }
+
+/* ---------------------------------------------------------------------------
+   UTILIDADES — conectan las keyframes de arriba a clases listas para usar.
+   Antes estaban definidas pero ninguna se aplicaba en el sitio.
+--------------------------------------------------------------------------- */
+
+/* Flota suave — para íconos, mockups, elementos decorativos del hero */
+.animate-float {
+  animation: float 4.5s var(--ease-default) infinite;
+}
+
+/* Texto/borde con degradado en movimiento — para badges o títulos destacados.
+   Requiere background con gradiente + background-size: 200% auto (o similar). */
+.animate-gradient {
+  background-size: 200% auto;
+  animation: gradientShift 6s ease infinite;
+}
+
+/* Glow pulsante en el borde — para CTAs o cards que quieras resaltar sutilmente */
+.animate-border-glow {
+  animation: borderGlow 2.4s ease-in-out infinite;
+}
+
+/* Punto pulsante — típico indicador de "en vivo" / disponibilidad */
+.animate-dot-pulse {
+  animation: dotPulse 1.8s ease-in-out infinite;
+}
+
+/* Shimmer — para skeletons de carga o para "brillo" recorriendo un botón */
+.animate-shimmer {
+  background-image: linear-gradient(
+    100deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.12) 50%,
+    transparent 70%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2.2s linear infinite;
+}
+
+/* Parpadeo suave — placeholders / estados de carga */
+.animate-pulse {
+  animation: pulse 1.6s ease-in-out infinite;
+}
+
+/* Spinner — loaders */
+.animate-spin {
+  animation: spin 0.8s linear infinite;
+}
+
+/* ---------------------------------------------------------------------------
+   REVEAL VARIANTS — se combinan con .reveal (definida en global.css).
+   Por defecto .reveal sube 24px + fade. Estas variantes le dan ritmo
+   a una página para que no todo entre exactamente igual.
+
+   Uso: class="reveal reveal--left reveal--delay-2"
+--------------------------------------------------------------------------- */
+
+.reveal--left {
+  transform: translateX(-32px);
+}
+.reveal--left.visible {
+  transform: translateX(0);
+}
+
+.reveal--right {
+  transform: translateX(32px);
+}
+.reveal--right.visible {
+  transform: translateX(0);
+}
+
+.reveal--scale {
+  transform: scale(0.94);
+}
+.reveal--scale.visible {
+  transform: scale(1);
+}
+
+/* Blur sutil sumado al fade — se siente más "cinematográfico".
+   Usar con moderación (1-2 elementos hero por página, no listas enteras). */
+.reveal--blur {
+  filter: blur(6px);
+  transition: filter var(--duration-slower) var(--ease-spring);
+}
+.reveal--blur.visible {
+  filter: blur(0);
+}
+
+/* Delays extendidos — antes llegaban solo hasta 5, insuficiente para
+   grids/listas más largas (servicios, testimonios, features). */
+.reveal--delay-6 { transition-delay: 480ms; }
+.reveal--delay-7 { transition-delay: 560ms; }
+.reveal--delay-8 { transition-delay: 640ms; }

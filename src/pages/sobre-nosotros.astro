@@ -19,14 +19,14 @@ import { SITE, CTA } from '@data/site';
     <div class="container">
       <div class="about-hero">
         <div class="about-hero__text">
-          <span class="section-label reveal">Sobre Nosotros</span>
+          <span class="section-label reveal" data-i18n="about.sectionLabel">Sobre Nosotros</span>
           <!-- TODO: Update headline -->
-          <h1 class="page-hero__title reveal reveal--delay-1">
+          <h1 class="page-hero__title reveal reveal--delay-1" data-i18n="about.title">
             No somos una agencia.<br />
             <span class="text-gradient">Somos tu equipo digital.</span>
           </h1>
           <!-- TODO: Update company description -->
-          <p class="page-hero__subtitle reveal reveal--delay-2">
+          <p class="page-hero__subtitle reveal reveal--delay-2" data-i18n="about.subtitle">
             The Ascend nació de una convicción simple: las pequeñas empresas merecen
             el mismo nivel de calidad digital que las grandes marcas.
             Sin presupuestos astronómicos. Sin procesos interminables.
@@ -44,15 +44,15 @@ import { SITE, CTA } from '@data/site';
           <div class="about-hero__stats">
             <div class="about-hero__stat">
               <span class="about-hero__stat-n">🇫🇷</span>
-              <span>Francia</span>
+              <span data-i18n="about.markets.items.0.country">Francia</span>
             </div>
             <div class="about-hero__stat">
               <span class="about-hero__stat-n">🇪🇸</span>
-              <span>España</span>
+              <span data-i18n="about.markets.items.1.country">España</span>
             </div>
             <div class="about-hero__stat">
               <span class="about-hero__stat-n">🇵🇪</span>
-              <span>Perú</span>
+              <span data-i18n="about.markets.items.2.country">Perú</span>
             </div>
           </div>
         </div>
@@ -63,30 +63,14 @@ import { SITE, CTA } from '@data/site';
   <!-- Philosophy -->
   <section class="about-philosophy section" aria-labelledby="philosophy-title">
     <div class="container container--narrow">
-      <h2 class="section-title text-center reveal" id="philosophy-title">Nuestra filosofía</h2>
+      <h2 class="section-title text-center reveal" id="philosophy-title" data-i18n="about.philosophy.title">Nuestra filosofía</h2>
 
       <div class="philosophy-grid">
-        {[
-          {
-            label: "Lo que creemos",
-            title: "Cada negocio merece brillar.",
-            body: "Un restaurante de barrio, una clínica familiar o un abogado local merecen la misma presencia digital que cualquier gran empresa. La tecnología debe ser un igualador, no una barrera.",
-          },
-          {
-            label: "Cómo trabajamos",
-            title: "Claro, humano y sin rodeos.",
-            body: "No hablamos de APIs, frameworks ni stacks tecnológicos. Hablamos de clientes, ventas y crecimiento. Nuestro trabajo es traducir la tecnología en resultados que tú puedas ver y medir.",
-          },
-          {
-            label: "Nuestro compromiso",
-            title: "Tu éxito es nuestro portfolio.",
-            body: "No somos proveedores que entregan y desaparecen. Somos socios a largo plazo. Tu crecimiento es nuestra mejor tarjeta de presentación.",
-          },
-        ].map((item, i) => (
+        {[0, 1, 2].map((i) => (
           <div class={`philosophy-item reveal reveal--delay-${i + 1}`}>
-            <span class="philosophy-item__label">{item.label}</span>
-            <h3 class="philosophy-item__title">{item.title}</h3>
-            <p class="philosophy-item__body">{item.body}</p>
+            <span class="philosophy-item__label" data-i18n={`about.philosophy.items.${i}.label`}></span>
+            <h3 class="philosophy-item__title" data-i18n={`about.philosophy.items.${i}.title`}></h3>
+            <p class="philosophy-item__body" data-i18n={`about.philosophy.items.${i}.body`}></p>
           </div>
         ))}
       </div>
@@ -97,23 +81,23 @@ import { SITE, CTA } from '@data/site';
   <section class="about-values section" aria-labelledby="values-title">
     <div class="container">
       <div class="section-header reveal">
-        <span class="section-label">Valores</span>
-        <h2 class="section-title" id="values-title">Lo que nos define.</h2>
+        <span class="section-label" data-i18n="about.values.label">Valores</span>
+        <h2 class="section-title" id="values-title" data-i18n="about.values.title">Lo que nos define.</h2>
       </div>
 
       <div class="values-grid">
         {[
-          { icon: "✦", title: "Calidad sin concesiones", desc: "Cada pixel, cada línea de código, cada palabra está pensada para transmitir profesionalismo." },
-          { icon: "◈", title: "Transparencia total", desc: "Precios claros, plazos cumplidos y comunicación constante. Sin sorpresas, nunca." },
-          { icon: "◉", title: "Resultados medibles", desc: "No vendemos promesas. Entregamos métricas reales: tráfico, conversiones, leads." },
-          { icon: "⬡", title: "Tecnología al servicio", desc: "La IA y la automatización son herramientas para ayudarte, no para impresionarte." },
-          { icon: "◇", title: "Cercanía humana", desc: "Hablamos contigo, no a ti. Entendemos tu negocio antes de proponer soluciones." },
-          { icon: "△", title: "Crecimiento continuo", desc: "El lanzamiento es solo el principio. Seguimos optimizando contigo durante años." },
+          { icon: "✦" },
+          { icon: "◈" },
+          { icon: "◉" },
+          { icon: "⬡" },
+          { icon: "◇" },
+          { icon: "△" },
         ].map((value, i) => (
           <div class={`value-item reveal reveal--delay-${(i % 3) + 1}`}>
             <span class="value-item__icon" aria-hidden="true">{value.icon}</span>
-            <h3 class="value-item__title">{value.title}</h3>
-            <p class="value-item__desc">{value.desc}</p>
+            <h3 class="value-item__title" data-i18n={`about.values.items.${i}.title`}></h3>
+            <p class="value-item__desc" data-i18n={`about.values.items.${i}.description`}></p>
           </div>
         ))}
       </div>
@@ -124,8 +108,8 @@ import { SITE, CTA } from '@data/site';
   <section class="about-markets section" aria-labelledby="markets-title">
     <div class="container container--narrow">
       <div class="section-header reveal">
-        <h2 class="section-title" id="markets-title">Donde estamos.</h2>
-        <p class="section-subtitle">
+        <h2 class="section-title" id="markets-title" data-i18n="about.markets.title">Donde estamos.</h2>
+        <p class="section-subtitle" data-i18n="about.markets.subtitle">
           Operamos en tres mercados con características y necesidades diferentes.
           Conocemos las particularidades de cada uno.
         </p>
@@ -133,32 +117,19 @@ import { SITE, CTA } from '@data/site';
 
       <div class="markets-grid">
         {[
-          {
-            flag: "🇫🇷",
-            country: "Francia",
-            desc: "Atendemos a negocios franceses con comunicación en francés, precios en euros y cumplimiento del RGPD europeo.",
-            focus: ["Restaurantes", "Hôtellerie", "Professions libérales"],
-          },
-          {
-            flag: "🇪🇸",
-            country: "España",
-            desc: "Proyectos para empresas españolas en toda la geografía nacional, con foco en pymes y autónomos.",
-            focus: ["Clínicas", "Abogados", "Comercio local"],
-          },
-          {
-            flag: "🇵🇪",
-            country: "Perú",
-            desc: "Soluciones adaptadas al mercado peruano, con precios locales y entendimiento del contexto empresarial.",
-            focus: ["Restaurantes", "Peluquerías", "Tiendas"],
-          },
+          { flag: "🇫🇷", focus: [0, 1, 2] },
+          { flag: "🇪🇸", focus: [0, 1, 2] },
+          { flag: "🇵🇪", focus: [0, 1, 2] },
         ].map((market, i) => (
           <div class={`market-item reveal reveal--delay-${i + 1}`}>
-            <span class="market-item__flag" aria-hidden="true">{market.flag}</span>
-            <h3 class="market-item__country">{market.country}</h3>
-            <p class="market-item__desc">{market.desc}</p>
+            <h3 class="market-item__country">
+              <span aria-hidden="true">{market.flag}</span>{' '}
+              <span data-i18n={`about.markets.items.${i}.country`}></span>
+            </h3>
+            <p class="market-item__desc" data-i18n={`about.markets.items.${i}.description`}></p>
             <ul class="market-item__focus">
-              {market.focus.map((item) => (
-                <li class="market-item__focus-item">{item}</li>
+              {market.focus.map((itemIndex) => (
+                <li class="market-item__focus-item" data-i18n={`about.markets.items.${i}.focus.${itemIndex}`}></li>
               ))}
             </ul>
           </div>
@@ -391,18 +362,14 @@ import { SITE, CTA } from '@data/site';
       0 0 40px -8px rgba(99, 102, 241, 0.18);
   }
 
-  .market-item__flag {
-    font-size: 2.25rem;
-    line-height: 1;
-    /* Small bottom margin adds visual separation from title */
-    margin-bottom: var(--space-1);
-  }
-
   .market-item__country {
     font-size: var(--text-2xl);
     font-weight: var(--weight-bold);
     color: var(--color-text-primary);
     letter-spacing: -0.03em;
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
   }
 
   .market-item__desc {

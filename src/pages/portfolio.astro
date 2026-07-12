@@ -20,11 +20,11 @@ import { CTA } from '@data/site';
   <section class="page-hero section">
     <div class="container">
       <div class="page-hero__inner">
-        <span class="section-label reveal">Portfolio</span>
-        <h1 class="page-hero__title reveal reveal--delay-1">
+        <span class="section-label reveal" data-i18n="portfolio.sectionLabel">Portfolio</span>
+        <h1 class="page-hero__title reveal reveal--delay-1" data-i18n="portfolio.page.heading">
           Proyectos que generan<br /><span class="text-gradient">resultados reales.</span>
         </h1>
-        <p class="page-hero__subtitle reveal reveal--delay-2">
+        <p class="page-hero__subtitle reveal reveal--delay-2" data-i18n="portfolio.page.subtitle">
           Cada caso de estudio documenta el reto del cliente,
           la solución que implementamos y los resultados obtenidos.
         </p>
@@ -39,23 +39,23 @@ import { CTA } from '@data/site';
       <!-- Stats bar -->
       <div class="portfolio-stats reveal">
         <div class="portfolio-stat">
-          <span class="portfolio-stat__number">{PORTFOLIO.length}+</span>
-          <span class="portfolio-stat__label">Proyectos</span>
+          <span class="portfolio-stat__number" data-i18n="hero.proof.projects">+40</span>
+          <span class="portfolio-stat__label" data-i18n="hero.proof.projectsLabel">Proyectos</span>
         </div>
         <div class="portfolio-stat__divider" aria-hidden="true"></div>
         <div class="portfolio-stat">
-          <span class="portfolio-stat__number">3</span>
-          <span class="portfolio-stat__label">Países</span>
+          <span class="portfolio-stat__number" data-i18n="hero.proof.countries">3</span>
+          <span class="portfolio-stat__label" data-i18n="hero.proof.countriesLabel">Países</span>
         </div>
         <div class="portfolio-stat__divider" aria-hidden="true"></div>
         <div class="portfolio-stat">
-          <span class="portfolio-stat__number">7</span>
-          <span class="portfolio-stat__label">Industrias</span>
+          <span class="portfolio-stat__number" data-i18n="portfolio.stats.industriesNumber">7</span>
+          <span class="portfolio-stat__label" data-i18n="portfolio.stats.industriesLabel">Industrias</span>
         </div>
         <div class="portfolio-stat__divider" aria-hidden="true"></div>
         <div class="portfolio-stat">
-          <span class="portfolio-stat__number">100%</span>
-          <span class="portfolio-stat__label">Clientes satisfechos</span>
+          <span class="portfolio-stat__number" data-i18n="hero.proof.satisfaction">100%</span>
+          <span class="portfolio-stat__label" data-i18n="portfolio.stats.satisfactionLabel">Clientes satisfechos</span>
         </div>
       </div>
 
@@ -69,11 +69,19 @@ import { CTA } from '@data/site';
           >
             <!-- Image -->
             <div class="portfolio-full-card__image">
-              <!-- TODO: Replace placeholder with real project image: {project.image} -->
-              <div class="portfolio-full-card__placeholder" aria-hidden="true">
-                <span class="portfolio-full-card__initial">{project.title.charAt(0)}</span>
-                <span class="portfolio-full-card__industry-label">{project.industry}</span>
-              </div>
+              {project.image ? (
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  loading="lazy"
+                  class="portfolio-full-card__image-real"
+                />
+              ) : (
+                <div class="portfolio-full-card__placeholder" aria-hidden="true">
+                  <span class="portfolio-full-card__initial">{project.title.charAt(0)}</span>
+                  <span class="portfolio-full-card__industry-label">{project.industry}</span>
+                </div>
+              )}
               {project.featured && (
                 <div class="portfolio-full-card__badge">Destacado</div>
               )}
@@ -82,7 +90,7 @@ import { CTA } from '@data/site';
             <!-- Body -->
             <div class="portfolio-full-card__body">
               <div class="portfolio-full-card__meta">
-                <span class="portfolio-full-card__tag">{project.industry}</span>
+                <span class="portfolio-full-card__tag" data-i18n={`portfolio.items.${project.id}.industry`}>{project.industry}</span>
                 <span class="portfolio-full-card__location">{project.location} · {project.year}</span>
               </div>
 
@@ -91,31 +99,31 @@ import { CTA } from '@data/site';
               </h2>
               <p class="portfolio-full-card__client">{project.client}</p>
 
-              <p class="portfolio-full-card__desc">{project.description}</p>
+              <p class="portfolio-full-card__desc" data-i18n={`portfolio.items.${project.id}.description`}>{project.description}</p>
 
               <!-- Challenge & Solution -->
               <div class="portfolio-full-card__cs">
                 <div class="portfolio-full-card__cs-item">
-                  <span class="portfolio-full-card__cs-label">Reto</span>
-                  <p class="portfolio-full-card__cs-text">{project.challenge}</p>
+                  <span class="portfolio-full-card__cs-label" data-i18n="portfolio.labels.challenge">Reto</span>
+                  <p class="portfolio-full-card__cs-text" data-i18n={`portfolio.items.${project.id}.challenge`}>{project.challenge}</p>
                 </div>
                 <div class="portfolio-full-card__cs-item">
-                  <span class="portfolio-full-card__cs-label">Solución</span>
-                  <p class="portfolio-full-card__cs-text">{project.solution}</p>
+                  <span class="portfolio-full-card__cs-label" data-i18n="portfolio.labels.solution">Solución</span>
+                  <p class="portfolio-full-card__cs-text" data-i18n={`portfolio.items.${project.id}.solution`}>{project.solution}</p>
                 </div>
               </div>
 
               <!-- Results -->
               <div class="portfolio-full-card__results">
-                <span class="portfolio-full-card__results-title">Resultados:</span>
+                <span class="portfolio-full-card__results-title" data-i18n="common.resultsLabel">Resultados:</span>
                 <ul class="portfolio-full-card__results-list">
-                  {project.results.map((result) => (
+                  {project.results.map((result, ri) => (
                     <li class="portfolio-full-card__result">
                       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                         <path d="M22 7l-8.5 8.5-5-5L1 18"/>
                         <path d="M16 7h6v6"/>
                       </svg>
-                      {result}
+                      <span data-i18n={`portfolio.items.${project.id}.results.${ri}`}>{result}</span>
                     </li>
                   ))}
                 </ul>
@@ -250,6 +258,16 @@ import { CTA } from '@data/site';
     justify-content: center;
     gap: var(--space-3);
     background: linear-gradient(135deg, var(--color-surface-2), var(--color-surface));
+  }
+
+  .portfolio-full-card__image-real {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    display: block;
   }
 
   .portfolio-full-card__initial {

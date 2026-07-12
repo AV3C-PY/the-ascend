@@ -33,7 +33,7 @@ export const MARKETS: Record<MarketCode, Market> = {
   FR: {
     code: 'FR',
     flag: '🇫🇷',
-    label: 'Français (EUR)',
+    label: 'Français • EUR',
     labelShort: 'FR',
     currency: 'EUR',
     currencySymbol: '€',
@@ -43,7 +43,7 @@ export const MARKETS: Record<MarketCode, Market> = {
   ES: {
     code: 'ES',
     flag: '🇪🇸',
-    label: 'Español (EUR)',
+    label: 'Español • EUR',
     labelShort: 'ES',
     currency: 'EUR',
     currencySymbol: '€',
@@ -53,7 +53,7 @@ export const MARKETS: Record<MarketCode, Market> = {
   PE: {
     code: 'PE',
     flag: '🇵🇪',
-    label: 'Español (PEN)',
+    label: 'Español • PEN',
     labelShort: 'PE',
     currency: 'PEN',
     currencySymbol: 'S/',
@@ -106,7 +106,7 @@ const pricingFR: MarketPricing = {
       name: 'Esencial',
       tagline: 'Pour démarrer du bon pied.',
       description: 'Tout ce qu\'un commerce local a besoin pour avoir une présence digitale professionnelle.',
-      price: 490,              // TODO: Update France Starter price (EUR)
+      price: 390,              // France Starter price (EUR)
       features: [
         'Site web jusqu\'à 5 pages',
         'Design personnalisé',
@@ -125,7 +125,7 @@ const pricingFR: MarketPricing = {
       name: 'Professionnel',
       tagline: 'Le plus choisi par nos clients.',
       description: 'La solution complète pour les entreprises qui veulent se démarquer et convertir les visites en clients.',
-      price: 890,              // TODO: Update France Professional price (EUR)
+      price: 590,              // France Professional price (EUR)
       features: [
         'Site web jusqu\'à 10 pages',
         'Design premium personnalisé',
@@ -147,7 +147,7 @@ const pricingFR: MarketPricing = {
       name: 'Premium',
       tagline: 'Transformation digitale complète.',
       description: 'Pour les entreprises qui veulent automatiser, scaler et dominer leur marché avec l\'IA.',
-      price: 1490,             // TODO: Update France Premium price (EUR)
+      price: 890,             // France Premium price (EUR)
       features: [
         'Tout du plan Professionnel',
         'Chatbot IA personnalisé',
@@ -179,7 +179,7 @@ const pricingES: MarketPricing = {
       name: 'Esencial',
       tagline: 'Para empezar con el pie derecho.',
       description: 'Todo lo que un negocio local necesita para tener presencia digital profesional.',
-      price: 490,              // TODO: Update Spain Starter price (EUR)
+      price: 250,              // Spain Starter price (EUR)
       features: [
         'Sitio web hasta 5 páginas',
         'Diseño personalizado',
@@ -198,7 +198,7 @@ const pricingES: MarketPricing = {
       name: 'Profesional',
       tagline: 'El más elegido por nuestros clientes.',
       description: 'La solución completa para negocios que quieren destacar y convertir visitas en clientes.',
-      price: 890,              // TODO: Update Spain Professional price (EUR)
+      price: 450,              // Spain Professional price (EUR)
       features: [
         'Sitio web hasta 10 páginas',
         'Diseño premium personalizado',
@@ -220,7 +220,7 @@ const pricingES: MarketPricing = {
       name: 'Premium',
       tagline: 'Transformación digital completa.',
       description: 'Para negocios que quieren automatizar, escalar y dominar su mercado con IA.',
-      price: 1490,             // TODO: Update Spain Premium price (EUR)
+      price: 750,             // Spain Premium price (EUR)
       features: [
         'Todo lo del plan Profesional',
         'Chatbot IA personalizado',
@@ -252,7 +252,7 @@ const pricingPE: MarketPricing = {
       name: 'Esencial',
       tagline: 'Para empezar con el pie derecho.',
       description: 'Todo lo que un negocio local necesita para tener presencia digital profesional.',
-      price: 1990,             // TODO: Update Peru Starter price (S/)
+      price: 499,             // Peru Starter price (S/)
       features: [
         'Sitio web hasta 5 páginas',
         'Diseño personalizado',
@@ -271,7 +271,7 @@ const pricingPE: MarketPricing = {
       name: 'Profesional',
       tagline: 'El más elegido por nuestros clientes.',
       description: 'La solución completa para negocios que quieren destacar y convertir visitas en clientes.',
-      price: 3690,             // TODO: Update Peru Professional price (S/)
+      price: 699,             // Peru Professional price (S/)
       features: [
         'Sitio web hasta 10 páginas',
         'Diseño premium personalizado',
@@ -293,7 +293,7 @@ const pricingPE: MarketPricing = {
       name: 'Premium',
       tagline: 'Transformación digital completa.',
       description: 'Para negocios que quieren automatizar, escalar y dominar su mercado con IA.',
-      price: 6190,             // TODO: Update Peru Premium price (S/)
+      price: 999,             // Peru Premium price (S/)
       features: [
         'Todo lo del plan Profesional',
         'Chatbot IA personalizado',

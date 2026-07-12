@@ -18,12 +18,12 @@ import { SITE, CTA } from '@data/site';
   <section class="page-hero section">
     <div class="container">
       <div class="page-hero__inner">
-        <span class="section-label reveal">Contacto</span>
-        <h1 class="page-hero__title reveal reveal--delay-1">
+        <span class="section-label reveal" data-i18n="contact.sectionLabel">Contacto</span>
+        <h1 class="page-hero__title reveal reveal--delay-1" data-i18n="contact.title">
           Cuéntanos sobre<br />
           <span class="text-gradient">tu proyecto.</span>
         </h1>
-        <p class="page-hero__subtitle reveal reveal--delay-2">
+        <p class="page-hero__subtitle reveal reveal--delay-2" data-i18n="contact.subtitle">
           El presupuesto es completamente gratuito.
           Te respondemos en menos de 24 horas.
         </p>
@@ -38,10 +38,10 @@ import { SITE, CTA } from '@data/site';
 
         <!-- Form -->
         <div class="contact__form-wrapper reveal">
-          <h2 class="contact__form-title" id="contact-form-title">
+          <h2 class="contact__form-title" id="contact-form-title" data-i18n="contact.form.title">
             Solicitar presupuesto
           </h2>
-          <p class="contact__form-subtitle">
+          <p class="contact__form-subtitle" data-i18n="contact.form.subtitle">
             Rellena el formulario y te contactamos en menos de 24 horas.
           </p>
 
@@ -56,25 +56,27 @@ import { SITE, CTA } from '@data/site';
           >
             <div class="contact-form__row">
               <div class="form-group">
-                <label class="form-label" for="name">Nombre <span aria-hidden="true">*</span></label>
+                <label class="form-label" for="name"><span data-i18n="contact.form.name">Nombre</span> <span aria-hidden="true">*</span></label>
                 <input
                   class="form-input"
                   type="text"
                   id="name"
                   name="name"
                   placeholder="Tu nombre"
+                  data-i18n-attr="placeholder:contact.form.namePlaceholder"
                   required
                   autocomplete="name"
                 />
               </div>
               <div class="form-group">
-                <label class="form-label" for="email">Email <span aria-hidden="true">*</span></label>
+                <label class="form-label" for="email"><span data-i18n="contact.form.email">Email</span> <span aria-hidden="true">*</span></label>
                 <input
                   class="form-input"
                   type="email"
                   id="email"
                   name="email"
                   placeholder="tu@email.com"
+                  data-i18n-attr="placeholder:contact.form.emailPlaceholder"
                   required
                   autocomplete="email"
                 />
@@ -83,71 +85,73 @@ import { SITE, CTA } from '@data/site';
 
             <div class="contact-form__row">
               <div class="form-group">
-                <label class="form-label" for="phone">Teléfono / WhatsApp</label>
+                <label class="form-label" for="phone" data-i18n="contact.form.phone">Teléfono / WhatsApp</label>
                 <input
                   class="form-input"
                   type="tel"
                   id="phone"
                   name="phone"
                   placeholder="+34 600 000 000"
+                  data-i18n-attr="placeholder:contact.form.phonePlaceholder"
                   autocomplete="tel"
                 />
               </div>
               <div class="form-group">
-                <label class="form-label" for="business">Tipo de negocio <span aria-hidden="true">*</span></label>
+                <label class="form-label" for="business"><span data-i18n="contact.form.business">Tipo de negocio</span> <span aria-hidden="true">*</span></label>
                 <select class="form-input form-select" id="business" name="business" required>
-                  <option value="">Selecciona...</option>
-                  <option value="restaurante">Restaurante / Hostelería</option>
-                  <option value="clinica">Clínica / Salud</option>
-                  <option value="abogado">Abogado / Asesoría</option>
-                  <option value="arquitecto">Arquitecto / Diseño</option>
-                  <option value="peluqueria">Peluquería / Belleza</option>
-                  <option value="hotel">Hotel / Alojamiento</option>
-                  <option value="tienda">Tienda / Comercio</option>
-                  <option value="otro">Otro</option>
+                  <option value="" data-i18n="contact.form.businessOptions.select">Selecciona...</option>
+                  <option value="restaurante" data-i18n="contact.form.businessOptions.restaurant">Restaurante / Hostelería</option>
+                  <option value="clinica" data-i18n="contact.form.businessOptions.clinic">Clínica / Salud</option>
+                  <option value="abogado" data-i18n="contact.form.businessOptions.lawyer">Abogado / Asesoría</option>
+                  <option value="arquitecto" data-i18n="contact.form.businessOptions.architect">Arquitecto / Diseño</option>
+                  <option value="peluqueria" data-i18n="contact.form.businessOptions.salon">Peluquería / Belleza</option>
+                  <option value="hotel" data-i18n="contact.form.businessOptions.hotel">Hotel / Alojamiento</option>
+                  <option value="tienda" data-i18n="contact.form.businessOptions.store">Tienda / Comercio</option>
+                  <option value="otro" data-i18n="contact.form.businessOptions.other">Otro</option>
                 </select>
               </div>
             </div>
 
             <div class="form-group">
-              <label class="form-label" for="service">¿Qué servicio te interesa?</label>
+              <label class="form-label" for="service" data-i18n="contact.form.service">¿Qué servicio te interesa?</label>
               <select class="form-input form-select" id="service" name="service">
-                <option value="">Selecciona un servicio...</option>
-                <option value="desarrollo-web">Desarrollo Web</option>
-                <option value="shopify">Tienda Shopify</option>
-                <option value="branding">Branding Express</option>
-                <option value="seo">SEO Local</option>
-                <option value="whatsapp">WhatsApp Business</option>
-                <option value="chatbot">Chatbot IA</option>
-                <option value="automatizaciones">Automatizaciones IA</option>
-                <option value="rediseno">Rediseño Web</option>
-                <option value="movil">Optimización Móvil</option>
-                <option value="multiidioma">Multiidioma</option>
-                <option value="no-se">No sé todavía, necesito orientación</option>
+                <option value="" data-i18n="contact.form.serviceDefault">Selecciona un servicio...</option>
+                <option value="desarrollo-web" data-i18n="services.items.desarrollo-web.name">Desarrollo Web</option>
+                <option value="shopify" data-i18n="services.items.shopify.name">Tienda Shopify</option>
+                <option value="branding" data-i18n="services.items.branding.name">Branding Express</option>
+                <option value="seo" data-i18n="services.items.seo-local.name">SEO Local</option>
+                <option value="whatsapp" data-i18n="services.items.whatsapp.name">WhatsApp Business</option>
+                <option value="chatbot" data-i18n="services.items.chatbot.name">Chatbot IA</option>
+                <option value="automatizaciones" data-i18n="services.items.automatizaciones.name">Automatizaciones IA</option>
+                <option value="rediseno" data-i18n="services.items.rediseno.name">Rediseño Web</option>
+                <option value="movil" data-i18n="services.items.movil.name">Optimización Móvil</option>
+                <option value="multiidioma" data-i18n="services.items.multiidioma.name">Multiidioma</option>
+                <option value="no-se" data-i18n="contact.form.serviceOptions.notSure">No sé todavía, necesito orientación</option>
               </select>
             </div>
 
             <div class="form-group">
-              <label class="form-label" for="budget">Presupuesto aproximado</label>
+              <label class="form-label" for="budget" data-i18n="contact.form.budget">Presupuesto aproximado</label>
               <select class="form-input form-select" id="budget" name="budget">
-                <option value="">Selecciona un rango...</option>
-                <option value="menos-500">Menos de 500€</option>
-                <option value="500-1000">500€ – 1.000€</option>
-                <option value="1000-2000">1.000€ – 2.000€</option>
-                <option value="mas-2000">Más de 2.000€</option>
-                <option value="no-se">No lo sé todavía</option>
+                <option value="" data-i18n="contact.form.budgetOptions.select">Selecciona un rango...</option>
+                <option value="menos-500" data-i18n="contact.form.budgetOptions.tier1">Menos de 500€</option>
+                <option value="500-1000" data-i18n="contact.form.budgetOptions.tier2">500€ – 1.000€</option>
+                <option value="1000-2000" data-i18n="contact.form.budgetOptions.tier3">1.000€ – 2.000€</option>
+                <option value="mas-2000" data-i18n="contact.form.budgetOptions.tier4">Más de 2.000€</option>
+                <option value="no-se" data-i18n="contact.form.budgetOptions.notSure">No lo sé todavía</option>
               </select>
             </div>
 
             <div class="form-group">
               <label class="form-label" for="message">
-                Cuéntanos sobre tu proyecto <span aria-hidden="true">*</span>
+                <span data-i18n="contact.form.message">Cuéntanos sobre tu proyecto</span> <span aria-hidden="true">*</span>
               </label>
               <textarea
                 class="form-input form-textarea"
                 id="message"
                 name="message"
                 placeholder="¿Qué necesitas? ¿Tienes web actualmente? ¿Cuáles son tus objetivos? Cuanto más nos cuentes, mejor podremos ayudarte."
+                data-i18n-attr="placeholder:contact.form.messagePlaceholder"
                 rows="5"
                 required
               ></textarea>
@@ -163,8 +167,8 @@ import { SITE, CTA } from '@data/site';
                 required
               />
               <label class="form-check__label" for="privacy">
-                He leído y acepto la
-                <a href="/privacidad" target="_blank" rel="noopener">Política de Privacidad</a>
+                <span data-i18n="contact.form.privacy">He leído y acepto la</span>
+                <a href="/privacidad" target="_blank" rel="noopener" data-i18n="contact.form.privacyLink">Política de Privacidad</a>
               </label>
             </div>
 
@@ -178,7 +182,7 @@ import { SITE, CTA } from '@data/site';
                 <line x1="22" y1="2" x2="11" y2="13"/>
                 <polygon points="22 2 15 22 11 13 2 9 22 2"/>
               </svg>
-              Enviar solicitud
+              <span data-i18n="contact.form.submit">Enviar solicitud</span>
             </button>
 
             <!-- Success / Error states -->
@@ -187,8 +191,8 @@ import { SITE, CTA } from '@data/site';
                 <polyline points="20 6 9 17 4 12"/>
               </svg>
               <div>
-                <p class="contact-form__success-title">¡Mensaje enviado!</p>
-                <p>Te respondemos en menos de 24 horas. Revisa también tu carpeta de spam.</p>
+                <p class="contact-form__success-title" data-i18n="contact.success.title">¡Mensaje enviado!</p>
+                <p data-i18n="contact.success.text">Te respondemos en menos de 24 horas. Revisa también tu carpeta de spam.</p>
               </div>
             </div>
 
@@ -198,7 +202,7 @@ import { SITE, CTA } from '@data/site';
                 <line x1="12" y1="8" x2="12" y2="12"/>
                 <line x1="12" y1="16" x2="12.01" y2="16"/>
               </svg>
-              <p>Hubo un error al enviar. Por favor, escríbenos directamente a <a href={`mailto:${SITE.email}`}>{SITE.email}</a></p>
+              <p><span data-i18n="contact.error.text">Hubo un error al enviar. Por favor, escríbenos directamente a</span> <a href={`mailto:${SITE.email}`}>{SITE.email}</a></p>
             </div>
           </form>
         </div>
@@ -207,7 +211,7 @@ import { SITE, CTA } from '@data/site';
         <aside class="contact__info reveal reveal--delay-2">
           <!-- Direct contact -->
           <div class="contact-info-card">
-            <h3 class="contact-info-card__title">Contacto directo</h3>
+            <h3 class="contact-info-card__title" data-i18n="contact.info.directContact">Contacto directo</h3>
 
             <!-- TODO: Update email in src/data/site.ts -->
             <a href={`mailto:${SITE.email}`} class="contact-info-item">
@@ -218,7 +222,7 @@ import { SITE, CTA } from '@data/site';
                 </svg>
               </div>
               <div>
-                <span class="contact-info-item__label">Email</span>
+                <span class="contact-info-item__label" data-i18n="contact.info.email">Email</span>
                 <span class="contact-info-item__value">{SITE.email}</span>
               </div>
             </a>
@@ -236,7 +240,7 @@ import { SITE, CTA } from '@data/site';
                 </svg>
               </div>
               <div>
-                <span class="contact-info-item__label">WhatsApp</span>
+                <span class="contact-info-item__label" data-i18n="contact.info.whatsapp">WhatsApp</span>
                 <span class="contact-info-item__value">{SITE.whatsappDisplay}</span>
               </div>
             </a>
@@ -244,36 +248,36 @@ import { SITE, CTA } from '@data/site';
 
           <!-- Response time -->
           <div class="contact-info-card">
-            <h3 class="contact-info-card__title">¿Cuándo respondemos?</h3>
+            <h3 class="contact-info-card__title" data-i18n="contact.info.responseTimeTitle">¿Cuándo respondemos?</h3>
             <div class="response-times">
               <div class="response-time">
-                <span class="response-time__badge response-time__badge--fast">Rápido</span>
-                <span class="response-time__label">WhatsApp</span>
-                <span class="response-time__value">1–3 horas</span>
+                <span class="response-time__badge response-time__badge--fast" data-i18n="contact.info.fast">Rápido</span>
+                <span class="response-time__label" data-i18n="contact.info.whatsapp">WhatsApp</span>
+                <span class="response-time__value" data-i18n="contact.info.time1">1–3 horas</span>
               </div>
               <div class="response-time">
-                <span class="response-time__badge">Normal</span>
-                <span class="response-time__label">Email / Formulario</span>
-                <span class="response-time__value">Menos de 24h</span>
+                <span class="response-time__badge" data-i18n="contact.info.normal">Normal</span>
+                <span class="response-time__label" data-i18n="contact.info.emailForm">Email / Formulario</span>
+                <span class="response-time__value" data-i18n="contact.info.time2">Menos de 24h</span>
               </div>
             </div>
           </div>
 
           <!-- What to expect -->
           <div class="contact-info-card">
-            <h3 class="contact-info-card__title">Después de contactar...</h3>
+            <h3 class="contact-info-card__title" data-i18n="contact.info.afterContactTitle">Después de contactar...</h3>
             <ol class="contact-steps">
               <li class="contact-step">
                 <span class="contact-step__n" aria-hidden="true">1</span>
-                <p>Te respondemos con preguntas para entender mejor tu proyecto.</p>
+                <p data-i18n="contact.info.step1">Te respondemos con preguntas para entender mejor tu proyecto.</p>
               </li>
               <li class="contact-step">
                 <span class="contact-step__n" aria-hidden="true">2</span>
-                <p>Preparamos una propuesta personalizada sin compromiso.</p>
+                <p data-i18n="contact.info.step2">Preparamos una propuesta personalizada sin compromiso.</p>
               </li>
               <li class="contact-step">
                 <span class="contact-step__n" aria-hidden="true">3</span>
-                <p>Si estás convencido, acordamos los detalles y empezamos.</p>
+                <p data-i18n="contact.info.step3">Si estás convencido, acordamos los detalles y empezamos.</p>
               </li>
             </ol>
           </div>

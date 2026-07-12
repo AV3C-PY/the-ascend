@@ -19,11 +19,11 @@ import { CTA } from '@data/site';
   <section class="page-hero section">
     <div class="container">
       <div class="page-hero__inner">
-        <span class="section-label reveal">Proceso</span>
-        <h1 class="page-hero__title reveal reveal--delay-1">
+        <span class="section-label reveal" data-i18n="processTeaser.sectionLabel">Proceso</span>
+        <h1 class="page-hero__title reveal reveal--delay-1" data-i18n="process.page.title">
           Así trabajamos.<br /><span class="text-gradient">Simple y claro.</span>
         </h1>
-        <p class="page-hero__subtitle reveal reveal--delay-2">
+        <p class="page-hero__subtitle reveal reveal--delay-2" data-i18n="process.page.subtitle">
           Sin tecnicismos, sin misterios. Cada etapa es transparente
           y tú siempre sabes exactamente en qué punto estamos.
         </p>
@@ -51,23 +51,23 @@ import { CTA } from '@data/site';
             <!-- Content -->
             <div class="process-item__content">
               <div class="process-item__header">
-                <h3 class="process-item__title">{step.title}</h3>
+                <h3 class="process-item__title" data-i18n={`process.items.${step.id}.title`}>{step.title}</h3>
                 <span class="process-item__duration">
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                     <circle cx="12" cy="12" r="10"/>
                     <polyline points="12 6 12 12 16 14"/>
                   </svg>
-                  {step.duration}
+                  <span data-i18n={`process.items.${step.id}.duration`}>{step.duration}</span>
                 </span>
               </div>
-              <p class="process-item__desc">{step.description}</p>
+              <p class="process-item__desc" data-i18n={`process.items.${step.id}.description`}>{step.description}</p>
               <ul class="process-item__details">
-                {step.details.map((detail) => (
+                {step.details.map((detail, j) => (
                   <li class="process-item__detail">
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                       <polyline points="20 6 9 17 4 12"/>
                     </svg>
-                    {detail}
+                    <span data-i18n={`process.items.${step.id}.details.${j}`}>{detail}</span>
                   </li>
                 ))}
               </ul>
@@ -82,37 +82,20 @@ import { CTA } from '@data/site';
   <section class="process-trust section" aria-labelledby="trust-title">
     <div class="container container--narrow">
       <div class="section-header reveal">
-        <h2 class="section-title" id="trust-title">
+        <h2 class="section-title" id="trust-title" data-i18n="process.page.trustTitle">
           Nuestros compromisos contigo.
         </h2>
       </div>
       <div class="trust-grid">
-        {[
-          {
-            title: "Comunicación constante",
-            desc: "Actualizaciones semanales de progreso. Nunca estarás en la oscuridad sobre el estado de tu proyecto.",
-          },
-          {
-            title: "Plazos cumplidos",
-            desc: "Si acordamos una fecha de entrega, la cumplimos. Si surge algo, te avisamos con antelación.",
-          },
-          {
-            title: "Revisiones incluidas",
-            desc: "Hasta 3 rondas de revisiones sin coste adicional. Tu satisfacción es parte del proyecto.",
-          },
-          {
-            title: "Sin sorpresas",
-            desc: "El presupuesto acordado es el precio final. No añadimos costes ocultos ni extras no pactados.",
-          },
-        ].map((item, i) => (
+        {[0, 1, 2, 3].map((i) => (
           <div class={`trust-item reveal reveal--delay-${i + 1}`}>
             <div class="trust-item__icon" aria-hidden="true">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
               </svg>
             </div>
-            <h3 class="trust-item__title">{item.title}</h3>
-            <p class="trust-item__desc">{item.desc}</p>
+            <h3 class="trust-item__title" data-i18n={`process.trust.${i}.title`}></h3>
+            <p class="trust-item__desc" data-i18n={`process.trust.${i}.desc`}></p>
           </div>
         ))}
       </div>

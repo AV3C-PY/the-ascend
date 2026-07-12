@@ -123,7 +123,7 @@ export default function MarketSelector() {
         <span className="market-selector__flag" aria-hidden="true">
           {currentMarket.flag}
         </span>
-        <span className="market-selector__code">{currentMarket.labelShort}</span>
+        <span className="market-selector__code">{currentMarket.label}</span>
         <svg
           className={`market-selector__chevron${open ? ' market-selector__chevron--open' : ''}`}
           width="10"

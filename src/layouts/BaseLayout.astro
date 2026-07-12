@@ -26,6 +26,8 @@ interface Props {
   ogImage?: string;
   canonical?: string;
   noindex?: boolean;
+  i18nTitle?: string;
+  i18nDesc?: string;
 }
 
 const {
@@ -34,6 +36,8 @@ const {
   ogImage = SITE.ogImage,
   canonical,
   noindex = false,
+  i18nTitle,
+  i18nDesc,
 } = Astro.props;
 
 const fullTitle = title === SITE.name ? title : `${title} | ${SITE.name}`;
@@ -55,9 +59,9 @@ const i18nDicts = { es, fr };
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
     <!-- Primary Meta Tags -->
-    <title>{fullTitle}</title>
-    <meta name="title" content={fullTitle} />
-    <meta name="description" content={description} />
+    <title data-i18n={i18nTitle}>{fullTitle}</title>
+    <meta name="title" content={fullTitle} data-i18n-attr={i18nTitle ? `content:${i18nTitle}` : null} />
+    <meta name="description" content={description} data-i18n-attr={i18nDesc ? `content:${i18nDesc}` : null} />
     <meta name="author" content={SITE.name} />
     {noindex && <meta name="robots" content="noindex, nofollow" />}
 
@@ -165,6 +169,13 @@ const i18nDicts = { es, fr };
           const key = el.getAttribute('data-i18n');
           const value = getByPath(dict, key);
           if (value !== undefined) el.textContent = value;
+        });
+
+        // HTML content: <div data-i18n-html="legal.content">...</div>
+        document.querySelectorAll('[data-i18n-html]').forEach((el) => {
+          const key = el.getAttribute('data-i18n-html');
+          const value = getByPath(dict, key);
+          if (value !== undefined) el.innerHTML = value;
         });
 
         // Attribute swaps: <input data-i18n-attr="placeholder:key,aria-label:key2">
