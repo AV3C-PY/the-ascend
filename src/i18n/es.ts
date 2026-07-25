@@ -212,6 +212,22 @@ export const es = {
         idealFor:    ['Hoteles', 'Restaurantes', 'Agencias', 'Empresas que exportan'],
         duration:    '2–3 semanas',
       },
+      'menu-digital': {
+        name:        'Menú Digital (QR Menu)',
+        tagline:     'Tu carta online, accesible con un código QR.',
+        description: 'Creamos tu carta digital con código QR para que tus clientes puedan ver el menú desde su móvil. Fácil de actualizar, sin app, con fotos y botones de WhatsApp y Google Maps.',
+        features:    ['QR Menu personalizado', 'Optimizado para móviles', 'Actualizaciones sencillas', 'Fotos de platos y productos', 'Botón de WhatsApp integrado', 'Botón de Google Maps integrado'],
+        idealFor:    ['Restaurantes', 'Cafés', 'Bares', 'Panaderías', 'Pequeños negocios de comida'],
+        duration:    '3–5 días',
+      },
+      'google-business': {
+        name:        'Google Business Profile',
+        tagline:     'Aparece en Google cuando te buscan cerca.',
+        description: 'Creamos y optimizamos tu perfil de Google Business para que tu negocio aparezca en Google Maps y las búsquedas locales. Más visibilidad, más clientes.',
+        features:    ['Creación de Google Business Profile', 'Optimización del perfil', 'Categorías y atributos', 'Fotos profesionales del negocio', 'Horarios de apertura configurados', 'Integración con WhatsApp', 'Enlace a tu sitio web', 'Mejoras de SEO local'],
+        idealFor:    ['Negocios locales', 'Restaurantes', 'Clínicas', 'Tiendas', 'Profesionales'],
+        duration:    '2–3 días',
+      },
     },
 
     // Services page specific
@@ -224,6 +240,9 @@ export const es = {
       idealFor: 'Ideal para',
       features: 'Qué incluye',
       requestService: 'Solicitar este servicio',
+      startingFrom: 'Desde',
+      includedIn: 'Incluido en',
+      includedStartingFrom: 'Incluido desde',
       ctaTitle:    '¿No sabes qué necesitas?',
       ctaSubtitle: 'Cuéntame sobre tu negocio y te digo exactamente qué necesitas. Sin tecnicismos, sin presiones.',
     },

@@ -15,6 +15,8 @@ export interface Service {
   idealFor: string[];
   duration: string;
   category: "web" | "marketing" | "ia" | "branding";
+  // Plan IDs where this service is included (e.g. ['esencial', 'profesional', 'premium'])
+  includedInPlans: string[];
 }
 
 // TODO: Add, remove, or edit services here. Each service appears on the
@@ -39,6 +41,7 @@ export const SERVICES: Service[] = [
     idealFor: ["Restaurantes", "Clínicas", "Abogados", "Arquitectos", "Hoteles"],
     duration: "2–3 semanas",
     category: "web",
+    includedInPlans: ["esencial", "profesional", "premium"],
   },
   {
     id: "shopify",
@@ -59,6 +62,7 @@ export const SERVICES: Service[] = [
     idealFor: ["Tiendas locales", "Peluquerías", "Boutiques", "Artesanos"],
     duration: "2–4 semanas",
     category: "web",
+    includedInPlans: ["premium"],
   },
   {
     id: "branding",
@@ -79,6 +83,7 @@ export const SERVICES: Service[] = [
     idealFor: ["Negocios nuevos", "Rebranding", "Peluquerías", "Restaurantes"],
     duration: "1–2 semanas",
     category: "branding",
+    includedInPlans: ["premium"],
   },
   {
     id: "seo-local",
@@ -99,6 +104,7 @@ export const SERVICES: Service[] = [
     idealFor: ["Dentistas", "Restaurantes", "Abogados", "Hoteles", "Clínicas"],
     duration: "Servicio mensual",
     category: "marketing",
+    includedInPlans: ["profesional", "premium"],
   },
   {
     id: "whatsapp",
@@ -119,6 +125,7 @@ export const SERVICES: Service[] = [
     idealFor: ["Peluquerías", "Restaurantes", "Tiendas", "Clínicas"],
     duration: "3–5 días",
     category: "marketing",
+    includedInPlans: ["esencial", "profesional", "premium"],
   },
   {
     id: "chatbot",
@@ -139,6 +146,7 @@ export const SERVICES: Service[] = [
     idealFor: ["Clínicas", "Hoteles", "Abogados", "Dentistas"],
     duration: "1–2 semanas",
     category: "ia",
+    includedInPlans: ["premium"],
   },
   {
     id: "automatizaciones",
@@ -159,6 +167,7 @@ export const SERVICES: Service[] = [
     idealFor: ["Cualquier negocio con procesos repetitivos"],
     duration: "2–3 semanas",
     category: "ia",
+    includedInPlans: ["premium"],
   },
   {
     id: "rediseno",
@@ -179,6 +188,7 @@ export const SERVICES: Service[] = [
     idealFor: ["Cualquier negocio con web desactualizada"],
     duration: "2–3 semanas",
     category: "web",
+    includedInPlans: [],
   },
   {
     id: "movil",
@@ -199,6 +209,7 @@ export const SERVICES: Service[] = [
     idealFor: ["Cualquier negocio con web existente"],
     duration: "1 semana",
     category: "web",
+    includedInPlans: ["esencial", "profesional", "premium"],
   },
   {
     id: "multiidioma",
@@ -219,6 +230,51 @@ export const SERVICES: Service[] = [
     idealFor: ["Hoteles", "Restaurantes", "Agencias", "Empresas que exportan"],
     duration: "2–3 semanas",
     category: "web",
+    includedInPlans: ["premium"],
+  },
+  {
+    id: "menu-digital",
+    slug: "menu-digital",
+    icon: "Utensils",
+    name: "Menú Digital (QR Menu)",
+    tagline: "Tu carta online, accesible con un código QR.",
+    description:
+      "Creamos tu carta digital con código QR para que tus clientes puedan ver el menú desde su móvil. Fácil de actualizar, sin app, con fotos y botones de WhatsApp y Google Maps.",
+    features: [
+      "QR Menu personalizado",
+      "Optimizado para móviles",
+      "Actualizaciones sencillas",
+      "Fotos de platos y productos",
+      "Botón de WhatsApp integrado",
+      "Botón de Google Maps integrado",
+    ],
+    idealFor: ["Restaurantes", "Cafés", "Bares", "Panaderías", "Pequeños negocios de comida"],
+    duration: "3–5 días",
+    category: "marketing",
+    includedInPlans: ["esencial", "profesional", "premium"],
+  },
+  {
+    id: "google-business",
+    slug: "google-business",
+    icon: "MapPin",
+    name: "Google Business Profile",
+    tagline: "Aparece en Google cuando te buscan cerca.",
+    description:
+      "Creamos y optimizamos tu perfil de Google Business para que tu negocio aparezca en Google Maps y las búsquedas locales. Más visibilidad, más clientes.",
+    features: [
+      "Creación de Google Business Profile",
+      "Optimización del perfil",
+      "Categorías y atributos",
+      "Fotos profesionales del negocio",
+      "Horarios de apertura configurados",
+      "Integración con WhatsApp",
+      "Enlace a tu sitio web",
+      "Mejoras de SEO local",
+    ],
+    idealFor: ["Negocios locales", "Restaurantes", "Clínicas", "Tiendas", "Profesionales"],
+    duration: "2–3 días",
+    category: "marketing",
+    includedInPlans: ["esencial", "profesional", "premium"],
   },
 ];
 

@@ -93,6 +93,8 @@ export interface MarketPlan {
 export interface MarketPricing {
   plans: MarketPlan[];
   note?: string;    // Optional footnote below pricing grid
+  // Standalone service prices for this market (service id -> price)
+  servicesPricing: Record<string, number>;
 }
 
 // ---------------------------------------------------------------------------
@@ -113,6 +115,8 @@ const pricingFR: MarketPricing = {
         'Optimisation mobile',
         'Formulaire de contact',
         'Google Analytics intégré',
+        'Menu Digital (QR Menu)',
+        'Configuration Google Business Profile',
         '1 mois de support inclus',
         'Livraison en 2 semaines',
       ],
@@ -134,6 +138,8 @@ const pricingFR: MarketPricing = {
         'WhatsApp Business configuré',
         'Blog intégré',
         'Google Analytics + Search Console',
+        'Menu Digital (QR Menu)',
+        'Configuration Google Business Profile',
         '3 mois de support inclus',
         'Livraison en 3 semaines',
       ],
@@ -155,6 +161,8 @@ const pricingFR: MarketPricing = {
         'Intégration multilingue',
         'Branding Express inclus',
         'Boutique en ligne (si nécessaire)',
+        'Optimisation avancée Google Business',
+        'Menu Digital avec personnalisation avancée',
         '6 mois de support prioritaire',
         'Rapports mensuels de performance',
         'Livraison en 4 semaines',
@@ -166,6 +174,20 @@ const pricingFR: MarketPricing = {
     },
   ],
   note: 'Prix en euros (€) TTC. Devis gratuit, sans engagement.',
+  servicesPricing: {
+    'desarrollo-web':    390,
+    'shopify':           590,
+    'rediseno':          190,
+    'movil':              90,
+    'multiidioma':       150,
+    'seo-local':          90,
+    'whatsapp':           90,
+    'chatbot':           250,
+    'automatizaciones':  350,
+    'branding':          150,
+    'menu-digital':       99,
+    'google-business':    79,
+  },
 };
 
 // ---------------------------------------------------------------------------
@@ -186,6 +208,8 @@ const pricingES: MarketPricing = {
         'Optimización móvil',
         'Formulario de contacto',
         'Google Analytics integrado',
+        'Menú Digital (QR Menu)',
+        'Configuración Google Business Profile',
         '1 mes de soporte incluido',
         'Entrega en 2 semanas',
       ],
@@ -207,6 +231,8 @@ const pricingES: MarketPricing = {
         'WhatsApp Business configurado',
         'Blog integrado',
         'Google Analytics + Search Console',
+        'Menú Digital (QR Menu)',
+        'Configuración Google Business Profile',
         '3 meses de soporte incluido',
         'Entrega en 3 semanas',
       ],
@@ -228,6 +254,8 @@ const pricingES: MarketPricing = {
         'Integración multiidioma',
         'Branding Express incluido',
         'Tienda online (si necesaria)',
+        'Optimización avanzada Google Business',
+        'Menú Digital con personalización avanzada',
         '6 meses de soporte prioritario',
         'Reportes mensuales de rendimiento',
         'Entrega en 4 semanas',
@@ -239,6 +267,20 @@ const pricingES: MarketPricing = {
     },
   ],
   note: 'Precios en euros (€). Presupuesto gratuito, sin compromiso.',
+  servicesPricing: {
+    'desarrollo-web':    250,
+    'shopify':           450,
+    'rediseno':          150,
+    'movil':              70,
+    'multiidioma':       120,
+    'seo-local':          70,
+    'whatsapp':           70,
+    'chatbot':           180,
+    'automatizaciones':  250,
+    'branding':          120,
+    'menu-digital':       79,
+    'google-business':    59,
+  },
 };
 
 // ---------------------------------------------------------------------------
@@ -259,6 +301,8 @@ const pricingPE: MarketPricing = {
         'Optimización móvil',
         'Formulario de contacto',
         'Google Analytics integrado',
+        'Menú Digital (QR Menu)',
+        'Configuración Google Business Profile',
         '1 mes de soporte incluido',
         'Entrega en 2 semanas',
       ],
@@ -280,6 +324,8 @@ const pricingPE: MarketPricing = {
         'WhatsApp Business configurado',
         'Blog integrado',
         'Google Analytics + Search Console',
+        'Menú Digital (QR Menu)',
+        'Configuración Google Business Profile',
         '3 meses de soporte incluido',
         'Entrega en 3 semanas',
       ],
@@ -301,6 +347,8 @@ const pricingPE: MarketPricing = {
         'Integración multiidioma',
         'Branding Express incluido',
         'Tienda online (si necesaria)',
+        'Optimización avanzada Google Business',
+        'Menú Digital con personalización avanzada',
         '6 meses de soporte prioritario',
         'Reportes mensuales de rendimiento',
         'Entrega en 4 semanas',
@@ -312,6 +360,20 @@ const pricingPE: MarketPricing = {
     },
   ],
   note: 'Precios en soles peruanos (S/). Presupuesto gratuito, sin compromiso.',
+  servicesPricing: {
+    'desarrollo-web':    499,
+    'shopify':           699,
+    'rediseno':          299,
+    'movil':             149,
+    'multiidioma':       249,
+    'seo-local':         149,
+    'whatsapp':          149,
+    'chatbot':           399,
+    'automatizaciones':  499,
+    'branding':          249,
+    'menu-digital':      149,
+    'google-business':   129,
+  },
 };
 
 // Map of market code → pricing data

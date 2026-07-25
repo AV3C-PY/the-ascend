@@ -8,6 +8,7 @@
 import BaseLayout from '@layouts/BaseLayout.astro';
 import CTABanner from '@components/sections/CTABanner.astro';
 import { SERVICES, SERVICE_CATEGORIES } from '@data/services';
+import { MARKET_PRICING, MARKETS, DEFAULT_MARKET } from '@data/market';
 import { CTA } from '@data/site';
 
 // Group services by category
@@ -16,6 +17,21 @@ const grouped = Object.entries(SERVICE_CATEGORIES).map(([key, label]) => ({
   label,
   items: SERVICES.filter((s) => s.category === key),
 }));
+
+// Default market data for SSR (client-side market selector overrides via JS)
+const defaultMarket   = MARKETS[DEFAULT_MARKET];
+const defaultPricing  = MARKET_PRICING[DEFAULT_MARKET];
+
+// Serialize all pricing for client-side JS
+const allPricingJSON = JSON.stringify(MARKET_PRICING);
+const allMarketsJSON = JSON.stringify(MARKETS);
+
+// Plan display names (shown in "Included in" badge — not translated, it's the plan name)
+const PLAN_NAMES: Record<string, string> = {
+  esencial:    'Esencial',
+  profesional: 'Profesional',
+  premium:     'Premium',
+};
 ---
 
 <BaseLayout
@@ -97,6 +113,37 @@ const grouped = Object.entries(SERVICE_CATEGORIES).map(([key, label]) => ({
                       </Fragment>
                     ))}
                   </div>
+
+                  {/* Pricing block — updated by JS on market change */}
+                  <div class="service-full-card__pricing">
+                    <span class="service-full-card__pricing-label" data-i18n="services.page.startingFrom">Desde</span>
+                    {' '}
+                    <span class="service-full-card__pricing-currency" data-service-currency>
+                      {defaultMarket.currencySymbol}
+                    </span>
+                    <span class="service-full-card__pricing-amount" data-service-price={service.id}>
+                      {defaultPricing.servicesPricing[service.id] ?? '—'}
+                    </span>
+                  </div>
+
+                  {/* Included-in badge */}
+                  {service.includedInPlans.length > 0 && (
+                    <div class="service-full-card__included">
+                      <span
+                        class="service-full-card__included-label"
+                        data-i18n={service.includedInPlans.length >= 2 ? 'services.page.includedIn' : 'services.page.includedStartingFrom'}
+                      >
+                        {service.includedInPlans.length >= 2 ? 'Incluido en' : 'Incluido desde'}
+                      </span>
+                      {': '}
+                      {service.includedInPlans.map((planId, pi) => (
+                        <Fragment key={pi}>
+                          <span class="service-full-card__included-plan">{PLAN_NAMES[planId] ?? planId}</span>
+                          {pi < service.includedInPlans.length - 1 ? ' • ' : ''}
+                        </Fragment>
+                      ))}
+                    </div>
+                  )}
                 </div>
                 <a href="/contacto" class="btn btn--primary btn--sm" data-i18n="services.page.requestService">
                   {CTA.quote}
@@ -280,6 +327,49 @@ const grouped = Object.entries(SERVICE_CATEGORIES).map(([key, label]) => ({
     color: var(--color-text-muted);
   }
 
+  /* Pricing block */
+  .service-full-card__pricing {
+    display: flex;
+    align-items: baseline;
+    gap: 0.25rem;
+    margin-top: var(--space-2);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    color: var(--color-primary-light);
+  }
+
+  .service-full-card__pricing-label {
+    font-weight: var(--weight-normal);
+    color: var(--color-text-muted);
+    font-size: var(--text-xs);
+  }
+
+  .service-full-card__pricing-currency {
+    font-size: var(--text-xs);
+  }
+
+  .service-full-card__pricing-amount {
+    font-size: var(--text-base);
+    font-weight: var(--weight-bold);
+  }
+
+  /* Included-in badge */
+  .service-full-card__included {
+    margin-top: var(--space-2);
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+  }
+
+  .service-full-card__included-label {
+    font-weight: var(--weight-semibold);
+    color: var(--color-text-secondary);
+  }
+
+  .service-full-card__included-plan {
+    color: var(--color-primary-light);
+    font-weight: var(--weight-medium);
+  }
+
   .section-label {
     display: inline-block;
     font-size: var(--text-xs);
@@ -300,3 +390,48 @@ const grouped = Object.entries(SERVICE_CATEGORIES).map(([key, label]) => ({
     }
   }
 </style>
+
+<script define:vars={{ allPricingJSON, allMarketsJSON }}>
+  /**
+   * Market-aware service pricing update
+   * Reads saved market from localStorage on load,
+   * then listens for 'marketchange' events from MarketSelector.tsx
+   */
+  const ALL_PRICING = JSON.parse(allPricingJSON);
+  const ALL_MARKETS = JSON.parse(allMarketsJSON);
+  const STORAGE_KEY = 'ascend_market';
+  const DEFAULT     = 'ES';
+
+  function getCurrentMarket() {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    return stored && ALL_PRICING[stored] ? stored : DEFAULT;
+  }
+
+  function updateServicePrices(marketCode) {
+    const pricing = ALL_PRICING[marketCode];
+    const market  = ALL_MARKETS[marketCode];
+    if (!pricing || !market) return;
+
+    // Update currency symbols
+    document.querySelectorAll('[data-service-currency]').forEach((el) => {
+      el.textContent = market.currencySymbol;
+    });
+
+    // Update individual service prices
+    const sp = pricing.servicesPricing || {};
+    document.querySelectorAll('[data-service-price]').forEach((el) => {
+      const serviceId = el.getAttribute('data-service-price');
+      if (serviceId && sp[serviceId] !== undefined) {
+        el.textContent = sp[serviceId].toLocaleString(market.locale);
+      }
+    });
+  }
+
+  // Apply on page load
+  updateServicePrices(getCurrentMarket());
+
+  // React to market changes
+  window.addEventListener('marketchange', (e) => {
+    updateServicePrices(e.detail.market);
+  });
+</script>
