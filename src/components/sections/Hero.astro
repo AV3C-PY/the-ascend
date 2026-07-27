@@ -17,6 +17,12 @@ import { CTA, SITE } from '@data/site';
 <section class="hero" aria-label="Sección principal">
   <!-- Animated background mesh -->
   <div class="hero__bg" aria-hidden="true">
+    <!-- Aurora layer — pure CSS, brand colors only -->
+    <div class="hero__aurora">
+      <div class="hero__aurora-band hero__aurora-band--1"></div>
+      <div class="hero__aurora-band hero__aurora-band--2"></div>
+      <div class="hero__aurora-band hero__aurora-band--3"></div>
+    </div>
     <div class="hero__bg-glow hero__bg-glow--1"></div>
     <div class="hero__bg-glow hero__bg-glow--2"></div>
     <div class="hero__bg-glow hero__bg-glow--3"></div>
@@ -25,7 +31,7 @@ import { CTA, SITE } from '@data/site';
 
   <div class="container hero__inner">
     <!-- Badge -->
-    <div class="hero__badge reveal">
+    <div class="hero__badge reveal reveal--hero">
       <span class="hero__badge-dot" aria-hidden="true"></span>
       <!-- TODO: Update this badge text in src/i18n/es.ts and fr.ts (hero.badge) -->
       <span data-i18n="hero.badge">Transformación digital para negocios reales</span>
@@ -33,7 +39,7 @@ import { CTA, SITE } from '@data/site';
 
     <!-- Headline -->
     <!-- TODO: Update this headline in src/i18n/es.ts and fr.ts (hero.title) -->
-    <h1 class="hero__title reveal reveal--delay-1" data-i18n="hero.title">
+    <h1 class="hero__title reveal reveal--hero reveal--delay-1" data-i18n="hero.title">
       Tu negocio merece<br />
       una presencia digital<br />
       <span class="text-gradient">que impresione.</span>
@@ -41,7 +47,7 @@ import { CTA, SITE } from '@data/site';
 
     <!-- Subheadline -->
     <!-- TODO: Update this subheadline in src/i18n/es.ts and fr.ts (hero.subtitle) -->
-    <p class="hero__subtitle reveal reveal--delay-2" data-i18n="hero.subtitle">
+    <p class="hero__subtitle reveal reveal--hero reveal--delay-2" data-i18n="hero.subtitle">
       Diseñamos webs, automatizamos procesos e implementamos IA para que
       restaurantes, clínicas, abogados y pequeñas empresas de Francia, España y Perú
       compitan con los grandes.
@@ -49,7 +55,7 @@ import { CTA, SITE } from '@data/site';
 
     <!-- CTA buttons -->
     <div class="hero__ctas reveal reveal--delay-3">
-      <a href="/contacto" class="btn btn--primary btn--lg">
+      <a href="/contacto" class="btn btn--primary btn--lg btn--shimmer">
         <!-- TODO: Update CTA text in src/i18n/es.ts and fr.ts (hero.ctaPrimary) -->
         <span data-i18n="hero.ctaPrimary">Agendar llamada gratuita</span>
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -112,6 +118,100 @@ import { CTA, SITE } from '@data/site';
     z-index: 0;
   }
 
+  /* ===== Aurora ===== */
+  /* Three wide, soft horizontal bands at very low opacity.
+     Each moves on a separate axis at a different speed.
+     Uses only the existing brand palette (indigo + violet). */
+  .hero__aurora {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+  }
+
+  .hero__aurora-band {
+    position: absolute;
+    left: -20%;
+    width: 140%;
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  /* Top aurora — indigo, wide and flat */
+  .hero__aurora-band--1 {
+    height: 380px;
+    top: -120px;
+    background: radial-gradient(
+      ellipse 80% 60% at 50% 50%,
+      rgba(99, 102, 241, 0.13) 0%,
+      rgba(99, 102, 241, 0.06) 40%,
+      transparent 70%
+    );
+    filter: blur(48px);
+    animation: auroraDrift1 28s ease-in-out infinite;
+    will-change: transform;
+  }
+
+  /* Middle aurora — violet, wider, slower */
+  .hero__aurora-band--2 {
+    height: 300px;
+    top: 20%;
+    left: -30%;
+    width: 160%;
+    background: radial-gradient(
+      ellipse 70% 50% at 55% 50%,
+      rgba(167, 139, 250, 0.10) 0%,
+      rgba(167, 139, 250, 0.04) 50%,
+      transparent 70%
+    );
+    filter: blur(60px);
+    animation: auroraDrift2 36s ease-in-out infinite 6s;
+    will-change: transform;
+  }
+
+  /* Bottom aurora — indigo again, very low opacity */
+  .hero__aurora-band--3 {
+    height: 260px;
+    bottom: 5%;
+    background: radial-gradient(
+      ellipse 90% 60% at 40% 50%,
+      rgba(99, 102, 241, 0.08) 0%,
+      transparent 65%
+    );
+    filter: blur(72px);
+    animation: auroraDrift3 44s ease-in-out infinite 12s;
+    will-change: transform;
+  }
+
+  @keyframes auroraDrift1 {
+    0%   { transform: translateX(0%)   translateY(0px)  scaleX(1); }
+    25%  { transform: translateX(4%)   translateY(18px) scaleX(1.03); }
+    50%  { transform: translateX(-3%)  translateY(32px) scaleX(0.97); }
+    75%  { transform: translateX(2%)   translateY(14px) scaleX(1.02); }
+    100% { transform: translateX(0%)   translateY(0px)  scaleX(1); }
+  }
+
+  @keyframes auroraDrift2 {
+    0%   { transform: translateX(0%)   translateY(0px)  scaleX(1); }
+    33%  { transform: translateX(-5%)  translateY(-20px) scaleX(1.04); }
+    66%  { transform: translateX(3%)   translateY(16px) scaleX(0.96); }
+    100% { transform: translateX(0%)   translateY(0px)  scaleX(1); }
+  }
+
+  @keyframes auroraDrift3 {
+    0%   { transform: translateX(0%)   scaleX(1); }
+    40%  { transform: translateX(6%)   scaleX(0.95); }
+    70%  { transform: translateX(-4%)  scaleX(1.05); }
+    100% { transform: translateX(0%)   scaleX(1); }
+  }
+
+  /* prefers-reduced-motion: freeze aurora in place */
+  @media (prefers-reduced-motion: reduce) {
+    .hero__aurora-band {
+      animation: none;
+      will-change: auto;
+    }
+  }
+
   .hero__bg-glow {
     position: absolute;
     border-radius: 50%;
@@ -126,7 +226,9 @@ import { CTA, SITE } from '@data/site';
     left: 50%;
     transform: translateX(-50%);
     background: radial-gradient(circle, rgba(99, 102, 241, 0.35) 0%, transparent 70%);
-    animation: float 8s ease-in-out infinite;
+    /* Drift slowly; offset base translateX so it doesn’t conflict */
+    animation: heroDrift 22s ease-in-out infinite;
+    will-change: transform;
   }
 
   .hero__bg-glow--2 {
@@ -135,7 +237,8 @@ import { CTA, SITE } from '@data/site';
     bottom: 10%;
     left: -5%;
     background: radial-gradient(circle, rgba(167, 139, 250, 0.2) 0%, transparent 70%);
-    animation: float 10s ease-in-out infinite 2s;
+    animation: heroDrift 18s ease-in-out infinite 4s;
+    will-change: transform;
   }
 
   .hero__bg-glow--3 {
@@ -144,7 +247,8 @@ import { CTA, SITE } from '@data/site';
     top: 30%;
     right: -5%;
     background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, transparent 70%);
-    animation: float 12s ease-in-out infinite 4s;
+    animation: heroDrift 26s ease-in-out infinite 8s;
+    will-change: transform;
   }
 
   /* Subtle grid lines */

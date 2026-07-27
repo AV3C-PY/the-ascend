@@ -11,6 +11,12 @@
 --------------------------------------------------------------------------- */
 :root {
   --ease-overshoot: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* Hero glow drift — extremely slow, almost imperceptible */
+  --hero-glow-duration: 18s;
+
+  /* Premium reveal — slightly further travel for hero elements */
+  --reveal-distance-hero: 40px;
 }
 
 @keyframes fadeIn {
@@ -99,6 +105,42 @@
   70%       { transform: translate(-4%, 1%); }
   80%       { transform: translate(1%, 3%); }
   90%       { transform: translate(3%, -2%); }
+}
+
+/* Hero background glow — extremely slow drift across two axes */
+@keyframes heroDrift {
+  0%   { transform: translate(0,   0)   scale(1); }
+  25%  { transform: translate(3%,  2%)  scale(1.04); }
+  50%  { transform: translate(-2%, 4%)  scale(0.98); }
+  75%  { transform: translate(1%,  -3%) scale(1.03); }
+  100% { transform: translate(0,   0)   scale(1); }
+}
+
+/* Button shimmer — on-hover highlight sweep, triggered via class */
+@keyframes btnShimmer {
+  from { background-position: 200% center; }
+  to   { background-position: -200% center; }
+}
+
+/* Soft float with barely-there rotation for decorative icons */
+@keyframes floatSoft {
+  0%,  100% { transform: translateY(0)    rotate(0deg); }
+  33%        { transform: translateY(-8px) rotate(0.5deg); }
+  66%        { transform: translateY(-4px) rotate(-0.5deg); }
+}
+
+/* Reveal from below with blur — hero title variant */
+@keyframes heroReveal {
+  from {
+    opacity: 0;
+    transform: translateY(var(--reveal-distance-hero, 40px));
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
 }
 
 /* ---------------------------------------------------------------------------
@@ -191,6 +233,107 @@
 
 /* Delays extendidos — antes llegaban solo hasta 5, insuficiente para
    grids/listas más largas (servicios, testimonios, features). */
-.reveal--delay-6 { transition-delay: 480ms; }
-.reveal--delay-7 { transition-delay: 560ms; }
-.reveal--delay-8 { transition-delay: 640ms; }
+.reveal--delay-6 { transition-delay: 480ms; animation-delay: 480ms; }
+.reveal--delay-7 { transition-delay: 560ms; animation-delay: 560ms; }
+.reveal--delay-8 { transition-delay: 640ms; animation-delay: 640ms; }
+
+/* ---------------------------------------------------------------------------
+   CARD HOVER — Premium elevation system.
+   Apply .card-hover to any card that should float on hover.
+   Combines GPU-friendly transform + box-shadow.
+   All transitions are on transform/opacity/box-shadow only.
+--------------------------------------------------------------------------- */
+
+.card-hover {
+  transition:
+    transform     var(--duration-normal) var(--ease-spring),
+    box-shadow    var(--duration-normal) var(--ease-default),
+    border-color  var(--duration-normal) var(--ease-default);
+  will-change: transform;
+}
+
+.card-hover:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.35),
+    0 12px 32px rgba(0, 0, 0, 0.25),
+    0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+/* ---------------------------------------------------------------------------
+   BUTTON SHIMMER — subtle highlight sweep on hover.
+   Add class .btn--shimmer to any .btn element.
+   Uses pseudo-element so it doesn’t affect the button’s own background.
+--------------------------------------------------------------------------- */
+
+.btn--shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn--shimmer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.14) 50%,
+    transparent 70%
+  );
+  background-size: 200% 100%;
+  background-position: 200% center;
+  transition: none;
+  opacity: 0;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.btn--shimmer:hover::after {
+  opacity: 1;
+  animation: btnShimmer 0.55s var(--ease-out) forwards;
+}
+
+/* ---------------------------------------------------------------------------
+   FLOAT DECORATIVE — gentle float for icon badges, hero decorations.
+   Use .animate-float-soft for elements you want to feel alive but not distracting.
+--------------------------------------------------------------------------- */
+
+.animate-float-soft {
+  animation: floatSoft 6s var(--ease-default) infinite;
+  will-change: transform;
+}
+
+/* ---------------------------------------------------------------------------
+   HERO BACKGROUND DRIFT — very slow, almost imperceptible glow movement.
+   Apply to .hero__bg-glow elements via Hero.astro styles.
+--------------------------------------------------------------------------- */
+
+.animate-hero-drift {
+  animation: heroDrift var(--hero-glow-duration, 18s) ease-in-out infinite;
+  will-change: transform;
+}
+
+/* ---------------------------------------------------------------------------
+   REDUCED MOTION overrides for new utility classes
+   (global.css already handles .reveal; these cover the new classes)
+--------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .card-hover,
+  .card-hover:hover {
+    transform: none;
+    box-shadow: none;
+    transition: box-shadow var(--duration-fast) var(--ease-default);
+  }
+
+  .btn--shimmer::after {
+    display: none;
+  }
+
+  .animate-float-soft,
+  .animate-hero-drift {
+    animation: none;
+    transform: none;
+  }
+}

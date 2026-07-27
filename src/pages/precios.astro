@@ -112,7 +112,7 @@ const pricingFaq = FAQ.filter((f) => f.category === 'precios');
 
             <!-- CTA — NEVER "Buy". Always "Request quote". -->
             <!-- TODO: Update CTA labels in src/data/market.ts per plan -->
-            <a href="/contacto" class={`btn ${plan.highlighted ? 'btn--primary' : 'btn--secondary'} pricing-card__cta`}>
+            <a href="/contacto" class={`btn ${plan.highlighted ? 'btn--primary btn--shimmer' : 'btn--secondary'} pricing-card__cta`}>
               <span data-plan-cta={plan.id}>{plan.cta}</span>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M5 12h14M12 5l7 7-7 7"/>
@@ -352,14 +352,18 @@ const pricingFaq = FAQ.filter((f) => f.category === 'precios');
     flex-direction: column;
     gap: var(--space-6);
     transition:
-      border-color var(--duration-normal) var(--ease-default),
-      transform var(--duration-normal) var(--ease-spring),
-      box-shadow var(--duration-normal) var(--ease-default);
+      border-color  var(--duration-normal) var(--ease-default),
+      transform     var(--duration-slow)   var(--ease-spring),
+      box-shadow    var(--duration-slow)   var(--ease-default);
+    will-change: transform;
   }
 
   .pricing-card:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--shadow-lg);
+    transform: translateY(-4px);
+    box-shadow:
+      0 4px 12px  rgba(0, 0, 0, 0.4),
+      0 16px 40px rgba(0, 0, 0, 0.3),
+      0 0 0 1px   rgba(255, 255, 255, 0.05);
   }
 
   .pricing-card--highlighted {

@@ -124,7 +124,9 @@ const featured = PORTFOLIO.filter((p) => p.featured).slice(0, 3);
     overflow: hidden;
     transition:
       border-color var(--duration-normal) var(--ease-default),
-      transform var(--duration-normal) var(--ease-spring);
+      transform    var(--duration-slow)   var(--ease-spring),
+      box-shadow   var(--duration-slow)   var(--ease-default);
+    will-change: transform;
     display: flex;
     flex-direction: column;
   }
@@ -132,6 +134,9 @@ const featured = PORTFOLIO.filter((p) => p.featured).slice(0, 3);
   .portfolio-card:hover {
     border-color: var(--color-border-hover);
     transform: translateY(-4px);
+    box-shadow:
+      0 6px 20px  rgba(0, 0, 0, 0.4),
+      0 20px 50px rgba(0, 0, 0, 0.3);
   }
 
   /* Image area */

@@ -215,12 +215,17 @@ const PLAN_NAMES: Record<string, string> = {
     gap: var(--space-6);
     transition:
       border-color var(--duration-normal) var(--ease-default),
-      transform var(--duration-normal) var(--ease-spring);
+      transform    var(--duration-slow)   var(--ease-spring),
+      box-shadow   var(--duration-slow)   var(--ease-default);
+    will-change: transform;
   }
 
   .service-full-card:hover {
     border-color: var(--color-primary-border);
     transform: translateY(-2px);
+    box-shadow:
+      0 4px 12px  rgba(0, 0, 0, 0.35),
+      0 12px 32px rgba(0, 0, 0, 0.25);
   }
 
   .service-full-card__header {

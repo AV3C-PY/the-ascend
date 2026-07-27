@@ -75,7 +75,7 @@ const featuredServices = SERVICES.slice(0, 6);
     <div class="services__footer reveal">
       <div class="services__footer-ctas">
         <a href="/servicios" class="btn btn--secondary" data-i18n="servicesOverview.cta">Ver todos los servicios</a>
-        <a href="/contacto" class="btn btn--primary" data-i18n="cta.contact">Contactar ahora</a>
+        <a href="/contacto" class="btn btn--primary btn--shimmer" data-i18n="cta.contact">Contactar ahora</a>
       </div>
     </div>
   </div>
@@ -132,14 +132,18 @@ const featuredServices = SERVICES.slice(0, 6);
     overflow: hidden;
     transition:
       border-color var(--duration-normal) var(--ease-default),
-      transform var(--duration-normal) var(--ease-spring),
-      box-shadow var(--duration-normal) var(--ease-default);
+      transform    var(--duration-slow)   var(--ease-spring),
+      box-shadow   var(--duration-slow)   var(--ease-default);
+    will-change: transform;
   }
 
   .service-card:hover {
     border-color: var(--color-primary-border);
     transform: translateY(-4px);
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 0 0 1px var(--color-primary-border);
+    box-shadow:
+      0 8px 24px  rgba(0, 0, 0, 0.45),
+      0 20px 60px rgba(0, 0, 0, 0.3),
+      0 0 0 1px   var(--color-primary-border);
   }
 
   .service-card__inner {
