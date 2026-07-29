@@ -66,7 +66,7 @@ export const POST: APIRoute = async ({ request }) => {
     await resend.emails.send({
       // TODO: Update "from" with your verified Resend sender
       // Format: "Name <email@yourdomain.com>"
-      from: 'The Ascend Web <noreply@the-ascend.store>',
+      from: 'The Ascend <info@the-ascend.store>',
       // TODO: Update "to" if you want different recipient
       to: [SITE.email],
       subject: `[The Ascend] Nueva solicitud de ${name} — ${service || 'Sin servicio especificado'}`,
@@ -125,7 +125,7 @@ export const POST: APIRoute = async ({ request }) => {
 
     // Send confirmation to client
     await resend.emails.send({
-      from: 'The Ascend <noreply@the-ascend.store>',
+      from: 'The Ascend <info@the-ascend.store>',
       to: [email],
       subject: 'Hemos recibido tu solicitud — The Ascend',
       html: `
