@@ -16,7 +16,7 @@ import { SITE } from '@data/site';
 
 export const prerender = false;
 
-export const POST: APIRoute = async ({ request }) => {
+export const POST: APIRoute = async ({ request, locals }) => {
   // Parse form data
   const data = await request.formData();
 
@@ -48,7 +48,12 @@ export const POST: APIRoute = async ({ request }) => {
 
   // Get API key from environment
   // TODO: Add RESEND_API_KEY to your .env file
-  const apiKey = (import.meta.env.RESEND_API_KEY || process.env.RESEND_API_KEY);
+  const apiKey = locals.runtime?.env?.RESEND_API_KEY;
+  console.log('ENV CHECK:', {
+  hasRuntime: !!locals.runtime,
+  hasEnv: !!locals.runtime?.env,
+  hasKey: !!locals.runtime?.env?.RESEND_API_KEY,
+});
 
   if (!apiKey || apiKey === 'your-resend-api-key') {
     console.error('RESEND_API_KEY is not configured');
