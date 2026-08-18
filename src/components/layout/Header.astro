@@ -107,7 +107,7 @@ const currentPath = Astro.url.pathname;
   }
 
   .header.scrolled {
-    background-color: rgba(9, 9, 11, 0.88);
+    background-color: rgba(251, 251, 253, 0.88);
     backdrop-filter: blur(24px) saturate(180%);
     -webkit-backdrop-filter: blur(24px) saturate(180%);
     border-bottom-color: var(--color-border);
@@ -176,7 +176,7 @@ const currentPath = Astro.url.pathname;
 
   .header__nav-link:hover {
     color: var(--color-text-primary);
-    background-color: rgba(255, 255, 255, 0.05);
+    background-color: var(--color-surface);
   }
 
   .header__nav-link--active {
@@ -215,7 +215,7 @@ const currentPath = Astro.url.pathname;
     font-size: var(--text-sm);
     font-weight: var(--weight-medium);
     color: var(--color-text-secondary);
-    background: rgba(255, 255, 255, 0.04);
+    background: var(--color-surface);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
     padding: 0.375rem 0.625rem;
@@ -230,7 +230,7 @@ const currentPath = Astro.url.pathname;
   .market-selector__trigger:hover,
   .market-selector__trigger--open {
     color: var(--color-text-primary);
-    background: rgba(255, 255, 255, 0.07);
+    background: var(--color-surface-2);
     border-color: var(--color-border-hover);
   }
 
@@ -274,10 +274,10 @@ const currentPath = Astro.url.pathname;
     right: 0;
     min-width: 200px;
     background: var(--color-bg-elevated);
-    border: 1px solid var(--color-border-hover);
+    border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
     padding: var(--space-2);
-    box-shadow: var(--shadow-lg), 0 0 0 1px rgba(255,255,255,0.04);
+    box-shadow: var(--shadow-lg);
     animation: dropdownIn 160ms var(--ease-spring) both;
     z-index: var(--z-modal);
   }
@@ -309,12 +309,12 @@ const currentPath = Astro.url.pathname;
 
   .market-selector__option:hover {
     color: var(--color-text-primary);
-    background: rgba(255, 255, 255, 0.05);
+    background: var(--color-surface);
   }
 
   .market-selector__option--active {
-    color: var(--color-text-primary);
-    background: rgba(99, 102, 241, 0.08);
+    color: var(--color-primary);
+    background: var(--color-primary-glow);
   }
 
   .market-selector__option-flag {
@@ -492,7 +492,7 @@ const currentPath = Astro.url.pathname;
     top: 100%;
     left: 0;
     right: 0;
-    background-color: rgba(9, 9, 11, 0.97);
+    background-color: rgba(251, 251, 253, 0.97);
     backdrop-filter: blur(24px) saturate(150%);
     -webkit-backdrop-filter: blur(24px) saturate(150%);
     border-bottom: 1px solid var(--color-border);

@@ -142,11 +142,11 @@ import { CTA, SITE } from '@data/site';
     top: -120px;
     background: radial-gradient(
       ellipse 80% 60% at 50% 50%,
-      rgba(99, 102, 241, 0.13) 0%,
-      rgba(99, 102, 241, 0.06) 40%,
+      rgba(99, 102, 241, 0.07) 0%,
+      rgba(99, 102, 241, 0.03) 40%,
       transparent 70%
     );
-    filter: blur(48px);
+    filter: blur(60px);
     animation: auroraDrift1 28s ease-in-out infinite;
     will-change: transform;
   }
@@ -159,11 +159,11 @@ import { CTA, SITE } from '@data/site';
     width: 160%;
     background: radial-gradient(
       ellipse 70% 50% at 55% 50%,
-      rgba(167, 139, 250, 0.10) 0%,
-      rgba(167, 139, 250, 0.04) 50%,
+      rgba(167, 139, 250, 0.05) 0%,
+      rgba(167, 139, 250, 0.02) 50%,
       transparent 70%
     );
-    filter: blur(60px);
+    filter: blur(72px);
     animation: auroraDrift2 36s ease-in-out infinite 6s;
     will-change: transform;
   }
@@ -174,10 +174,10 @@ import { CTA, SITE } from '@data/site';
     bottom: 5%;
     background: radial-gradient(
       ellipse 90% 60% at 40% 50%,
-      rgba(99, 102, 241, 0.08) 0%,
+      rgba(99, 102, 241, 0.04) 0%,
       transparent 65%
     );
-    filter: blur(72px);
+    filter: blur(80px);
     animation: auroraDrift3 44s ease-in-out infinite 12s;
     will-change: transform;
   }
@@ -216,7 +216,7 @@ import { CTA, SITE } from '@data/site';
     position: absolute;
     border-radius: 50%;
     filter: blur(120px);
-    opacity: 0.4;
+    opacity: 0.35;
   }
 
   .hero__bg-glow--1 {
@@ -225,8 +225,7 @@ import { CTA, SITE } from '@data/site';
     top: -200px;
     left: 50%;
     transform: translateX(-50%);
-    background: radial-gradient(circle, rgba(99, 102, 241, 0.35) 0%, transparent 70%);
-    /* Drift slowly; offset base translateX so it doesn’t conflict */
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.12) 0%, transparent 70%);
     animation: heroDrift 22s ease-in-out infinite;
     will-change: transform;
   }
@@ -236,7 +235,7 @@ import { CTA, SITE } from '@data/site';
     height: 400px;
     bottom: 10%;
     left: -5%;
-    background: radial-gradient(circle, rgba(167, 139, 250, 0.2) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(167, 139, 250, 0.07) 0%, transparent 70%);
     animation: heroDrift 18s ease-in-out infinite 4s;
     will-change: transform;
   }
@@ -246,20 +245,18 @@ import { CTA, SITE } from '@data/site';
     height: 350px;
     top: 30%;
     right: -5%;
-    background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.06) 0%, transparent 70%);
     animation: heroDrift 26s ease-in-out infinite 8s;
     will-change: transform;
   }
 
-  /* Subtle grid lines */
+  /* Nothing Phone-style dot grid — tiny dark dots on white */
   .hero__bg-grid {
     position: absolute;
     inset: 0;
-    background-image:
-      linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-    background-size: 60px 60px;
-    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black, transparent);
+    background-image: radial-gradient(circle, rgba(0,0,0,0.10) 1px, transparent 1px);
+    background-size: 32px 32px;
+    mask-image: radial-gradient(ellipse 70% 70% at 50% 40%, black 30%, transparent 80%);
   }
 
   /* ===== Content ===== */
@@ -330,7 +327,7 @@ import { CTA, SITE } from '@data/site';
     align-items: center;
     gap: var(--space-8);
     padding: var(--space-5) var(--space-8);
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(0, 0, 0, 0.03);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-xl);
     backdrop-filter: blur(8px);

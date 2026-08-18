@@ -10,42 +10,42 @@
      TODO: Update --color-primary if you want a different brand color
   --------------------------------------------------------------------------- */
 
-  /* Neutral Scale (near-black UI) */
-  --color-bg:           #09090b;
-  --color-bg-elevated:  #111113;
-  --color-surface:      #18181b;
-  --color-surface-2:    #1f1f23;
-  --color-border:       rgba(255, 255, 255, 0.07);
-  --color-border-hover: rgba(255, 255, 255, 0.14);
+  /* Neutral Scale — Apple-signature light grays */
+  --color-bg:           #FBFBFD;
+  --color-bg-elevated:  #FFFFFF;
+  --color-surface:      #F5F5F7;
+  --color-surface-2:    #E8E8ED;
+  --color-border:       rgba(0, 0, 0, 0.08);
+  --color-border-hover: rgba(0, 0, 0, 0.16);
 
-  /* Text */
-  --color-text-primary:   #fafafa;
-  --color-text-secondary: #a1a1aa;
-  --color-text-muted:     #52525b;
-  --color-text-inverse:   #09090b;
+  /* Text — Apple near-black */
+  --color-text-primary:   #1D1D1F;
+  --color-text-secondary: #6E6E73;
+  --color-text-muted:     #AEAEB2;
+  --color-text-inverse:   #FFFFFF;
 
-  /* Brand — Indigo (trustworthy, premium, tech) */
+  /* Brand — Indigo (mantener identidad de marca) */
   --color-primary:        #6366f1;
-  --color-primary-light:  #818cf8;
-  --color-primary-dark:   #4f46e5;
-  --color-primary-glow:   rgba(99, 102, 241, 0.15);
-  --color-primary-border: rgba(99, 102, 241, 0.25);
+  --color-primary-light:  #4f46e5;
+  --color-primary-dark:   #4338ca;
+  --color-primary-glow:   rgba(99, 102, 241, 0.07);
+  --color-primary-border: rgba(99, 102, 241, 0.18);
 
   /* Accent — Violet */
-  --color-accent:       #a78bfa;
-  --color-accent-glow:  rgba(167, 139, 250, 0.12);
+  --color-accent:       #7c3aed;
+  --color-accent-glow:  rgba(124, 58, 237, 0.06);
 
   /* Semantic */
-  --color-success:      #22c55e;
-  --color-success-bg:   rgba(34, 197, 94, 0.1);
-  --color-warning:      #f59e0b;
-  --color-error:        #ef4444;
+  --color-success:      #34c759;
+  --color-success-bg:   rgba(52, 199, 89, 0.08);
+  --color-warning:      #ff9f0a;
+  --color-error:        #ff3b30;
 
-  /* Gradient */
+  /* Gradients */
   --gradient-primary: linear-gradient(135deg, #6366f1 0%, #a78bfa 100%);
-  --gradient-text:    linear-gradient(135deg, #fafafa 0%, #a1a1aa 100%);
-  --gradient-hero:    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(99, 102, 241, 0.25), transparent);
-  --gradient-card:    linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0) 100%);
+  --gradient-text:    linear-gradient(135deg, #1D1D1F 0%, #6E6E73 100%);
+  --gradient-hero:    radial-gradient(ellipse 80% 60% at 50% -10%, rgba(99, 102, 241, 0.08), transparent);
+  --gradient-card:    linear-gradient(145deg, rgba(255,255,255,1) 0%, rgba(245,245,247,0.6) 100%);
 
   /* ---------------------------------------------------------------------------
      TYPOGRAPHY
@@ -138,12 +138,12 @@
      SHADOWS
   --------------------------------------------------------------------------- */
 
-  --shadow-sm:      0 1px 2px rgba(0, 0, 0, 0.5);
-  --shadow-md:      0 4px 16px rgba(0, 0, 0, 0.4);
-  --shadow-lg:      0 8px 32px rgba(0, 0, 0, 0.5);
-  --shadow-xl:      0 16px 64px rgba(0, 0, 0, 0.6);
-  --shadow-primary: 0 8px 32px rgba(99, 102, 241, 0.3);
-  --shadow-glow:    0 0 60px rgba(99, 102, 241, 0.15);
+  --shadow-sm:      0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md:      0 4px 16px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.04);
+  --shadow-lg:      0 12px 32px rgba(0, 0, 0, 0.10), 0 4px 8px rgba(0, 0, 0, 0.05);
+  --shadow-xl:      0 24px 64px rgba(0, 0, 0, 0.12), 0 8px 16px rgba(0, 0, 0, 0.06);
+  --shadow-primary: 0 8px 32px rgba(99, 102, 241, 0.22);
+  --shadow-glow:    0 0 48px rgba(99, 102, 241, 0.08);
 
   /* ---------------------------------------------------------------------------
      TRANSITIONS & ANIMATIONS
@@ -159,6 +159,7 @@
   --ease-bounce:  cubic-bezier(0.34, 1.56, 0.64, 1);
   --ease-out:     cubic-bezier(0, 0, 0.2, 1);
   --ease-in:      cubic-bezier(0.4, 0, 1, 1);
+  --ease-apple:   cubic-bezier(0.25, 0.46, 0.45, 0.94);
 
   --transition-base:   all var(--duration-normal) var(--ease-default);
   --transition-spring: all var(--duration-slow) var(--ease-spring);

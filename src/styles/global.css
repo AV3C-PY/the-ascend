@@ -180,15 +180,15 @@ p {
 }
 
 /* ---------------------------------------------------------------------------
-   SCROLLBAR — Custom thin scrollbar
+   SCROLLBAR — Apple-style minimal
 --------------------------------------------------------------------------- */
 
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 5px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--color-bg);
+  background: var(--color-surface);
 }
 
 ::-webkit-scrollbar-thumb {
@@ -197,7 +197,7 @@ p {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-border-hover);
+  background: var(--color-text-muted);
 }
 
 /* ---------------------------------------------------------------------------
@@ -205,8 +205,8 @@ p {
 --------------------------------------------------------------------------- */
 
 ::selection {
-  background: var(--color-primary-glow);
-  color: var(--color-primary-light);
+  background: rgba(99, 102, 241, 0.12);
+  color: var(--color-primary-dark);
 }
 
 /* ---------------------------------------------------------------------------
@@ -228,17 +228,16 @@ code, pre {
 }
 
 /* ---------------------------------------------------------------------------
-   ANIMATIONS — Scroll reveal
+   ANIMATIONS — Apple-style scroll reveal
    Used by IntersectionObserver in BaseLayout.astro
 --------------------------------------------------------------------------- */
 
 .reveal {
   opacity: 0;
-  transform: translateY(24px);
+  transform: translateY(20px);
   transition:
-    opacity  var(--duration-slower) var(--ease-spring),
-    transform var(--duration-slower) var(--ease-spring);
-  /* GPU hint — only when animating */
+    opacity   var(--duration-slow)   var(--ease-apple),
+    transform var(--duration-slow)   var(--ease-spring);
   backface-visibility: hidden;
 }
 
@@ -247,10 +246,10 @@ code, pre {
   transform: translateY(0);
 }
 
-/* Hero variant: animated via keyframe so badge/title/subtitle feel more alive */
+/* Hero variant: keyframe-driven for a more alive entrance */
 .reveal--hero {
   opacity: 0;
-  animation: heroReveal 0.7s var(--ease-spring) forwards;
+  animation: heroReveal 0.8s var(--ease-spring) forwards;
   animation-play-state: paused;
 }
 
@@ -258,11 +257,11 @@ code, pre {
   animation-play-state: running;
 }
 
-.reveal--delay-1 { transition-delay: 80ms;  animation-delay: 80ms;  }
-.reveal--delay-2 { transition-delay: 160ms; animation-delay: 160ms; }
-.reveal--delay-3 { transition-delay: 240ms; animation-delay: 240ms; }
-.reveal--delay-4 { transition-delay: 320ms; animation-delay: 320ms; }
-.reveal--delay-5 { transition-delay: 400ms; animation-delay: 400ms; }
+.reveal--delay-1 { transition-delay: 60ms;  animation-delay: 60ms;  }
+.reveal--delay-2 { transition-delay: 120ms; animation-delay: 120ms; }
+.reveal--delay-3 { transition-delay: 180ms; animation-delay: 180ms; }
+.reveal--delay-4 { transition-delay: 240ms; animation-delay: 240ms; }
+.reveal--delay-5 { transition-delay: 300ms; animation-delay: 300ms; }
 
 /* ---------------------------------------------------------------------------
    REDUCED MOTION — Accessibility
@@ -296,7 +295,7 @@ code, pre {
 }
 
 /* ---------------------------------------------------------------------------
-   NOISE TEXTURE — Subtle film grain for premium feel
+   NOISE TEXTURE — Very subtle film grain (reduced for light theme)
 --------------------------------------------------------------------------- */
 
 .noise::before {
@@ -305,7 +304,7 @@ code, pre {
   inset: 0;
   pointer-events: none;
   z-index: var(--z-toast);
-  opacity: 0.025;
+  opacity: 0.012;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
   background-size: 128px 128px;
 }

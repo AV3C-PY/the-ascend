@@ -47,7 +47,7 @@ export const PORTFOLIO: PortfolioItem[] = [
       "Diseñamos un sitio web premium con menú digital, galería de platos y sistema de reservas online, optimizado para búsquedas locales en Lyon.",
     results: [
       "+120% de reservas en los primeros 3 meses",
-      "#1 en Google para 'restaurant français Lyon'",
+      "#1  en Google para 'restaurant français Lyon'",
       "40% de reservas provenientes de la web",
     ],
     url: "#",
