@@ -34,6 +34,7 @@ export const fr = {
     process:    'Notre méthode',
     pricing:    'Tarifs',
     about:      'À propos',
+    founder:    'Fondateur',
     contact:    'Contact',
     ctaPrimary: 'Planifier un appel',
     menuOpen:   'Ouvrir le menu',
@@ -714,6 +715,7 @@ export const fr = {
     },
     links: {
       about:     'À propos',
+      founder:   'Fondateur',
       process:   'Notre méthode',
       portfolio: 'Portfolio',
       contact:   'Contact',

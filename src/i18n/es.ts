@@ -47,6 +47,7 @@ export const es = {
     process:    'Proceso',
     pricing:    'Precios',
     about:      'Nosotros',
+    founder:    'Fundador',
     contact:    'Contactar',
     ctaPrimary: 'Agendar llamada',
     menuOpen:   'Abrir menú',
@@ -730,6 +731,7 @@ export const es = {
     },
     links: {
       about:      'Sobre Nosotros',
+      founder:    'Fundador',
       process:    'Nuestro Proceso',
       portfolio:  'Portfolio',
       contact:    'Contacto',
